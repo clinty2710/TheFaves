@@ -1,0 +1,25 @@
+
+{
+  "development": {
+    "username": "root",
+    "password": "Studman081!",
+    "database": "thefavesdb",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "Studman081!",
+    "database": "thefavesdb_test",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "Studman081!",
+    "database": "thefavesdb_production",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}
+
