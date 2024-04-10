@@ -35,7 +35,7 @@ sequelize
   .then(() => {
     console.log('Connected to the database');
     // Synchronize models with the database
-    return sequelize.sync({ force: true });
+    return sequelize.sync(); // Remove { force: true }
   })
   .then(() => {
     console.log('All models were synchronized successfully.');
@@ -49,11 +49,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Define the registration route
 app.post('/auth/register', async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, nickname } = req.body; // Include nickname in registration
 
   try {
     // Create a new user record in the MySQL database
-    const newUser = await User.create({ email, password });
+    const newUser = await User.create({ email, password, nickname }); // Include nickname
     res.send('User registered successfully!');
   } catch (error) {
     console.error('Error registering user:', error);

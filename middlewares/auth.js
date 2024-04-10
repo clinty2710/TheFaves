@@ -19,13 +19,13 @@ const ensureAuthenticated = (req, res, next) => {
 router.post('/register', async (req, res, next) => {
     try {
         console.log(req.body); // Log the request body
-        const { email, password } = req.body;
-        if (!email || !password) {
-            return res.status(400).json({ message: 'Email and password are required' });
+        const { email, password, nickname } = req.body; // Extract nickname from request body
+        if (!email || !password || !nickname) { // Check for nickname in addition to email and password
+            return res.status(400).json({ message: 'Nickname, email, and password are required' }); // Update error message
         }
         const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
         console.log('Hashed password:', hashedPassword); // Log the hashed password
-        const user = await User.create({ email, password: hashedPassword }); // Store hashed password
+        const user = await User.create({ email, password: hashedPassword, nickname }); // Store hashed password and nickname
         res.json({ message: 'User registered successfully', user });
     } catch (error) {
         next(error);
@@ -58,7 +58,7 @@ router.get('/logout', (req, res) => {
 
 // Route to serve the user's profile page
 router.get('/profile', ensureAuthenticated, (req, res) => {
-  res.send(`Welcome, ${req.user.nickname}!`);
+  res.send(`Welcome, ${req.user.nickname}!`); // Update to use nickname
 });
 
 // Route to display user's favorites page

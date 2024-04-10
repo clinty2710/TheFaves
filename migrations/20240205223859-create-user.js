@@ -11,26 +11,15 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      nickname: { // Add the nickname field
+        type: Sequelize.STRING
+      },
       email: {
         type: Sequelize.STRING
       },
       password: {
         type: Sequelize.STRING
       },
-      name: { // Add the name field
-        type: Sequelize.STRING
-      },
-      nickname: { // Add the nickname field
-        type: Sequelize.STRING
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
     });
   },
   async down(queryInterface, Sequelize) {

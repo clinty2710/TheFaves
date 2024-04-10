@@ -15,7 +15,12 @@ passport.use(new Auth0Strategy({
   try {
     let user = await User.findOne({ where: { email: profile.emails[0].value } });
     if (!user) {
+      // If user doesn't exist, create a new user with email and nickname
       user = await User.create({ email: profile.emails[0].value, nickname: profile.nickname });
+    } else if (!user.nickname) {
+      // If user exists but doesn't have a nickname, update the nickname
+      user.nickname = profile.nickname;
+      await user.save();
     }
     return done(null, user);
   } catch (error) {
