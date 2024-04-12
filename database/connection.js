@@ -6,6 +6,7 @@ const { Sequelize } = require('sequelize');
 const sequelize = new Sequelize('thefavesdb', 'root', 'Studman081!', {
   host: 'localhost',
   dialect: 'mysql', // or any other dialect
+  port: 3306,
 });
 
 // Test the database connection
