@@ -44,8 +44,9 @@ sequelize
     console.error('Unable to synchronize models with the database:', err);
   });
 
-// Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
+// Serve static files
+app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'frontend', 'public')));
 
 // Define the registration route
 app.post('/auth/register', async (req, res) => {
@@ -67,12 +68,12 @@ app.use('/favorites', authMiddleware.ensureAuthenticated, favoriteRoutes); // Mo
 
 // Route to serve the login page
 app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, './frontend/public/login_form.html')); // Adjust the path to your login HTML file
+  res.sendFile(path.join(__dirname, 'frontend', 'public', 'login_form.html')); // Adjust the path to your login HTML file
 });
 
-// Route to handle requests to the root URL
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
+// Route to serve the React application
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'public', 'index.html'));
 });
 
 const PORT = process.env.PORT || 3000;

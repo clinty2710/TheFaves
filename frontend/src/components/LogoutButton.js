@@ -1,16 +1,20 @@
 // LogoutButton.js
 
 import React from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
+import axios from 'axios'; // Import axios for making HTTP requests
 
 const LogoutButton = () => {
-  const { logout, isAuthenticated } = useAuth0();
+  const handleLogout = async () => {
+    try {
+      await axios.get('/auth/logout');
+      // Redirect the user to the login page after successful logout
+      window.location.href = '/auth/login';
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
 
-  return (
-    isAuthenticated && (
-      <button onClick={() => logout({ returnTo: window.location.origin })}>Log Out</button>
-    )
-  );
+  return <button onClick={handleLogout}>Logout</button>;
 };
 
 export default LogoutButton;

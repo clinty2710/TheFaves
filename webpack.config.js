@@ -4,7 +4,7 @@ module.exports = {
   mode: 'development', // or 'production'
   entry: './frontend/src/index.js', // Entry point of your client-side application
   output: {
-    path: path.resolve(__dirname, 'public'), // Output directory
+    path: path.resolve(__dirname, 'dist'), // Output directory
     filename: 'bundle.js', // Output filename for client-side bundle
   },
   module: {
@@ -26,6 +26,7 @@ module.exports = {
     ],
   },
   resolve: {
+    extensions: ['.js', '.jsx'], // Add .jsx extension
     fallback: {
       // Add any necessary fallbacks here
     },

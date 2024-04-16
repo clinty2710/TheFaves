@@ -1,11 +1,11 @@
 // middlewares/auth.js
 
 const express = require('express');
-const passport = require('passport');
 const router = express.Router();
+const passport = require('passport'); // Import passport for authentication
 const User = require('../models/user');
-const path = require('path');
 const bcrypt = require('bcrypt');
+const path = require('path');
 
 // Middleware function for ensuring authentication
 const ensureAuthenticated = (req, res, next) => {
@@ -18,14 +18,12 @@ const ensureAuthenticated = (req, res, next) => {
 // Registration route - Handle POST request for user registration
 router.post('/register', async (req, res, next) => {
     try {
-        console.log(req.body); // Log the request body
-        const { email, password, nickname } = req.body; // Extract nickname from request body
-        if (!email || !password || !nickname) { // Check for nickname in addition to email and password
-            return res.status(400).json({ message: 'Nickname, email, and password are required' }); // Update error message
+        const { email, password, nickname } = req.body;
+        if (!email || !password || !nickname) {
+            return res.status(400).json({ message: 'Nickname, email, and password are required' });
         }
-        const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
-        console.log('Hashed password:', hashedPassword); // Log the hashed password
-        const user = await User.create({ email, password: hashedPassword, nickname }); // Store hashed password and nickname
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user = await User.create({ email, password: hashedPassword, nickname });
         res.json({ message: 'User registered successfully', user });
     } catch (error) {
         next(error);
@@ -34,37 +32,55 @@ router.post('/register', async (req, res, next) => {
 
 // Registration route - Handle GET request to render registration form
 router.get('/register', (req, res) => {
-    // Serve the registration form HTML file
     res.sendFile(path.join(__dirname, '..', 'frontend', 'public', 'registration_form.html'));
 });
 
-// Auth0 login route
-router.get('/login', passport.authenticate('auth0', {
-  scope: 'openid email profile'
-}));
-
-// Auth0 callback route
-router.get('/callback', passport.authenticate('auth0', {
-  failureRedirect: '/login' // Redirect to /login if authentication fails
-}), (req, res) => {
-  res.redirect(req.session.returnTo || '/'); // Redirect to the original URL or home
+// Login route - Handle GET request to render login form
+router.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'public', 'login_form.html'));
 });
 
-// Auth0 logout route
-router.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/');
+// Login route - Handle POST request for user login
+router.post('/login', passport.authenticate('local'), (req, res) => {
+  res.redirect('/auth/profile');
 });
 
-// Route to serve the user's profile page
+// Profile route - Handle GET request to render user profile
 router.get('/profile', ensureAuthenticated, (req, res) => {
-  res.send(`Welcome, ${req.user.nickname}!`); // Update to use nickname
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'public', 'profile.html')); // Render the profile.html file
 });
 
-// Route to display user's favorites page
-router.get('/favorites', ensureAuthenticated, (req, res) => {
-    // Retrieve user's favorites from the database and render the favorites page
-    res.send('User favorites page');
+// Profile route - Handle POST request to fetch user profile data
+router.post('/profile', ensureAuthenticated, async (req, res) => {
+  try {
+    // Fetch user profile data from the database
+    const user = await User.findByPk(req.user.id); // Assuming you have access to the authenticated user object
+
+    // Check if user exists
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Construct the user profile data object
+    const userProfileData = {
+      id: user.id,
+      nickname: user.nickname,
+      email: user.email,
+      // Add any additional fields you want to include in the profile data
+    };
+
+    // Send the user profile data as JSON response
+    res.json(userProfileData);
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Logout route - Handle GET request for user logout
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/auth/login');
 });
 
 module.exports = { ensureAuthenticated, router };

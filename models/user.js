@@ -9,7 +9,7 @@ class User extends Model {
     static async authenticate(email, password) {
         console.log('Authenticating user:', email); 
         const user = await this.findOne({ where: { email } });
-        if (!user || !(await user.isValidPassword(password))) {
+        if (!user || !(await bcrypt.compare(password, user.password))) {
             console.error('Invalid email or password');
             throw new Error('Invalid email or password');
         }
