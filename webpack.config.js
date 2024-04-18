@@ -32,6 +32,7 @@ module.exports = {
     fallback: {
       "zlib": require.resolve("browserify-zlib"),
       "path": require.resolve("path-browserify"),
+      // Exclude fs from being bundled for the client-side code
       "fs": false,
       "http": require.resolve("stream-http"),
       "https": require.resolve("https-browserify"),
