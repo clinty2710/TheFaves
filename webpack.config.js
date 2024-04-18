@@ -1,16 +1,18 @@
+//webpack.config.js
+
 const path = require('path');
 
 module.exports = {
-  mode: 'development', // or 'production'
-  entry: './frontend/src/index.js', // Entry point of your client-side application
+  mode: 'development',
+  entry: './frontend/src/index.js',
   output: {
-    path: path.resolve(__dirname, 'dist'), // Output directory
-    filename: 'bundle.js', // Output filename for client-side bundle
+    path: path.resolve(__dirname, 'frontend/dist'),
+    filename: 'bundle.js',
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.js$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -20,24 +22,31 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/,
+        test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx'], // Add .jsx extension
+    extensions: ['.js', '.jsx'],
     fallback: {
-      // Add any necessary fallbacks here
-    },
-  },
-  node: {
-    __dirname: false,
-    __filename: false,
-    global: true
-  },
-  externals: {
-    // Exclude server-related dependencies from bundling
-    express: 'commonjs express',
+      "zlib": require.resolve("browserify-zlib"),
+      "path": require.resolve("path-browserify"),
+      "fs": false,
+      "http": require.resolve("stream-http"),
+      "https": require.resolve("https-browserify"),
+      "stream": require.resolve("stream-browserify"),
+      "crypto": require.resolve("crypto-browserify"),
+      "buffer": require.resolve("buffer"),
+      "os": require.resolve("os-browserify/browser"),
+      "querystring": require.resolve("querystring-es3"),
+      "assert": require.resolve("assert/"),
+      "vm": require.resolve("vm-browserify"),
+      "net": require.resolve("net-browserify"),
+      "async_hooks": require.resolve("util"),
+      "zlib": require.resolve("browserify-zlib"),
+      "path": require.resolve("path-browserify"),
+      "timers": require.resolve("timers-browserify")
+    }
   },
 };
