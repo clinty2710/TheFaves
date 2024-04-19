@@ -50,7 +50,7 @@ router.get('/profile', ensureAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'frontend', 'public', 'profile.html')); // Render the profile.html file
 });
 
-// Profile route - Handle POST request to fetch user profile data
+// Profile route - Handle GET request to fetch user profile data
 router.post('/profile', ensureAuthenticated, async (req, res) => {
   try {
     // Fetch user profile data from the database

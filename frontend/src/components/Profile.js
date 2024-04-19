@@ -11,7 +11,7 @@ const Profile = () => {
     const fetchUserProfile = async () => {
       try {
         // Make a GET request to fetch user profile
-        const response = await axios.get('/middlewares/auth/profile');
+        const response = await axios.get('/auth/profile');
         setUser(response.data); // Update user state with the fetched user profile
       } catch (error) {
         console.error('Profile fetch error:', error);
