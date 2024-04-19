@@ -30,24 +30,24 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     fallback: {
-      "zlib": require.resolve("browserify-zlib"),
-      "path": require.resolve("path-browserify"),
-      // Exclude fs from being bundled for the client-side code
       "fs": false,
+      "crypto": require.resolve("crypto-browserify"),
+      "stream": require.resolve("stream-browserify"),
       "http": require.resolve("stream-http"),
       "https": require.resolve("https-browserify"),
-      "stream": require.resolve("stream-browserify"),
-      "crypto": require.resolve("crypto-browserify"),
-      "buffer": require.resolve("buffer"),
-      "os": require.resolve("os-browserify/browser"),
       "querystring": require.resolve("querystring-es3"),
-      "assert": require.resolve("assert/"),
-      "vm": require.resolve("vm-browserify"),
-      "net": require.resolve("net-browserify"),
-      "async_hooks": require.resolve("util"),
       "zlib": require.resolve("browserify-zlib"),
       "path": require.resolve("path-browserify"),
-      "timers": require.resolve("timers-browserify")
-    }
+      "vm": require.resolve("vm-browserify"),
+      "timers": require.resolve("timers-browserify"),
+      // Add similar fallbacks for other missing modules
+    },
+  },
+  // Use 'empty' to mock the fs module when bundling for the browser environment
+  // Use 'false' to disable the fs module entirely
+  node: {
+    __dirname: true,
+    __filename: true,
+    global: true, // Use global to mock the net module
   },
 };
