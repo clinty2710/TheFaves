@@ -2,6 +2,7 @@
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
     "@babel/register": "^7.23.7",
+    "async_hooks": "^1.0.0",
     "axios": "^1.6.8",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
@@ -13,7 +14,8 @@
     "https-browserify": "^1.0.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.9.1",
-    "net-browserify": "^0.1.7",
+    "net": "^1.0.2",
+    "net-browserify": "^0.1.4",
     "node-libs-browser": "^2.2.1",
     "os-browserify": "^0.3.0",
     "passport": "^0.7.0",

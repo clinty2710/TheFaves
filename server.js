@@ -44,10 +44,6 @@ sequelize
     console.error('Unable to synchronize models with the database:', err);
   });
 
-// Serve static files
-app.use(express.static(path.join(__dirname, 'dist')));
-app.use(express.static(path.join(__dirname, 'frontend', 'public')));
-
 // Define the registration route
 app.post('/auth/register', async (req, res) => {
   const { email, password, nickname } = req.body; // Include nickname in registration
@@ -71,11 +67,22 @@ app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'public', 'login_form.html')); // Adjust the path to your login HTML file
 });
 
+// Serve JavaScript files with the appropriate MIME type
+app.use('/frontend/dist', express.static(path.join(__dirname, 'frontend', 'dist'), {
+  setHeaders: (res, path, stat) => {
+    if (path.endsWith('.js')) {
+      res.setHeader('Content-Type', 'application/javascript');
+    }
+  },
+}));
+
 // Route to serve the React application
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'public', 'index.html'));
+  const filePath = path.join(__dirname, 'frontend', 'public', 'index.html');
+  res.sendFile(filePath, { headers: { 'Content-Type': 'text/html' } });
 });
 
+// Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

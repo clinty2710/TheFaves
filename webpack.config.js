@@ -6,13 +6,13 @@ module.exports = {
   mode: 'development',
   entry: './frontend/src/index.js',
   output: {
-    path: path.resolve(__dirname, 'frontend/dist'),
+    path: path.resolve(__dirname, 'frontend', 'dist'), // Adjusted output path
     filename: 'bundle.js',
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/, // Added support for .jsx files
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -28,19 +28,19 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx'], // Included .jsx extension
     fallback: {
-      "fs": false,
-      "crypto": require.resolve("crypto-browserify"),
-      "stream": require.resolve("stream-browserify"),
-      "http": require.resolve("stream-http"),
-      "https": require.resolve("https-browserify"),
-      "querystring": require.resolve("querystring-es3"),
-      "zlib": require.resolve("browserify-zlib"),
-      "path": require.resolve("path-browserify"),
-      "vm": require.resolve("vm-browserify"),
-      "timers": require.resolve("timers-browserify"),
-      // Add similar fallbacks for other missing modules
+      fs: false,
+      crypto: require.resolve('crypto-browserify'),
+      stream: require.resolve('stream-browserify'),
+      http: require.resolve('stream-http'),
+      https: require.resolve('https-browserify'),
+      querystring: require.resolve('querystring-es3'),
+      zlib: require.resolve('browserify-zlib'),
+      path: require.resolve('path-browserify'),
+      vm: require.resolve('vm-browserify'),
+      timers: require.resolve('timers-browserify'),
+      net: false, // Resolve 'net' module as false
     },
   },
   // Use 'empty' to mock the fs module when bundling for the browser environment
