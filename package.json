@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "ws": "^8.5.0",
+    "express-ws": "^5.0.0",
     "@auth0/auth0-react": "^2.2.4",
     "@babel/register": "^7.23.7",
     "async_hooks": "^1.0.0",

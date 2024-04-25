@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
 
 // Route to add a new favorite item (GET request to render form)
 router.get('/create', (req, res) => {
+  res.setHeader('Content-Type', 'text/html');
   res.send(`
     <!DOCTYPE html>
     <html lang="en">

@@ -34,8 +34,7 @@ sequelize
   .authenticate()
   .then(() => {
     console.log('Connected to the database');
-    // Synchronize models with the database
-    return sequelize.sync(); // Remove { force: true }
+    return sequelize.sync();
   })
   .then(() => {
     console.log('All models were synchronized successfully.');
@@ -44,13 +43,11 @@ sequelize
     console.error('Unable to synchronize models with the database:', err);
   });
 
-// Define the registration route
 app.post('/auth/register', async (req, res) => {
-  const { email, password, nickname } = req.body; // Include nickname in registration
+  const { email, password, nickname } = req.body;
 
   try {
-    // Create a new user record in the MySQL database
-    const newUser = await User.create({ email, password, nickname }); // Include nickname
+    const newUser = await User.create({ email, password, nickname });
     res.send('User registered successfully!');
   } catch (error) {
     console.error('Error registering user:', error);
@@ -58,31 +55,28 @@ app.post('/auth/register', async (req, res) => {
   }
 });
 
-// Define routes
-app.use('/auth', authMiddleware.router); // Mount auth routes
-app.use('/favorites', authMiddleware.ensureAuthenticated, favoriteRoutes); // Mount favoriteRoutes with authentication middleware
+app.use('/auth', authMiddleware.router);
+app.use('/favorites', authMiddleware.ensureAuthenticated, favoriteRoutes);
 
-// Route to serve the login page
 app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'public', 'login_form.html')); // Adjust the path to your login HTML file
+  res.sendFile(path.join(__dirname, 'frontend', 'public', 'login_form.html'));
 });
 
-// Serve JavaScript files with the appropriate MIME type
-app.use('/frontend/dist', express.static(path.join(__dirname, 'frontend', 'dist'), {
-  setHeaders: (res, path, stat) => {
-    if (path.endsWith('.js')) {
-      res.setHeader('Content-Type', 'application/javascript');
-    }
-  },
-}));
+// Serve static files before custom JS middleware to ensure correct order
+app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
-// Route to serve the React application
+// Custom middleware to set Content-Type for JavaScript files after serving static files
+app.use((req, res, next) => {
+  if (req.path.endsWith('.js')) {
+    res.setHeader('Content-Type', 'application/javascript');
+  }
+  next();
+});
+
 app.get('*', (req, res) => {
-  const filePath = path.join(__dirname, 'frontend', 'public', 'index.html');
-  res.sendFile(filePath, { headers: { 'Content-Type': 'text/html' } });
+  res.sendFile(path.join(__dirname, 'frontend', 'public', 'index.html'));
 });
 
-// Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
