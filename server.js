@@ -43,9 +43,9 @@ sequelize
     console.error('Unable to synchronize models with the database:', err);
   });
 
+// API and specific route configurations
 app.post('/auth/register', async (req, res) => {
   const { email, password, nickname } = req.body;
-
   try {
     const newUser = await User.create({ email, password, nickname });
     res.send('User registered successfully!');
@@ -55,28 +55,35 @@ app.post('/auth/register', async (req, res) => {
   }
 });
 
+// Mount middleware and routes
 app.use('/auth', authMiddleware.router);
 app.use('/favorites', authMiddleware.ensureAuthenticated, favoriteRoutes);
 
-app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'public', 'login_form.html'));
-});
-
-// Serve static files before custom JS middleware to ensure correct order
-app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
-
-// Custom middleware to set Content-Type for JavaScript files after serving static files
+// Explicitly set MIME type for JS files before serving static files
 app.use((req, res, next) => {
   if (req.path.endsWith('.js')) {
-    res.setHeader('Content-Type', 'application/javascript');
+    res.type('application/javascript'); // Force MIME type to JavaScript
   }
   next();
 });
 
+// Serve static files from the frontend's build directory
+app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
+
+// Fallback route for serving the React application
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'public', 'index.html'));
+  if (!req.path.endsWith('.js')) {  // Ensure this check to avoid serving HTML for JS requests
+    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
+  }
 });
 
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack); // Log the error stack for debugging
+  res.status(500).send('Something broke!'); // Send a 500 error response
+});
+
+// Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
