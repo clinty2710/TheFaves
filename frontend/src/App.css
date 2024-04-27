@@ -1,3 +1,5 @@
+/* App.css */
+
 .App {
   text-align: center;
 }
@@ -26,6 +28,13 @@
 
 .App-link {
   color: #61dafb;
+}
+
+/* Loading Message Styling */
+.loading-message {
+  color: #61dafb; /* Bright blue color for visibility */
+  font-size: 24px; /* Larger font size for clear visibility */
+  font-weight: bold; /* Bold font weight for emphasis */
 }
 
 @keyframes App-logo-spin {

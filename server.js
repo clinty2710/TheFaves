@@ -28,6 +28,7 @@ app.use(passport.session());
 const sequelize = new Sequelize('thefavesdb', 'root', 'Studman081!', {
   host: 'localhost',
   dialect: 'mysql',
+  logging: console.log,
 });
 
 sequelize
