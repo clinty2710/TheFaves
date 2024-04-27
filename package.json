@@ -16,7 +16,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^3.9.1",
     "net": "^1.0.2",
-    "net-browserify": "^0.1.4",
+    "net-browserify": "github:clinty2710/net-browserify",
     "node-libs-browser": "^2.2.1",
     "os-browserify": "^0.3.0",
     "passport": "^0.7.0",

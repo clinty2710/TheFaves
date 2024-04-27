@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Profile from './components/Profile';
 import Register from './components/Register';
 import Login from './components/Login'; // Import Login component
-import Favorites from '../../../routes/Favorites'; // Update import path to reflect the correct file structure
+import Favorites from '../../routes/Favorites'; 
 import './App.css';
 
 function App() {
