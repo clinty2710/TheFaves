@@ -1,6 +1,7 @@
 //webpack.config.js
 
 const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   mode: 'development',
@@ -9,6 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, 'frontend', 'dist'), // Adjusted output path
     filename: 'bundle.js',
   },
+  externals: [nodeExternals()], // Exclude node modules from frontend bundle
   module: {
     rules: [
       {
@@ -43,8 +45,6 @@ module.exports = {
       net: false, // Resolve 'net' module as false
     },
   },
-  // Use 'empty' to mock the fs module when bundling for the browser environment
-  // Use 'false' to disable the fs module entirely
   node: {
     __dirname: true,
     __filename: true,
