@@ -5,13 +5,11 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Profile from './components/Profile';
 import Register from './components/Register';
 import Login from './components/Login';
-import Favorites from '../../routes/Favorites';  // Correct import path assuming src is at the same level as routes
-
-// Optional: Authentication context provider if you have authentication logic
-import { AuthProvider, useAuth } from './AuthContext'; // Ensure this context set up is correct
+import FavoriteItems from './components/FavoriteItems';
+import { useAuth } from './AuthContext'; // Correct import of useAuth
 
 function App() {
-  const { isAuthenticated } = useAuth();  // Using authentication context properly
+  const auth = useAuth(); // Use the useAuth hook
 
   return (
     <Router>
@@ -22,8 +20,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/profile-page" element={isAuthenticated ? <Profile /> : <Navigate replace to="/" />} />
-          <Route path="/favorites" element={isAuthenticated ? <Favorites /> : <Navigate replace to="/" />} />
+          <Route path="/profile-page" element={auth.isAuthenticated ? <Profile /> : <Navigate replace to="/" />} />
+          <Route path="/favorite-items" element={auth.isAuthenticated ? <FavoriteItems /> : <Navigate replace to="/" />} />
         </Routes>
       </div>
     </Router>

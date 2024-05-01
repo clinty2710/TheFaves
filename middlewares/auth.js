@@ -1,7 +1,5 @@
 // middlewares/auth.js
 
-// middlewares/auth.js
-
 const express = require('express');
 const passport = require('passport');
 const User = require('../models/user');
@@ -35,27 +33,28 @@ router.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'frontend', 'public', 'registration_form.html'));
 });
 
-// Login route - Handle GET request to render login form
 router.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'frontend', 'public', 'login_form.html'));
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'public', 'login_form.html'));
 });
 
-// Login route - Handle POST request for user login
 router.post('/login', passport.authenticate('local'), (req, res) => {
-  // Redirect to a client-side route after successful login
-  res.redirect('/profile-page');
+  res.redirect('/profile-page');  // Changed redirection to a neutral client-side route
 });
 
-router.get('/profile', ensureAuthenticated, (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'frontend', 'public', 'profile.html'));
-});
-
-router.post('/profile', ensureAuthenticated, async (req, res) => {
-  const user = await User.findByPk(req.user.id);
-  if (!user) {
+router.get('/profile', ensureAuthenticated, async (req, res) => {
+  if (!req.user || !req.user.id) {
     return res.status(404).json({ message: 'User not found' });
   }
-  res.json({ id: user.id, nickname: user.nickname, email: user.email });
+  try {
+    const user = await User.findByPk(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json({ id: user.id, nickname: user.nickname, email: user.email });
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 router.get('/logout', (req, res) => {
