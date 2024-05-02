@@ -9,7 +9,12 @@ import FavoriteItems from './components/FavoriteItems';
 import { useAuth } from './AuthContext'; // Correct import of useAuth
 
 function App() {
-  const auth = useAuth(); // Use the useAuth hook
+  const auth = useAuth();
+  
+  if (!auth || auth.isAuthenticated === undefined) {
+    console.error('Authentication context is not set up correctly.');
+    return <div>Error: Authentication context is missing or broken.</div>;
+  }
 
   return (
     <Router>

@@ -37,20 +37,17 @@ sequelize.authenticate().then(() => {
 app.use('/auth', authMiddleware.router);
 app.use('/favorites', authMiddleware.ensureAuthenticated, favoriteRoutes);
 
-app.use((req, res, next) => {
-  if (req.path.endsWith('.js')) {
-    res.type('application/javascript');
-  }
-  next();
-});
-
 app.use(express.static(path.join(__dirname, 'frontend', 'public')));
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
+// Specific route for profile.html
+app.get('/profile-page', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'public', 'profile.html'));
+});
+
+// Fallback to index.html for all other routes
 app.get('*', (req, res) => {
-  if (!req.path.endsWith('.js')) {
-    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
-  }
+  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
 });
 
 app.use((err, req, res, next) => {

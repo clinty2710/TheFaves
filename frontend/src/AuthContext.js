@@ -1,12 +1,12 @@
+// AuthContext.js
 import React, { createContext, useContext, useState } from 'react';
 
-const AuthContext = createContext();
+const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setAuthenticated] = useState(false);
 
-  // Here you might include logic to check authentication status
-  // For example, checking a token in localStorage or making an API call
+  // Logic to toggle `isAuthenticated` goes here
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, setAuthenticated }}>
