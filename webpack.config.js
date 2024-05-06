@@ -31,6 +31,10 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
+    alias: {
+      // Ensuring a single copy of React
+      react: path.resolve('./node_modules/react'),
+    },
     fallback: {
       fs: false,
       crypto: require.resolve('crypto-browserify'),
@@ -51,6 +55,6 @@ module.exports = {
     })
   ],
   externals: {
-    express: 'express'  // This should prevent express and its dependencies from being bundled.
+    express: 'express'  // Prevents bundling express
   }
 };

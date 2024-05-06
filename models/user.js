@@ -1,4 +1,3 @@
-// models/user.js
 // /Users/clinty2710/Desktop/TheFaves/models/user.js
 
 const { DataTypes, Model } = require('sequelize');
@@ -7,10 +6,15 @@ const bcrypt = require('bcrypt');
 
 class User extends Model {
     static async authenticate(email, password) {
-        console.log('Authenticating user:', email); 
+        console.log('Authenticating user:', email);
         const user = await this.findOne({ where: { email } });
-        if (!user || !(await bcrypt.compare(password, user.password))) {
-            console.error('Invalid email or password');
+        if (!user) {
+            console.error('User not found');
+            throw new Error('Invalid email or password');
+        }
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        if (!passwordMatch) {
+            console.error('Invalid password');
             throw new Error('Invalid email or password');
         }
         console.log('Authentication successful:', email);
@@ -29,7 +33,6 @@ User.init(
         nickname: {
             type: DataTypes.STRING,
             allowNull: false,
-            // unique: true, // Remove unique constraint if not required
         },
         email: {
             type: DataTypes.STRING,
@@ -50,6 +53,7 @@ User.init(
                 if (user.password) {
                     const hashedPassword = await bcrypt.hash(user.password, 10);
                     user.password = hashedPassword;
+                    console.log('Hashed password:', hashedPassword);
                 }
             },
         },

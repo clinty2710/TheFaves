@@ -29,16 +29,26 @@ router.post('/register', async (req, res) => {
   }
 });
 
-router.get('/register', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'frontend', 'public', 'registration_form.html'));
-});
-
 router.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'frontend', 'public', 'login_form.html'));
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'src', 'components', 'Login.js'));
 });
 
-router.post('/login', passport.authenticate('local'), (req, res) => {
-  res.redirect('/profile-page');  // Changed redirection to a neutral client-side route
+router.post('/login', (req, res, next) => {
+  console.log(req.body);
+  passport.authenticate('local', (err, user, info) => {
+      if (err) {
+          return next(err);
+      }
+      if (!user) {
+          return res.status(401).json({ message: info.message });
+      }
+      req.logIn(user, (err) => {
+          if (err) {
+              return next(err);
+          }
+          return res.redirect('/profile-page');
+      });
+  })(req, res, next);
 });
 
 router.get('/profile', ensureAuthenticated, async (req, res) => {

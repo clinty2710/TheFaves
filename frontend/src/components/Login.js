@@ -1,42 +1,33 @@
 // src/components/Login.js
 
 import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Added for navigation after login
+import LoginButton from './LoginButton'; // Import the LoginButton component
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');  // Added for error handling
-    const navigate = useNavigate();  // Hook for redirecting
+    const [error, setError] = useState('');
 
-    const handleLogin = async (e) => {
-        e.preventDefault();  // Prevent default form submission behavior
-        try {
-            const response = await axios.post('/auth/login', { email, password });
-            if (response.data) {
-                navigate('/profile-page');  // Redirect to profile on success
-            }
-        } catch (error) {
-            console.error('Login error:', error);
-            setError('Failed to log in. Please check your credentials.');  // Update error state
-        }
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        if (name === 'email') setEmail(value);
+        if (name === 'password') setPassword(value);
     };
 
     return (
         <div>
             <h2>Login</h2>
-            <form onSubmit={handleLogin}>
+            <form onSubmit={(e) => e.preventDefault()}>
                 <div>
-                    <label>Email:</label>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    <label htmlFor="email">Email:</label>
+                    <input type="email" id="email" name="email" value={email} onChange={handleChange} required autoComplete="email" />
                 </div>
                 <div>
-                    <label>Password:</label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <label htmlFor="password">Password:</label>
+                    <input type="password" id="password" name="password" value={password} onChange={handleChange} required autoComplete="current-password" />
                 </div>
-                <button type="submit">Log In</button>
-                {error && <p>{error}</p>}  // Display error message if there is an error
+                <LoginButton email={email} password={password} />
+                {error && <p>{error}</p>}
             </form>
         </div>
     );

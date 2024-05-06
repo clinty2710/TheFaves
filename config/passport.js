@@ -7,16 +7,24 @@ const bcrypt = require('bcrypt');
 
 // Configure Local strategy for authentication
 passport.use(new LocalStrategy({
-    usernameField: 'email', // Specify the field for username (email)
-    passwordField: 'password', // Specify the field for password
+    usernameField: 'email',
+    passwordField: 'password',
 }, async (email, password, done) => {
     try {
         const user = await User.findOne({ where: { email } });
-        if (!user || !(await user.isValidPassword(password))) {
+        if (!user) {
+            console.log('No user found with email:', email);
             return done(null, false, { message: 'Invalid email or password' });
         }
+        const isMatch = await user.isValidPassword(password);
+        if (!isMatch) {
+            console.log('Password does not match for:', email);
+            return done(null, false, { message: 'Invalid email or password' });
+        }
+        console.log('User authenticated successfully:', email);
         return done(null, user);
     } catch (error) {
+        console.log('Error in authentication:', error);
         return done(error);
     }
 }));

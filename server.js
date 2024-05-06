@@ -37,7 +37,6 @@ sequelize.authenticate().then(() => {
 app.use('/auth', authMiddleware.router);
 app.use('/favorites', authMiddleware.ensureAuthenticated, favoriteRoutes);
 
-app.use(express.static(path.join(__dirname, 'frontend', 'public')));
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
 // Specific route for profile.html

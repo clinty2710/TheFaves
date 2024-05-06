@@ -1,19 +1,23 @@
 // LoginButton.js
 
 import React from 'react';
-import { useHistory } from 'react-router-dom'; // Import useHistory hook for redirection
-import axios from 'axios'; // Import axios for making HTTP requests
+import { useNavigate } from 'react-router-dom'; // Changed to useNavigate hook for React Router v6
+import axios from 'axios';
 
-const LoginButton = () => {
-  const history = useHistory();
+const LoginButton = ({ email, password }) => {
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-      // Make a POST request to your backend server to handle authentication
-      const response = await axios.post('/auth/login');
-      console.log(response.data); // Log the response from the server
-      // Optionally, you can redirect the user to another page upon successful login
-      // history.push('/dashboard');
+      const response = await axios.post('/auth/login', { email, password }, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+      });
+      console.log(response.data);
+      if (response.data && response.data.success) {
+        navigate('/profile-page');  // Redirect to profile on success
+      }
     } catch (error) {
       console.error('Login error:', error);
     }
