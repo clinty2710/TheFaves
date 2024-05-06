@@ -20,9 +20,8 @@ router.post('/register', async (req, res) => {
   if (!email || !password || !nickname) {
     return res.status(400).json({ message: 'All fields required' });
   }
-  const hashedPassword = await bcrypt.hash(password, 10);
   try {
-    const newUser = await User.create({ email, password: hashedPassword, nickname });
+    const newUser = await User.create({ email, password, nickname });
     res.json({ message: 'User registered successfully', user: newUser });
   } catch (error) {
     res.status(500).json({ message: 'Error registering user', error: error.message });
@@ -37,16 +36,16 @@ router.post('/login', (req, res, next) => {
   console.log(req.body);
   passport.authenticate('local', (err, user, info) => {
       if (err) {
-          return next(err);
+          return res.status(500).json({ message: 'Internal Server Error' });
       }
       if (!user) {
           return res.status(401).json({ message: info.message });
       }
-      req.logIn(user, (err) => {
+      req.logIn(user, function(err) {
           if (err) {
               return next(err);
           }
-          return res.redirect('/profile-page');
+          return res.json({ success: true, message: 'Authentication successful', user: user });
       });
   })(req, res, next);
 });

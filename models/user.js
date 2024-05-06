@@ -50,13 +50,14 @@ User.init(
         timestamps: false, // Disable timestamps
         hooks: {
             beforeCreate: async (user) => {
-                if (user.password) {
-                    const hashedPassword = await bcrypt.hash(user.password, 10);
-                    user.password = hashedPassword;
-                    console.log('Hashed password:', hashedPassword);
-                }
+              if (user.password) {
+                const hashedPassword = await bcrypt.hash(user.password, 10);
+                user.password = hashedPassword;
+                console.log('Hashed password:', hashedPassword);
+              }
             },
-        },
+          }
+          
     }
 );
 

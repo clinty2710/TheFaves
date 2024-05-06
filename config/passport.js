@@ -1,11 +1,10 @@
 // config/passport.js
 
+const bcrypt = require('bcrypt'); // Make sure bcrypt is required correctly
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy; // Import LocalStrategy for local authentication
-const User = require('../models/user'); // Adjust the path if necessary
-const bcrypt = require('bcrypt');
+const LocalStrategy = require('passport-local').Strategy;
+const User = require('../models/user');
 
-// Configure Local strategy for authentication
 passport.use(new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
@@ -13,24 +12,20 @@ passport.use(new LocalStrategy({
     try {
         const user = await User.findOne({ where: { email } });
         if (!user) {
-            console.log('No user found with email:', email);
             return done(null, false, { message: 'Invalid email or password' });
         }
-        const isMatch = await user.isValidPassword(password);
+        const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            console.log('Password does not match for:', email);
             return done(null, false, { message: 'Invalid email or password' });
         }
-        console.log('User authenticated successfully:', email);
         return done(null, user);
     } catch (error) {
-        console.log('Error in authentication:', error);
         return done(error);
     }
 }));
 
 passport.serializeUser((user, done) => {
-    done(null, user.id); // Serialize user ID into the session
+    done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {

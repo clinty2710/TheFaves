@@ -40,7 +40,7 @@ app.use('/favorites', authMiddleware.ensureAuthenticated, favoriteRoutes);
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
 // Specific route for profile.html
-app.get('/profile-page', (req, res) => {
+app.get('/profile', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'public', 'profile.html'));
 });
 

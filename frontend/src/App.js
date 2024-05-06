@@ -22,7 +22,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/profile-page" element={auth.isAuthenticated ? <Profile /> : <Navigate replace to="/" />} />
+          <Route path="/profile" element={auth.isAuthenticated ? <Profile /> : <Navigate replace to="/" />} />
           <Route path="/favorite-items" element={auth.isAuthenticated ? <FavoriteItems /> : <Navigate replace to="/" />} />
         </Routes>
       </ErrorBoundary>
