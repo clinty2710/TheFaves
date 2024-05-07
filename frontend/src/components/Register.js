@@ -8,7 +8,7 @@ const Register = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    nickname: '' // Assuming you want to include nickname in the registration form
+    nickname: '' 
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();

@@ -16,7 +16,7 @@ const LoginButton = ({ email, password }) => {
       });
       console.log(response.data);
       if (response.data && response.data.success) {
-        navigate('/profile-page');  // Redirect to profile page on success
+        navigate('/profile');  // Redirect to profile page on success
       } else {
         console.error('Login failed:', response.data.message);
       }
