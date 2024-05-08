@@ -13,12 +13,20 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+// Determine if the environment is development
+const isDevelopment = process.env.NODE_ENV !== 'production';
+
 app.use(cors());
 const randomSessionSecret = crypto.randomBytes(32).toString('hex');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
-app.use(session({ secret: randomSessionSecret, resave: true, saveUninitialized: true }));
+app.use(session({
+  secret: randomSessionSecret,
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: !isDevelopment } // Set secure to true if in production
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -39,12 +47,14 @@ app.use('/favorites', authMiddleware.ensureAuthenticated, favoriteRoutes);
 
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
-// Specific route for profile.html
 app.get('/profile', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'public', 'profile.html'));
+  if (req.isAuthenticated()) {
+    res.sendFile(path.join(__dirname, 'frontend', 'public', 'profile.html'));
+  } else {
+    res.status(401).send('Unauthorized');
+  }
 });
 
-// Fallback to index.html for all other routes
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
 });

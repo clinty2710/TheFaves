@@ -16,10 +16,12 @@ const LoginButton = ({ email, password }) => {
       });
       console.log(response.data);
       if (response.data && response.data.success) {
-        navigate('/profile');  // Redirect to profile page on success
+        console.log("Authentication success, navigating to profile.");
+        navigate('/profile'); // Make sure this navigation is correct
       } else {
-        console.error('Login failed:', response.data.message);
+        console.error('Login error:', response.data.message); // Log server-provided error message if any
       }
+      
     } catch (error) {
       console.error('Login error:', error);
     }

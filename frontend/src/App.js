@@ -7,11 +7,11 @@ import Register from './components/Register';
 import Login from './components/Login';
 import FavoriteItems from './components/FavoriteItems';
 import { useAuth } from './AuthContext';
-import ErrorBoundary from './components/ErrorBoundary'; // Make sure the path is correct
+import ErrorBoundary from './components/ErrorBoundary'; // Verify path correctness
 
 function App() {
   const auth = useAuth();
-
+  console.log(auth.isAuthenticated)
   return (
     <div className="App">
       <header className="App-header">
@@ -19,11 +19,10 @@ function App() {
       </header>
       <ErrorBoundary>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/Login" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={auth.isAuthenticated ? <Profile /> : <Navigate replace to="/" />} />
-          <Route path="/favorite-items" element={auth.isAuthenticated ? <FavoriteItems /> : <Navigate replace to="/" />} />
+          <Route path="/favorite-items" element={auth.isAuthenticated ? <FavoriteItems /> : <Navigate replace to="/login" />} />
         </Routes>
       </ErrorBoundary>
     </div>
