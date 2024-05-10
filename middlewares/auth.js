@@ -71,4 +71,21 @@ router.get('/logout', (req, res) => {
   res.redirect('/auth/login');
 });
 
+router.post('/logout', (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      console.error('Logout error:', err);
+      return res.status(500).send('Something went wrong during logout.');
+    }
+    req.session.destroy((err) => {
+      if (err) {
+        console.error('Session destruction error:', err);
+        return res.status(500).send('Failed to destroy the session.');
+      }
+      res.clearCookie('connect.sid');
+      res.redirect('/login');
+    });
+  });
+});
+
 module.exports = { ensureAuthenticated, router };

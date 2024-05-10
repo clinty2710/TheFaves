@@ -1,20 +1,25 @@
-// LogoutButton.js
+// src/components/LogoutButton.js
 
 import React from 'react';
-import axios from 'axios'; // Import axios for making HTTP requests
+import { useNavigate } from 'react-router-dom'; // Ensure this import is present
+import axios from 'axios';
 
 const LogoutButton = () => {
-  const handleLogout = async () => {
-    try {
-      await axios.get('/auth/logout');
-      // Redirect the user to the login page after successful logout
-      window.location.href = '/auth/login';
-    } catch (error) {
-      console.error('Logout error:', error);
-    }
-  };
+    const navigate = useNavigate();
 
-  return <button onClick={handleLogout}>Logout</button>;
+    const handleLogout = async () => {
+        try {
+            const response = await axios.post('/auth/logout');
+            console.log('Logout successful:', response.data);
+            navigate('/login');
+        } catch (error) {
+            console.error('Logout failed:', error);
+        }
+    };
+
+    return (
+        <button onClick={handleLogout}>Logout</button>
+    );
 };
 
 export default LogoutButton;

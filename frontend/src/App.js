@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Welcome to Your Favorites App</h1>
+        <h1>The Faves</h1>
       </header>
       <ErrorBoundary>
         <Routes>

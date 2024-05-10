@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import LogoutButton from './LogoutButton';
 import { useAuth } from '../AuthContext';
+import SearchMovies from './SearchMovies'; // Import the SearchMovies component
 
 const Profile = React.memo(() => {
     const [user, setUser] = useState(null);
@@ -52,11 +53,11 @@ const Profile = React.memo(() => {
         return <div>No user data available</div>;
     }
 
-    console.log("Profile Data:", user);
     return (
         <div>
             <h2>Welcome, {user.nickname}!</h2>
             <p>Email: {user.email}</p>
+            <SearchMovies />  {/* Add the SearchMovies component here */}
             <LogoutButton />
         </div>
     );

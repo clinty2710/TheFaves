@@ -14,14 +14,12 @@ const LoginButton = ({ email, password }) => {
             'Content-Type': 'application/json'
           }
       });
-      console.log(response.data);
       if (response.data && response.data.success) {
-        console.log("Authentication success, navigating to profile.");
-        navigate('/profile'); // Make sure this navigation is correct
+        navigate('/profile'); // Redirect to profile on success
       } else {
-        console.error('Login error:', response.data.message); // Log server-provided error message if any
+        // handle errors here if login was unsuccessful
+        console.error('Login error:', response.data.message || 'Login failed. Please check your credentials.');
       }
-      
     } catch (error) {
       console.error('Login error:', error);
     }
