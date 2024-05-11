@@ -1,37 +1,37 @@
 // frontend/src/services/tmdbClient.js
 
-import axios from 'axios';
+const axios = require('axios');
 
-const API_KEY = process.env.THEMOVIEDB_API_KEY;
+const bearerToken = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ZDdjODdlMmM0YzdkOGNlMjVhMWJlYzMxMDAzMTNlNSIsInN1YiI6IjY2M2NmNDUwMWEzZDAyYTE0MDc4YjM4NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.uXAn0dT_6ZNH_xJrQNSrbby-5UOXP6d2SVpk5HStAM0';
 const baseURL = 'https://api.themoviedb.org/3';
 
 const tmdbClient = axios.create({
-  baseURL: baseURL,
-  params: {
-    api_key: API_KEY
-  }
+    baseURL: baseURL,
+    headers: {
+      'Authorization': bearerToken,
+      'Accept': 'application/json'
+    }
 });
 
-export const searchMovies = async (query) => {
-  try {
-    const response = await tmdbClient.get('/search/movie', {
-      params: { query }
-    });
-    return response.data.results;
-  } catch (error) {
-    console.error('Error searching movies:', error);
-    return [];
-  }
+const searchMovies = async (query, page = 1) => {
+    try {
+        const response = await tmdbClient.get('/search/movie', {
+            params: {
+                query,  // the search keyword
+                page,
+                include_adult: false,
+                language: 'en-US'
+            }
+        });
+        return {
+            results: response.data.results,
+            totalPages: response.data.total_pages,
+            currentPage: response.data.page
+        };
+    } catch (error) {
+        console.error('Error searching movies:', error);
+        return { results: [], totalPages: 0, currentPage: 0 };
+    }
 };
 
-export const getMovieDetails = async (movieId) => {
-  try {
-    const response = await tmdbClient.get(`/movie/${movieId}`);
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching movie details:', error);
-    return null;
-  }
-};
-
-export default { searchMovies, getMovieDetails };
+module.exports = { searchMovies }; // Using CommonJS syntax to export

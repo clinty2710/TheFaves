@@ -3,6 +3,9 @@
 const express = require('express');
 const { Favorite } = require('../models/favorite'); // Ensure this path is correct
 const router = express.Router();
+const { searchMovies } = require('../frontend/src/services/tmdbClient');
+
+const API_KEY = process.env.THEMOVIEDB_API_KEY;
 
 // Route to search movies
 router.get('/movies/search', async (req, res) => {
@@ -12,6 +15,29 @@ router.get('/movies/search', async (req, res) => {
   }
   const movies = await searchMovies(query);
   res.json(movies);
+});
+
+// Route to search movies from TMDB
+router.get('/search/:query', async (req, res) => {
+  const url = `https://api.themoviedb.org/3/search/movie`;
+  try {
+      const response = await axios.get(url, {
+          params: {
+              api_key: API_KEY,
+              query: req.params.query,
+              include_adult: false
+          }
+      });
+      console.log("TMDB Response:", response.data); // Added to log the TMDB response
+      res.json(response.data.results);
+  } catch (error) {
+      console.error('Search API error:', error);
+      if (error.response) {
+          // Log detailed response error
+          console.error("TMDB Response Error:", error.response.data);
+      }
+      res.status(500).json({ message: "Failed to fetch movies", error: error.message });
+  }
 });
 
 // Route to get details of a specific movie

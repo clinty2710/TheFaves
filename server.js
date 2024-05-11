@@ -16,6 +16,10 @@ const app = express();
 // Determine if the environment is development
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
+require('dotenv').config();
+
+app.use('/api', favoriteRoutes);
+
 app.use(cors());
 const randomSessionSecret = crypto.randomBytes(32).toString('hex');
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -68,3 +72,4 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+console.log(process.env.THEMOVIEDB_API_KEY);

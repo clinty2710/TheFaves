@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import LogoutButton from './LogoutButton';
 import { useAuth } from '../AuthContext';
-import SearchMovies from './SearchMovies'; // Import the SearchMovies component
+import SearchMovies from './SearchMovies';
 
 const Profile = React.memo(() => {
     const [user, setUser] = useState(null);
@@ -36,7 +36,7 @@ const Profile = React.memo(() => {
 
             fetchUserProfile();
         }
-    }, [isAuthenticated]); // Dependency array includes isAuthenticated to re-run effect when it changes
+    }, [isAuthenticated]); 
 
     if (loading) {
         console.log("Loading Profile...");
