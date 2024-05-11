@@ -23,14 +23,14 @@ const searchMovies = async (query, page = 1) => {
                 language: 'en-US'
             }
         });
-        return {
-            results: response.data.results,
-            totalPages: response.data.total_pages,
-            currentPage: response.data.page
-        };
+        return response.data.results.map(movie => ({
+            label: `${movie.title} (${movie.release_date ? movie.release_date.split('-')[0] : 'Unknown'})`,
+            value: movie.id,
+            poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+        }));
     } catch (error) {
         console.error('Error searching movies:', error);
-        return { results: [], totalPages: 0, currentPage: 0 };
+        return [];
     }
 };
 

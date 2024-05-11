@@ -1,16 +1,15 @@
-// models/favorite.js
-
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../database/connection');
+const sequelize = require('../database/connection'); 
 
 class Favorite extends Model {}
 
 Favorite.init({
   userId: DataTypes.INTEGER,
-  title: DataTypes.STRING,
-  description: DataTypes.STRING,
-  itemId: DataTypes.STRING,
-  itemType: DataTypes.STRING // 'movie', 'music', or 'book'
+  itemId: DataTypes.INTEGER,
+  itemType: DataTypes.STRING,  // 'movie', 'music', 'book'
+  movieId: DataTypes.INTEGER,  // Specific for movies
+  movieTitle: DataTypes.STRING,  // Specific for movies
+  posterPath: DataTypes.STRING  // Specific for movies
 }, { sequelize, modelName: 'Favorite' });
 
 module.exports = Favorite;

@@ -7,25 +7,29 @@ import Register from './components/Register';
 import Login from './components/Login';
 import FavoriteItems from './components/FavoriteItems';
 import { useAuth } from './AuthContext';
-import ErrorBoundary from './components/ErrorBoundary'; // Verify path correctness
+import ErrorBoundary from './components/ErrorBoundary';
+import { UserProvider } from './components/UserContext'; // Corrected path assuming UserContext is directly under components
 
 function App() {
   const auth = useAuth();
-  console.log(auth.isAuthenticated)
+  console.log(auth.isAuthenticated);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>The Faves</h1>
-      </header>
-      <ErrorBoundary>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={auth.isAuthenticated ? <Profile /> : <Navigate replace to="/" />} />
-          <Route path="/favorite-items" element={auth.isAuthenticated ? <FavoriteItems /> : <Navigate replace to="/login" />} />
-        </Routes>
-      </ErrorBoundary>
-    </div>
+    <UserProvider> {/* Correct placement */}
+      <div className="App">
+        <header className="App-header">
+          <h1>The Faves</h1>
+        </header>
+        <ErrorBoundary>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/profile" element={auth.isAuthenticated ? <Profile /> : <Navigate replace to="/" />} />
+            <Route path="/favorite-items" element={auth.isAuthenticated ? <FavoriteItems /> : <Navigate replace to="/login" />} />
+          </Routes>
+        </ErrorBoundary>
+      </div>
+    </UserProvider>
   );
 }
 
