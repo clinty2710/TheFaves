@@ -10,6 +10,6 @@ Favorite.init({
   movieId: DataTypes.INTEGER,  // Specific for movies
   movieTitle: DataTypes.STRING,  // Specific for movies
   posterPath: DataTypes.STRING  // Specific for movies
-}, { sequelize, modelName: 'Favorite' });
+}, { sequelize, modelName: 'Favorite', timestamps: false });
 
 module.exports = Favorite;
