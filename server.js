@@ -1,42 +1,47 @@
 // server.js
 
+require('dotenv').config();  // Load environment variables from .env file
 const express = require('express');
 const session = require('express-session');
 const passport = require('./config/passport');
 const path = require('path');
 const crypto = require('crypto');
-const db = require('./models');  // Import the models
+const { Sequelize } = require('sequelize');
+const authMiddleware = require('./middlewares/auth');
 const favoriteRoutes = require('./routes/Favorites');
 const cors = require('cors');
-const authMiddleware = require('./middlewares/auth'); // Add this line
 
 const app = express();
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
-require('dotenv').config();
+// Set up body parsing middleware
+app.use(express.json());  // for parsing application/json
+app.use(express.urlencoded({ extended: true }));  // for parsing application/x-www-form-urlencoded
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-
 const randomSessionSecret = crypto.randomBytes(32).toString('hex');
 app.use(session({
   secret: randomSessionSecret,
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: !isDevelopment }
+  cookie: { secure: !isDevelopment }  // Set secure to true if in production
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-db.sequelize.authenticate().then(() => {
+const sequelize = new Sequelize('thefavesdb', 'root', 'Studman081!', {
+  host: 'localhost',
+  dialect: 'mysql',
+});
+
+sequelize.authenticate().then(() => {
   console.log('Connected to the database');
-  return db.sequelize.sync();
+  return sequelize.sync();
 }).catch((err) => {
   console.error('Unable to synchronize models with the database:', err);
 });
 
-app.use('/auth', authMiddleware.router); // Now this line should work
+app.use('/auth', authMiddleware.router);
 app.use('/api/favorites', favoriteRoutes);
 
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));

@@ -4,8 +4,9 @@ const express = require('express');
 const { Favorite, Movie } = require('../models');  // Import Movie model
 const router = express.Router();
 const axios = require('axios');
+require('dotenv').config();  // Load environment variables
 
-const API_KEY = process.env.THEMOVIEDB_API_KEY;
+const API_TOKEN = process.env.THEMOVIEDB_API_TOKEN;
 
 // Route to search movies using TMDB API
 router.get('/movies/search', async (req, res) => {
@@ -17,10 +18,13 @@ router.get('/movies/search', async (req, res) => {
   try {
       const response = await axios.get(url, {
           params: {
-              api_key: API_KEY,
               query: query,
               include_adult: false,
               language: 'en-US'
+          },
+          headers: {
+              'Authorization': API_TOKEN,
+              'Accept': 'application/json'
           }
       });
       console.log("TMDB Response:", response.data);
@@ -37,6 +41,18 @@ router.post('/add', async (req, res) => {
   console.log("Adding a new favorite:", req.body); // Debugging line
 
   try {
+    // Fetch movie details from TMDB to get release_date and description
+    const movieDetailsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
+      params: {
+        language: 'en-US'
+      },
+      headers: {
+        'Authorization': API_TOKEN,
+        'Accept': 'application/json'
+      }
+    });
+    const movieDetails = movieDetailsResponse.data;
+
     // Check if the movie already exists in the movies table
     let movie = await Movie.findOne({ where: { id: movieId } });
 
@@ -45,17 +61,17 @@ router.post('/add', async (req, res) => {
       movie = await Movie.create({
         id: movieId,
         title: movieTitle,
-        release_date: null, // Add the release date if available
+        release_date: movieDetails.release_date || null,
         poster_path: posterPath,
-        description: null, // Add the description if available
+        description: movieDetails.overview || null,
       });
     }
 
     // Insert the favorite into the favorites table
     const newFavorite = await Favorite.create({
       user_Id,
-      item_Id,
-      item_Type,
+      item_Id: movieId,  // Ensure item_Id is the same as movieId
+      item_Type: item_Type,
     });
 
     res.status(201).json(newFavorite);

@@ -46,6 +46,7 @@ module.exports = {
       path: require.resolve('path-browserify'),
       vm: require.resolve('vm-browserify'),
       timers: require.resolve('timers-browserify'),
+      os: require.resolve('os-browserify/browser'), // Added os-browserify fallback
       net: false
     }
   },

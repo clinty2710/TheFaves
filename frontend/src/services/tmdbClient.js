@@ -2,7 +2,7 @@
 
 const axios = require('axios');
 
-const bearerToken = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ZDdjODdlMmM0YzdkOGNlMjVhMWJlYzMxMDAzMTNlNSIsInN1YiI6IjY2M2NmNDUwMWEzZDAyYTE0MDc4YjM4NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.uXAn0dT_6ZNH_xJrQNSrbby-5UOXP6d2SVpk5HStAM0';
+const bearerToken = process.env.THEMOVIEDB_API_TOKEN;  // Ensure this is set on the server
 const baseURL = 'https://api.themoviedb.org/3';
 
 const tmdbClient = axios.create({
