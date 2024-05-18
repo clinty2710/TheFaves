@@ -5,14 +5,23 @@ const { Model, DataTypes } = require('sequelize');
 class Movie extends Model {
   static init(sequelize) {
     return super.init({
-      title: DataTypes.STRING,
-      release_date: DataTypes.DATE,
-      poster_path: DataTypes.STRING,
-      description: DataTypes.TEXT
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      release_date: {
+        type: DataTypes.DATE,
+      },
+      poster_path: {
+        type: DataTypes.STRING,
+      },
+      description: {
+        type: DataTypes.TEXT,
+      },
     }, {
       sequelize,
       modelName: 'Movie',
-      timestamps: false
+      timestamps: false,
     });
   }
 }

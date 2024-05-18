@@ -1,7 +1,7 @@
 // routes/Favorites.js
 
 const express = require('express');
-const { Favorite } = require('../models'); 
+const { Favorite, Movie } = require('../models');  // Import Movie model
 const router = express.Router();
 const axios = require('axios');
 
@@ -15,35 +15,49 @@ router.get('/movies/search', async (req, res) => {
   }
   const url = `https://api.themoviedb.org/3/search/movie`;
   try {
-    const response = await axios.get(url, {
-      params: {
-        api_key: API_KEY,
-        query: query,
-        include_adult: false,
-        language: 'en-US'
-      }
-    });
-    console.log("TMDB Response:", response.data);
-    res.json(response.data.results);
+      const response = await axios.get(url, {
+          params: {
+              api_key: API_KEY,
+              query: query,
+              include_adult: false,
+              language: 'en-US'
+          }
+      });
+      console.log("TMDB Response:", response.data);
+      res.json(response.data.results);
   } catch (error) {
-    console.error('Search API error:', error);
-    res.status(500).json({ message: "Failed to fetch movies", error: error.message });
+      console.error('Search API error:', error);
+      res.status(500).json({ message: "Failed to fetch movies", error: error.message });
   }
 });
 
 // Generic add favorite endpoint
 router.post('/add', async (req, res) => {
-  console.log("Favorite model:", Favorite);
-  const { user_Id, item_Id, item_Type } = req.body;
+  const { user_Id, item_Id, item_Type, movieId, movieTitle, posterPath } = req.body;
   console.log("Adding a new favorite:", req.body); // Debugging line
-  console.log("Favorite model loaded:", Favorite !== undefined); // Debugging line
 
   try {
+    // Check if the movie already exists in the movies table
+    let movie = await Movie.findOne({ where: { id: movieId } });
+
+    if (!movie) {
+      // If the movie doesn't exist, insert it into the movies table
+      movie = await Movie.create({
+        id: movieId,
+        title: movieTitle,
+        release_date: null, // Add the release date if available
+        poster_path: posterPath,
+        description: null, // Add the description if available
+      });
+    }
+
+    // Insert the favorite into the favorites table
     const newFavorite = await Favorite.create({
       user_Id,
       item_Id,
-      item_Type
+      item_Type,
     });
+
     res.status(201).json(newFavorite);
   } catch (error) {
     console.error('Failed to add favorite:', error);
