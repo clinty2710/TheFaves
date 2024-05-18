@@ -1,12 +1,13 @@
 // routes/Favorites.js
 
 const express = require('express');
-const { Favorite } = require('../models');
+const { Favorite } = require('../models'); 
 const router = express.Router();
 const axios = require('axios');
 
 const API_KEY = process.env.THEMOVIEDB_API_KEY;
 
+// Route to search movies using TMDB API
 router.get('/movies/search', async (req, res) => {
   const { query } = req.query;
   if (!query) {
@@ -30,9 +31,10 @@ router.get('/movies/search', async (req, res) => {
   }
 });
 
+// Generic add favorite endpoint
 router.post('/add', async (req, res) => {
-  const { user_Id, item_Id, item_Type, movieId, movieTitle, posterPath } = req.body;
   console.log("Favorite model:", Favorite);
+  const { user_Id, item_Id, item_Type } = req.body;
   console.log("Adding a new favorite:", req.body); // Debugging line
   console.log("Favorite model loaded:", Favorite !== undefined); // Debugging line
 
@@ -40,10 +42,7 @@ router.post('/add', async (req, res) => {
     const newFavorite = await Favorite.create({
       user_Id,
       item_Id,
-      item_Type,
-      movieId,
-      movieTitle,
-      posterPath
+      item_Type
     });
     res.status(201).json(newFavorite);
   } catch (error) {
