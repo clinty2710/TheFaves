@@ -79,6 +79,26 @@ router.post('/add', async (req, res) => {
   }
 });
 
+// Endpoint to fetch a user's favorites
+router.get('/user/:userId', async (req, res) => {
+  const { userId } = req.params;
+  
+  try {
+    const favorites = await Favorite.findAll({
+      where: { user_Id: userId },
+      include: [{
+        model: Movie,
+        as: 'movie',  // This should match the alias used in the association
+      }]
+    });
+    
+    res.json(favorites);
+  } catch (error) {
+    console.error('Failed to fetch favorites:', error);
+    res.status(500).send('Failed to fetch favorites.');
+  }
+});
+
 // Endpoint to delete a favorite
 router.delete('/delete/:id', async (req, res) => {
   const { id } = req.params;

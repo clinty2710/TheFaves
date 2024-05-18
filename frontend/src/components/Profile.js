@@ -10,16 +10,15 @@ import SearchMovies from './SearchMovies';
 const Profile = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [favorites, setFavorites] = useState([]);
     const { isAuthenticated } = useAuth();
     const { user, setUser } = useContext(UserContext);
 
     useEffect(() => {
         const fetchUserProfile = async () => {
-            console.log("Fetching user profile...");
             try {
                 setLoading(true);
                 const response = await axios.get('/auth/profile');
-                console.log("Profile data received:", response.data);
                 if (response.data) {
                     setUser(response.data);
                     setError(null);
@@ -41,28 +40,49 @@ const Profile = () => {
         }
     }, [isAuthenticated, setUser]);
 
+    useEffect(() => {
+        const fetchFavorites = async () => {
+            if (user && user.id) {
+                try {
+                    const response = await axios.get(`/api/favorites/user/${user.id}`);
+                    setFavorites(response.data);
+                } catch (error) {
+                    console.error('Failed to fetch favorites:', error);
+                }
+            }
+        };
+
+        if (user && user.id) {
+            fetchFavorites();
+        }
+    }, [user]);
+
     if (loading) {
-        console.log("Loading Profile...");
         return <div>Loading...</div>;
     }
 
     if (error) {
-        console.log("Error loading profile:", error);
         return <div>Error: {error}</div>;
     }
 
     if (!user) {
-        console.log("No user data received");
         return <div>No user data available</div>;
     }
-
-    console.log("User data available:", user);
 
     return (
         <div>
             <h2>Welcome, {user.nickname}!</h2>
             <p>Email: {user.email}</p>
-            <SearchMovies />  {/* Add the SearchMovies component here */}
+            <SearchMovies favorites={favorites} setFavorites={setFavorites} />  {/* Pass favorites as props */}
+            <div className="favorites-container">
+                {favorites.map(fav => (
+                    <div key={fav.id} className="favorite-item">
+                        <img src={fav.movie.poster_path} alt={fav.movie.title} />
+                        <p>{fav.movie.title}</p>
+                        <button onClick={() => handleRemoveFavorite(fav.id)}>Delete</button>
+                    </div>
+                ))}
+            </div>
             <LogoutButton />
         </div>
     );

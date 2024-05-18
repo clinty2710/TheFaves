@@ -6,11 +6,10 @@ import axios from 'axios';
 import { searchMovies } from '../services/tmdbClient';
 import { UserContext } from './UserContext';
 
-const SearchMovies = () => {
+const SearchMovies = ({ favorites, setFavorites }) => {
     const { user } = useContext(UserContext);
     const [inputValue, setInputValue] = useState('');
     const [options, setOptions] = useState([]);
-    const [favorites, setFavorites] = useState([]);
 
     useEffect(() => {
         if (inputValue.length > 2) {
@@ -69,8 +68,8 @@ const SearchMovies = () => {
             <div className="favorites-container">
                 {Array.isArray(favorites) && favorites.map(fav => (
                     <div key={fav.id} className="favorite-item">
-                        <img src={fav.poster_path} alt={fav.movieTitle} />
-                        <p>{fav.movieTitle}</p>
+                        <img src={fav.movie.poster_path} alt={fav.movie.title} />
+                        <p>{fav.movie.title}</p>
                         <button onClick={() => handleRemoveFavorite(fav.id)}>Delete</button>
                     </div>
                 ))}
