@@ -7,7 +7,7 @@ import { searchMovies } from '../services/tmdbClient';
 import { UserContext } from './UserContext';
 
 const SearchMovies = () => {
-    const { user } = useContext(UserContext);  // Destructure user from UserContext
+    const { user } = useContext(UserContext);
     const [inputValue, setInputValue] = useState('');
     const [options, setOptions] = useState([]);
     const [favorites, setFavorites] = useState([]);
@@ -47,6 +47,15 @@ const SearchMovies = () => {
         }
     };
 
+    const handleRemoveFavorite = async (id) => {
+        try {
+            await axios.delete(`/api/favorites/delete/${id}`);
+            setFavorites(favorites.filter(fav => fav.id !== id));
+        } catch (error) {
+            console.error('Error removing favorite:', error);
+        }
+    };
+
     return (
         <>
             <Select
@@ -59,8 +68,8 @@ const SearchMovies = () => {
             />
             <div className="favorites-container">
                 {Array.isArray(favorites) && favorites.map(fav => (
-                    <div key={fav.item_Id} className="favorite-item">
-                        <img src={`https://image.tmdb.org/t/p/w500${fav.poster_path}`} alt={fav.movieTitle} />
+                    <div key={fav.id} className="favorite-item">
+                        <img src={fav.poster_path} alt={fav.movieTitle} />
                         <p>{fav.movieTitle}</p>
                         <button onClick={() => handleRemoveFavorite(fav.id)}>Delete</button>
                     </div>

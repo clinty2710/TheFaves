@@ -15,9 +15,6 @@ class Movie extends Model {
       poster_path: {
         type: DataTypes.STRING,
       },
-      description: {
-        type: DataTypes.TEXT,
-      },
     }, {
       sequelize,
       modelName: 'Movie',

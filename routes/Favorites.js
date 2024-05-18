@@ -62,7 +62,6 @@ router.post('/add', async (req, res) => {
         title: movieTitle,
         release_date: movieDetails.release_date || null,
         poster_path: posterPath,
-        description: movieDetails.overview || null,
       });
     }
 
@@ -77,6 +76,34 @@ router.post('/add', async (req, res) => {
   } catch (error) {
     console.error('Failed to add favorite:', error);
     res.status(500).send('Failed to add to favorites.');
+  }
+});
+
+// Endpoint to delete a favorite
+router.delete('/delete/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const favorite = await Favorite.findByPk(id);
+    if (!favorite) {
+      return res.status(404).json({ message: 'Favorite not found' });
+    }
+
+    const movieId = favorite.item_Id; // Get the movie ID before deleting the favorite
+
+    await favorite.destroy();
+
+    // Check if the movie is still referenced in the Favorites table
+    const remainingFavorites = await Favorite.count({ where: { item_Id: movieId } });
+    if (remainingFavorites === 0) {
+      // No more references to this movie, safe to delete from the Movies table
+      await Movie.destroy({ where: { id: movieId } });
+    }
+
+    res.status(200).json({ message: 'Favorite deleted successfully' });
+  } catch (error) {
+    console.error('Failed to delete favorite:', error);
+    res.status(500).send('Failed to delete favorite.');
   }
 });
 
