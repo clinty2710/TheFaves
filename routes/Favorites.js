@@ -1,7 +1,7 @@
 // routes/Favorites.js
 
 const express = require('express');
-const { Favorite } = require('../models/favorite'); 
+const { Favorite } = require('../models');
 const router = express.Router();
 const axios = require('axios');
 
@@ -33,19 +33,14 @@ router.get('/movies/search', async (req, res) => {
 
 // Generic add favorite endpoint
 router.post('/add', async (req, res) => {
-  console.log("Favorite model:", Favorite);
-  const { userId, itemId, itemType, movieId, movieTitle, posterPath } = req.body;
-  console.log("Adding a new favorite:", req.body); // Debugging line
-  console.log("Favorite model loaded:", Favorite !== undefined); // Debugging line
+  const { userId, itemId, itemType } = req.body;
+  console.log("Adding a new favorite:", req.body);
 
   try {
     const newFavorite = await Favorite.create({
         userId,
         itemId,
-        itemType,
-        movieId,
-        movieTitle,
-        posterPath
+        itemType
     });
     res.status(201).json(newFavorite);
   } catch (error) {

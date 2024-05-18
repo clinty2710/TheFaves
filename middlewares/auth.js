@@ -2,7 +2,7 @@
 
 const express = require('express');
 const passport = require('passport');
-const User = require('../models/user');
+const User = require('../models').User;
 const bcrypt = require('bcrypt');
 const path = require('path');
 
@@ -35,18 +35,18 @@ router.get('/login', (req, res) => {
 router.post('/login', (req, res, next) => {
   console.log(req.body);
   passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      return res.status(500).json({ message: 'Internal Server Error' });
+    }
+    if (!user) {
+      return res.status(401).json({ message: info.message });
+    }
+    req.logIn(user, function(err) {
       if (err) {
-          return res.status(500).json({ message: 'Internal Server Error' });
+        return next(err);
       }
-      if (!user) {
-          return res.status(401).json({ message: info.message });
-      }
-      req.logIn(user, function(err) {
-          if (err) {
-              return next(err);
-          }
-          return res.json({ success: true, message: 'Authentication successful', user: user });
-      });
+      return res.json({ success: true, message: 'Authentication successful', user: user });
+    });
   })(req, res, next);
 });
 

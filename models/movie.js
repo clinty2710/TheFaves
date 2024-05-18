@@ -3,18 +3,20 @@
 const { Model, DataTypes } = require('sequelize');
 
 class Movie extends Model {
-  static init(sequelize) {
-    return super.init({
-      title: DataTypes.STRING,
-      release_date: DataTypes.DATE,
-      poster_path: DataTypes.STRING,
-      description: DataTypes.TEXT
-    }, { sequelize, modelName: 'Movie',timestamps: false });
-  }
-
   static associate(models) {
     // Define associations here if needed
   }
 }
 
-module.exports = Movie;
+module.exports = (sequelize) => {
+  Movie.init(
+    {
+      title: DataTypes.STRING,
+      release_date: DataTypes.DATE,
+      poster_path: DataTypes.STRING,
+      description: DataTypes.TEXT,
+    },
+    { sequelize, modelName: 'Movie', timestamps: false }
+  );
+  return Movie;
+};

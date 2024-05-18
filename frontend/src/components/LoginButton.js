@@ -1,24 +1,27 @@
 // LoginButton.js
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from './../AuthContext';
 
 const LoginButton = ({ email, password }) => {
   const navigate = useNavigate();
+  const { setAuthenticated } = useAuth();
 
   const handleLogin = async () => {
     try {
       const response = await axios.post('/auth/login', { email, password }, {
-          headers: {
-            'Content-Type': 'application/json'
-          }
+        headers: { 'Content-Type': 'application/json' }
       });
-      if (response.data && response.data.success) {
-        navigate('/profile'); // Redirect to profile on success
+      if (response.data.success) {
+        setAuthenticated(true);
+        sessionStorage.setItem('isAuthenticated', true); // Persist authentication state
+        navigate('/profile');
       } else {
-        // handle errors here if login was unsuccessful
-        console.error('Login error:', response.data.message || 'Login failed. Please check your credentials.');
+        setAuthenticated(false);
+        sessionStorage.removeItem('isAuthenticated');
+        alert('Login failed. Please check your credentials.');
       }
     } catch (error) {
       console.error('Login error:', error);
@@ -26,7 +29,7 @@ const LoginButton = ({ email, password }) => {
   };
 
   return (
-    <button onClick={handleLogin}>Log In</button>
+    <button onClick={handleLogin}>Login</button>
   );
 };
 

@@ -9,10 +9,21 @@ export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        // Fetch user data from your API or handle authentication
-        axios.get('/api/user')
-            .then(response => setUser(response.data))
-            .catch(error => console.error('Failed to fetch user', error));
+        const fetchUser = async () => {
+            try {
+                const response = await axios.get('/auth/profile');
+                setUser(response.data);
+            } catch (error) {
+                if (error.response && error.response.status === 401) {
+                    console.log('User not authenticated');
+                    setUser(null); // Ensure user is set to null if not authenticated
+                } else {
+                    console.error('Failed to fetch user', error);
+                }
+            }
+        };
+
+        fetchUser();
     }, []);
 
     return (

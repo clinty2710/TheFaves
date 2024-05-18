@@ -16,8 +16,8 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 require('dotenv').config();
 
 // Set up body parsing middleware
-app.use(express.json());  // for parsing application/json
-app.use(express.urlencoded({ extended: true }));  // for parsing application/x-www-form-urlencoded
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 const randomSessionSecret = crypto.randomBytes(32).toString('hex');
@@ -25,7 +25,7 @@ app.use(session({
   secret: randomSessionSecret,
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: !isDevelopment }  // Set secure to true if in production
+  cookie: { secure: !isDevelopment }
 }));
 app.use(passport.initialize());
 app.use(passport.session());

@@ -56,7 +56,7 @@ const SearchMovies = () => {
             />
             <div className="favorites-container">
                 {Array.isArray(favorites) && favorites.map(fav => (
-                    <div key={fav.itemId} className="favorite-item">
+                    <div key={fav.id} className="favorite-item">
                         <img src={`https://image.tmdb.org/t/p/w500${fav.posterPath}`} alt={fav.movieTitle} />
                         <p>{fav.movieTitle}</p>
                         <button onClick={() => handleRemoveFavorite(fav.id)}>Delete</button>
