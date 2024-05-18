@@ -7,9 +7,9 @@ class Favorite extends Model {}
 module.exports = (sequelize) => {
   Favorite.init(
     {
-      userId: DataTypes.INTEGER,
-      itemId: DataTypes.INTEGER,
-      itemType: DataTypes.STRING,  // 'movie', 'music', 'book'
+      user_Id: DataTypes.INTEGER,
+      item_Id: DataTypes.INTEGER,
+      item_Type: DataTypes.STRING,  // 'movie', 'music', 'book'
     },
     { sequelize, modelName: 'Favorite', timestamps: false }
   );

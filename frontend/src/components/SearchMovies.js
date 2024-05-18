@@ -34,9 +34,9 @@ const SearchMovies = () => {
         }
         try {
             const { data } = await axios.post('/api/favorites/add', {
-                userId: user.id,
-                itemId: movie.value,
-                itemType: 'movie',
+                user_Id: user.id,
+                item_Id: movie.value,
+                item_Type: 'movie',
                 movieId: movie.value,
                 movieTitle: movie.label,
                 posterPath: movie.poster
