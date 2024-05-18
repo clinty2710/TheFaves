@@ -13,6 +13,7 @@ export const UserProvider = ({ children }) => {
             try {
                 const response = await axios.get('/auth/profile');
                 setUser(response.data);
+                console.log("User data set in UserContext:", response.data);
             } catch (error) {
                 if (error.response && error.response.status === 401) {
                     console.log('User not authenticated');
@@ -27,7 +28,7 @@ export const UserProvider = ({ children }) => {
     }, []);
 
     return (
-        <UserContext.Provider value={user}>
+        <UserContext.Provider value={{ user, setUser }}>
             {children}
         </UserContext.Provider>
     );

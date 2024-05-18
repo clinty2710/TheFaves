@@ -4,7 +4,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Select from 'react-select';
 import axios from 'axios';
 import { searchMovies } from '../services/tmdbClient';
-import { UserContext } from '../components/UserContext';
+import { UserContext } from './UserContext';
 
 const SearchMovies = () => {
     const user = useContext(UserContext);
@@ -36,7 +36,10 @@ const SearchMovies = () => {
             const { data } = await axios.post('/api/favorites/add', {
                 userId: user.id,
                 itemId: movie.value,
-                itemType: 'movie'
+                itemType: 'movie',
+                movieId: movie.value,
+                movieTitle: movie.label,
+                posterPath: movie.poster
             });
             setFavorites([...favorites, data]);
         } catch (error) {
@@ -56,8 +59,8 @@ const SearchMovies = () => {
             />
             <div className="favorites-container">
                 {Array.isArray(favorites) && favorites.map(fav => (
-                    <div key={fav.id} className="favorite-item">
-                        <img src={`https://image.tmdb.org/t/p/w500${fav.posterPath}`} alt={fav.movieTitle} />
+                    <div key={fav.itemId} className="favorite-item">
+                        <img src={fav.posterPath} alt={fav.movieTitle} />
                         <p>{fav.movieTitle}</p>
                         <button onClick={() => handleRemoveFavorite(fav.id)}>Delete</button>
                     </div>
