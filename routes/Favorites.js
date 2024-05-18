@@ -34,17 +34,14 @@ router.get('/movies/search', async (req, res) => {
   }
 });
 
-// Generic add favorite endpoint
 router.post('/add', async (req, res) => {
   const { user_Id, item_Id, item_Type, movieId, movieTitle, posterPath } = req.body;
   console.log("Adding a new favorite:", req.body);
 
   try {
-    // Fetch movie details from TMDB to get release_date and description
+    // Fetch movie details from TMDB to get release_date
     const movieDetailsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
-      params: {
-        language: 'en-US'
-      },
+      params: { language: 'en-US' },
       headers: {
         'Authorization': API_TOKEN,
         'Accept': 'application/json'
@@ -54,7 +51,6 @@ router.post('/add', async (req, res) => {
 
     // Check if the movie already exists in the movies table
     let movie = await Movie.findOne({ where: { id: movieId } });
-
     if (!movie) {
       // If the movie doesn't exist, insert it into the movies table
       movie = await Movie.create({

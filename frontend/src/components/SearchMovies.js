@@ -43,15 +43,7 @@ const SearchMovies = ({ favorites, setFavorites }) => {
             setFavorites([...favorites, data]);
         } catch (error) {
             console.error('Error adding to favorites:', error);
-        }
-    };
-
-    const handleRemoveFavorite = async (id) => {
-        try {
-            await axios.delete(`/api/favorites/delete/${id}`);
-            setFavorites(favorites.filter(fav => fav.id !== id));
-        } catch (error) {
-            console.error('Error removing favorite:', error);
+            alert('Something went wrong. Please refresh the page.');
         }
     };
 
@@ -65,15 +57,6 @@ const SearchMovies = ({ favorites, setFavorites }) => {
                 noOptionsMessage={() => 'No movies found'}
                 isLoading={inputValue && options.length === 0}
             />
-            <div className="favorites-container">
-                {Array.isArray(favorites) && favorites.map(fav => (
-                    <div key={fav.id} className="favorite-item">
-                        <img src={fav.movie.poster_path} alt={fav.movie.title} />
-                        <p>{fav.movie.title}</p>
-                        <button onClick={() => handleRemoveFavorite(fav.id)}>Delete</button>
-                    </div>
-                ))}
-            </div>
         </>
     );
 };

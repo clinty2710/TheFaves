@@ -57,6 +57,15 @@ const Profile = () => {
         }
     }, [user]);
 
+    const handleRemoveFavorite = async (id) => {
+        try {
+            await axios.delete(`/api/favorites/delete/${id}`);
+            setFavorites(favorites.filter(fav => fav.id !== id));
+        } catch (error) {
+            console.error('Error removing favorite:', error);
+        }
+    };
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -73,7 +82,7 @@ const Profile = () => {
         <div>
             <h2>Welcome, {user.nickname}!</h2>
             <p>Email: {user.email}</p>
-            <SearchMovies favorites={favorites} setFavorites={setFavorites} />  {/* Pass favorites as props */}
+            <SearchMovies favorites={favorites} setFavorites={setFavorites} />
             <div className="favorites-container">
                 {favorites.map(fav => (
                     <div key={fav.id} className="favorite-item">
