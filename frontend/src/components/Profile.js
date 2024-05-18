@@ -1,4 +1,4 @@
-// src/components/Profile.js
+// frontend/src/components/Profile.js
 
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
@@ -16,9 +16,11 @@ const Profile = () => {
 
     useEffect(() => {
         const fetchUserProfile = async () => {
+            console.log("Fetching user profile...");
             try {
                 setLoading(true);
                 const response = await axios.get('/auth/profile');
+                console.log("Profile data received:", response.data);
                 if (response.data) {
                     setUser(response.data);
                     setError(null);
@@ -41,10 +43,11 @@ const Profile = () => {
     }, [isAuthenticated, setUser]);
 
     useEffect(() => {
-        const fetchFavorites = async () => {
+        const fetchUserFavorites = async () => {
             if (user && user.id) {
                 try {
                     const response = await axios.get(`/api/favorites/user/${user.id}`);
+                    console.log("User favorites fetched:", response.data);
                     setFavorites(response.data);
                 } catch (error) {
                     console.error('Failed to fetch favorites:', error);
@@ -52,8 +55,8 @@ const Profile = () => {
             }
         };
 
-        if (user && user.id) {
-            fetchFavorites();
+        if (user) {
+            fetchUserFavorites();
         }
     }, [user]);
 
@@ -67,16 +70,21 @@ const Profile = () => {
     };
 
     if (loading) {
+        console.log("Loading Profile...");
         return <div>Loading...</div>;
     }
 
     if (error) {
+        console.log("Error loading profile:", error);
         return <div>Error: {error}</div>;
     }
 
     if (!user) {
+        console.log("No user data received");
         return <div>No user data available</div>;
     }
+
+    console.log("User data available:", user);
 
     return (
         <div>
@@ -84,7 +92,7 @@ const Profile = () => {
             <p>Email: {user.email}</p>
             <SearchMovies favorites={favorites} setFavorites={setFavorites} />
             <div className="favorites-container">
-                {favorites.map(fav => (
+                {Array.isArray(favorites) && favorites.map(fav => (
                     <div key={fav.id} className="favorite-item">
                         <img src={fav.movie.poster_path} alt={fav.movie.title} />
                         <p>{fav.movie.title}</p>

@@ -48,6 +48,7 @@ router.post('/add', async (req, res) => {
       }
     });
     const movieDetails = movieDetailsResponse.data;
+    console.log("Fetched movie details:", movieDetails);
 
     // Check if the movie already exists in the movies table
     let movie = await Movie.findOne({ where: { id: movieId } });
@@ -59,6 +60,7 @@ router.post('/add', async (req, res) => {
         release_date: movieDetails.release_date || null,
         poster_path: posterPath,
       });
+      console.log("Inserted new movie into movies table:", movie);
     }
 
     // Insert the favorite into the favorites table
@@ -67,11 +69,12 @@ router.post('/add', async (req, res) => {
       item_Id: movieId,
       item_Type: item_Type,
     });
+    console.log("Inserted new favorite into favorites table:", newFavorite);
 
     res.status(201).json(newFavorite);
   } catch (error) {
     console.error('Failed to add favorite:', error);
-    res.status(500).send('Failed to add to favorites.');
+    res.status(500).json({ message: 'Failed to add to favorites', error: error.message });
   }
 });
 

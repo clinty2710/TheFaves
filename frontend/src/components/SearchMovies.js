@@ -32,6 +32,7 @@ const SearchMovies = ({ favorites, setFavorites }) => {
             return;
         }
         try {
+            console.log('Attempting to add movie to favorites:', movie);
             const { data } = await axios.post('/api/favorites/add', {
                 user_Id: user.id,
                 item_Id: movie.value,
@@ -40,10 +41,10 @@ const SearchMovies = ({ favorites, setFavorites }) => {
                 movieTitle: movie.label,
                 posterPath: movie.poster
             });
-            setFavorites([...favorites, data]);
+            console.log('Successfully added to favorites:', data);
+            setFavorites([...favorites, { ...data, movie: { poster_path: movie.poster, title: movie.label } }]);
         } catch (error) {
             console.error('Error adding to favorites:', error);
-            alert('Something went wrong. Please refresh the page.');
         }
     };
 
