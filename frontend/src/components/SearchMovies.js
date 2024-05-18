@@ -4,10 +4,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import Select from 'react-select';
 import axios from 'axios';
 import { searchMovies } from '../services/tmdbClient';
-import { UserContext } from './UserContext';
+import { UserContext } from '../components/UserContext';
 
 const SearchMovies = () => {
-    const user = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const [inputValue, setInputValue] = useState('');
     const [options, setOptions] = useState([]);
     const [favorites, setFavorites] = useState([]);
@@ -47,6 +47,15 @@ const SearchMovies = () => {
         }
     };
 
+    const handleRemoveFavorite = async (favoriteId) => {
+        try {
+            await axios.post(`/api/favorites/delete/${favoriteId}`);
+            setFavorites(favorites.filter(fav => fav.id !== favoriteId));
+        } catch (error) {
+            console.error('Error removing favorite:', error);
+        }
+    };
+
     return (
         <>
             <Select
@@ -59,7 +68,7 @@ const SearchMovies = () => {
             />
             <div className="favorites-container">
                 {Array.isArray(favorites) && favorites.map(fav => (
-                    <div key={fav.itemId} className="favorite-item">
+                    <div key={fav.item_Id} className="favorite-item">
                         <img src={fav.posterPath} alt={fav.movieTitle} />
                         <p>{fav.movieTitle}</p>
                         <button onClick={() => handleRemoveFavorite(fav.id)}>Delete</button>

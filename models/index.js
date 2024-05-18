@@ -12,9 +12,10 @@ let sequelize;
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+  sequelize = new Sequelize(config.database, config.email, config.password, config);
 }
 
+// Read all model files in the current directory (except index.js)
 fs.readdirSync(__dirname)
   .filter(file => {
     return (
@@ -25,7 +26,10 @@ fs.readdirSync(__dirname)
     );
   })
   .forEach(file => {
-    const model = require(path.join(__dirname, file))(sequelize); // Pass the Sequelize instance to the model
+    const model = require(path.join(__dirname, file));
+    if (typeof model.init === 'function') {
+      model.init(sequelize);  // Initialize model with sequelize instance
+    }
     db[model.name] = model;
   });
 

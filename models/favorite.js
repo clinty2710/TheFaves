@@ -2,16 +2,27 @@
 
 const { Model, DataTypes } = require('sequelize');
 
-class Favorite extends Model {}
+class Favorite extends Model {
+  static init(sequelize) {
+    return super.init({
+      user_Id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      item_Id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      item_Type: {
+        type: DataTypes.STRING,
+        allowNull: false
+      }
+    }, {
+      sequelize,
+      modelName: 'Favorite',
+      timestamps: false
+    });
+  }
+}
 
-module.exports = (sequelize) => {
-  Favorite.init(
-    {
-      user_Id: DataTypes.INTEGER,
-      item_Id: DataTypes.INTEGER,
-      item_Type: DataTypes.STRING,  // 'movie', 'music', 'book'
-    },
-    { sequelize, modelName: 'Favorite', timestamps: false }
-  );
-  return Favorite;
-};
+module.exports = Favorite;
