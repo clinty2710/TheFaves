@@ -2,6 +2,10 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const dotenv = require('dotenv');
+
+// Load environment variables from .env file
+dotenv.config();
 
 module.exports = {
   mode: 'development',
@@ -32,7 +36,6 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      // Ensuring a single copy of React
       react: path.resolve('./node_modules/react'),
     },
     fallback: {
@@ -46,8 +49,8 @@ module.exports = {
       path: require.resolve('path-browserify'),
       vm: require.resolve('vm-browserify'),
       timers: require.resolve('timers-browserify'),
-      os: require.resolve('os-browserify/browser'), // Added os-browserify fallback
-      net: false
+      net: false,
+      os: require.resolve('os-browserify/browser'),
     }
   },
   plugins: [
@@ -56,6 +59,6 @@ module.exports = {
     })
   ],
   externals: {
-    express: 'express'  // Prevents bundling express
+    express: 'express'
   }
 };

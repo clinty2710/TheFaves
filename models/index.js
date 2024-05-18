@@ -12,9 +12,10 @@ let sequelize;
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+  sequelize = new Sequelize(config.database, config.email, config.password, config);
 }
 
+// Read all model files in the current directory (except index.js)
 fs.readdirSync(__dirname)
   .filter(file => {
     return (
@@ -30,12 +31,14 @@ fs.readdirSync(__dirname)
     db[model.name] = model;
   });
 
+// Run associate method if it exists in the model
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
 });
 
+// Export the Sequelize instance and models
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

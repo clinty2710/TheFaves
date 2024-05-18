@@ -1,10 +1,9 @@
 // routes/Favorites.js
 
 const express = require('express');
-const { Favorite, Movie } = require('../models');  // Import Movie model
+const { Favorite, Movie } = require('../models');
 const router = express.Router();
 const axios = require('axios');
-require('dotenv').config();  // Load environment variables
 
 const API_TOKEN = process.env.THEMOVIEDB_API_TOKEN;
 
@@ -38,7 +37,7 @@ router.get('/movies/search', async (req, res) => {
 // Generic add favorite endpoint
 router.post('/add', async (req, res) => {
   const { user_Id, item_Id, item_Type, movieId, movieTitle, posterPath } = req.body;
-  console.log("Adding a new favorite:", req.body); // Debugging line
+  console.log("Adding a new favorite:", req.body);
 
   try {
     // Fetch movie details from TMDB to get release_date and description
@@ -70,7 +69,7 @@ router.post('/add', async (req, res) => {
     // Insert the favorite into the favorites table
     const newFavorite = await Favorite.create({
       user_Id,
-      item_Id: movieId,  // Ensure item_Id is the same as movieId
+      item_Id: movieId,
       item_Type: item_Type,
     });
 

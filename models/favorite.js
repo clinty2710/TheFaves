@@ -1,6 +1,7 @@
 // models/favorite.js
 
 const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../database/connection');
 
 class Favorite extends Model {
   static init(sequelize) {
@@ -11,7 +12,11 @@ class Favorite extends Model {
       },
       item_Id: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'Movies', // Name of the Movies table
+          key: 'id'
+        }
       },
       item_Type: {
         type: DataTypes.STRING,
@@ -22,6 +27,10 @@ class Favorite extends Model {
       modelName: 'Favorite',
       timestamps: false
     });
+  }
+
+  static associate(models) {
+    this.belongsTo(models.Movie, { foreignKey: 'item_Id', as: 'movie' });
   }
 }
 

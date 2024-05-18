@@ -2,14 +2,14 @@
 
 const axios = require('axios');
 
-const bearerToken = process.env.THEMOVIEDB_API_TOKEN;  // Ensure this is set on the server
+const bearerToken = process.env.THEMOVIEDB_API_TOKEN;
 const baseURL = 'https://api.themoviedb.org/3';
 
 const tmdbClient = axios.create({
     baseURL: baseURL,
     headers: {
-      'Authorization': bearerToken,
-      'Accept': 'application/json'
+        'Authorization': bearerToken,
+        'Accept': 'application/json'
     }
 });
 
