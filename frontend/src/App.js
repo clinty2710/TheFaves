@@ -11,8 +11,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import { UserProvider } from './components/UserContext';
 
 function App() {
-  const auth = useAuth();
-  console.log(auth.isAuthenticated);
+  const { isAuthenticated } = useAuth();
 
   return (
     <UserProvider>
@@ -25,8 +24,8 @@ function App() {
             <Route path="/" element={<Navigate replace to="/login" />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/profile" element={auth.isAuthenticated ? <Profile /> : <Navigate replace to="/login" />} />
-            <Route path="/favorite-items" element={auth.isAuthenticated ? <FavoriteItems /> : <Navigate replace to="/login" />} />
+            <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate replace to="/login" />} />
+            <Route path="/favorite-items" element={isAuthenticated ? <FavoriteItems /> : <Navigate replace to="/login" />} />
           </Routes>
         </ErrorBoundary>
       </div>

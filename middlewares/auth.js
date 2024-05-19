@@ -3,7 +3,6 @@
 const express = require('express');
 const passport = require('passport');
 const User = require('../models').User;
-const bcrypt = require('bcrypt');
 const path = require('path');
 
 const router = express.Router();
@@ -28,12 +27,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-router.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'frontend', 'src', 'components', 'Login.js'));
-});
-
 router.post('/login', (req, res, next) => {
-  console.log(req.body);
   passport.authenticate('local', (err, user, info) => {
     if (err) {
       return res.status(500).json({ message: 'Internal Server Error' });
@@ -86,6 +80,14 @@ router.post('/logout', (req, res) => {
       res.redirect('/login');
     });
   });
+});
+
+router.get('/check-session', (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.json({ isAuthenticated: true });
+  } else {
+    return res.json({ isAuthenticated: false });
+  }
 });
 
 module.exports = { ensureAuthenticated, router };

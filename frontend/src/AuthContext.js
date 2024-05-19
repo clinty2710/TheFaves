@@ -1,21 +1,28 @@
 // AuthContext.js
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setAuthenticated] = useState(false);
+  const [isAuthenticated, setAuthenticated] = useState(
+    JSON.parse(localStorage.getItem('isAuthenticated')) || false
+  );
 
-  // Check session storage or perform a check to backend to validate session
   useEffect(() => {
-    const verifySession = async () => {
-      // Dummy function to simulate session check
-      const sessionIsValid = sessionStorage.getItem('isAuthenticated');
-      setAuthenticated(sessionIsValid);
+    const checkAuth = async () => {
+      try {
+        const response = await axios.get('/auth/check-session');
+        setAuthenticated(response.data.isAuthenticated);
+        localStorage.setItem('isAuthenticated', response.data.isAuthenticated);
+      } catch (error) {
+        setAuthenticated(false);
+        localStorage.setItem('isAuthenticated', false);
+      }
     };
 
-    verifySession();
+    checkAuth();
   }, []);
 
   return (
