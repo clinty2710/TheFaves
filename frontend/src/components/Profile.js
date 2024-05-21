@@ -6,7 +6,7 @@ import LogoutButton from './LogoutButton';
 import { useAuth } from '../AuthContext';
 import { UserContext } from './UserContext';
 import SearchMovies from './SearchMovies';
-import SearchMusic from './SearchMusic';  // Import the new SearchMusic component
+import SearchMusic from './SearchMusic';
 
 const Profile = () => {
   const [loading, setLoading] = useState(true);
@@ -103,7 +103,7 @@ const Profile = () => {
         ))}
       </div>
       <h2>Favorite Music</h2>
-      <SearchMusic favorites={favorites} setFavorites={setFavorites} />  {/* Add SearchMusic component here */}
+      <SearchMusic favorites={favorites} setFavorites={setFavorites} />
       <div className="favorites-container">
         {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'music').map(fav => (
           <div key={fav.id} className="favorite-item">
