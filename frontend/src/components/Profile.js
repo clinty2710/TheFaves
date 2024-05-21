@@ -90,6 +90,7 @@ const Profile = () => {
     <div>
       <h2>Welcome, {user.nickname}!</h2>
       <p>Email: {user.email}</p>
+      <h2>Favorite Movies</h2>
       <SearchMovies favorites={favorites} setFavorites={setFavorites} />
       <div className="favorites-container">
         {Array.isArray(favorites) && favorites.map(fav => (
