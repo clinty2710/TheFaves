@@ -6,6 +6,7 @@ import LogoutButton from './LogoutButton';
 import { useAuth } from '../AuthContext';
 import { UserContext } from './UserContext';
 import SearchMovies from './SearchMovies';
+import SearchMusic from './SearchMusic';  // Import the new SearchMusic component
 
 const Profile = () => {
   const [loading, setLoading] = useState(true);
@@ -93,10 +94,21 @@ const Profile = () => {
       <h2>Favorite Movies</h2>
       <SearchMovies favorites={favorites} setFavorites={setFavorites} />
       <div className="favorites-container">
-        {Array.isArray(favorites) && favorites.map(fav => (
+        {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'movie').map(fav => (
           <div key={fav.id} className="favorite-item">
             <img src={fav.movie.poster_path} alt={fav.movie.title} />
             <p>{fav.movie.title}</p>
+            <button onClick={() => handleRemoveFavorite(fav.id)}>Delete</button>
+          </div>
+        ))}
+      </div>
+      <h2>Favorite Music</h2>
+      <SearchMusic favorites={favorites} setFavorites={setFavorites} />  {/* Add SearchMusic component here */}
+      <div className="favorites-container">
+        {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'music').map(fav => (
+          <div key={fav.id} className="favorite-item">
+            <img src={fav.music.cover_image} alt={fav.music.title} />
+            <p>{fav.music.title}</p>
             <button onClick={() => handleRemoveFavorite(fav.id)}>Delete</button>
           </div>
         ))}

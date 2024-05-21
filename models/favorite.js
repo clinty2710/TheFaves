@@ -31,6 +31,7 @@ class Favorite extends Model {
 
   static associate(models) {
     this.belongsTo(models.Movie, { foreignKey: 'item_Id', as: 'movie' });
+    this.belongsTo(models.Music, { foreignKey: 'item_Id', as: 'music' });
   }
 }
 
