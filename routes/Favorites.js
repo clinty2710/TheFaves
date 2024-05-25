@@ -1,7 +1,7 @@
 // routes/Favorites.js
 
 const express = require('express');
-const { Favorite, Movie, Music } = require('../models');
+const { Favorite, Movie, Music, Book } = require('../models');
 const router = express.Router();
 const axios = require('axios');
 
@@ -45,7 +45,7 @@ router.get('/movies/search', async (req, res) => {
 });
 
 router.post('/add', async (req, res) => {
-  const { user_Id, item_Id, item_Type, movieId, movieTitle, posterPath, musicId, musicTitle, coverImage } = req.body;
+  const { user_Id, item_Id, item_Type, movieId, movieTitle, posterPath, musicId, musicTitle, coverImage, bookId, bookTitle, author } = req.body;
   console.log("Adding a new favorite:", req.body);
 
   try {
@@ -107,6 +107,30 @@ router.post('/add', async (req, res) => {
       console.log("Inserted new favorite into favorites table:", newFavorite);
 
       res.status(201).json(newFavorite);
+
+    } else if (item_Type === 'book') {
+      // Check if the book already exists in the books table
+      let book = await Book.findOne({ where: { id: bookId } });
+      if (!book) {
+        // If the book doesn't exist, insert it into the books table
+        book = await Book.create({
+          id: bookId,
+          title: bookTitle.split(' by ')[0],
+          author: author,
+          cover_image: coverImage
+        });
+        console.log("Inserted new book into books table:", book);
+      }
+
+      // Insert the favorite into the favorites table
+      const newFavorite = await Favorite.create({
+        user_Id,
+        item_Id: bookId,
+        item_Type: item_Type,
+      });
+      console.log("Inserted new favorite into favorites table:", newFavorite);
+
+      res.status(201).json(newFavorite);
     }
   } catch (error) {
     console.error('Failed to add favorite:', error);
@@ -129,6 +153,10 @@ router.get('/user/:userId', async (req, res) => {
         {
           model: Music,
           as: 'music', // This should match the alias used in the association
+        },
+        {
+          model: Book,
+          as: 'book', // This should match the alias used in the association
         }
       ]
     });
@@ -163,6 +191,8 @@ router.delete('/delete/:id', async (req, res) => {
         await Movie.destroy({ where: { id: itemId } });
       } else if (itemType === 'music') {
         await Music.destroy({ where: { id: itemId } });
+      } else if (itemType === 'book') {
+        await Book.destroy({ where: { id: itemId } });
       }
     }
 

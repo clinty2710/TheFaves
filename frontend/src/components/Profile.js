@@ -7,6 +7,7 @@ import { useAuth } from '../AuthContext';
 import { UserContext } from './UserContext';
 import SearchMovies from './SearchMovies';
 import SearchMusic from './SearchMusic';
+import SearchBooks from './SearchBooks';
 
 const Profile = () => {
   const [loading, setLoading] = useState(true);
@@ -109,6 +110,18 @@ const Profile = () => {
           <div key={fav.id} className="favorite-item">
             <img src={fav.music.cover_image} alt={fav.music.title} />
             <p>{fav.music.title}</p>
+            <button onClick={() => handleRemoveFavorite(fav.id)}>Delete</button>
+          </div>
+        ))}
+      </div>
+      <h2>Favorite Books</h2>
+      <SearchBooks favorites={favorites} setFavorites={setFavorites} />  {/* Add SearchBooks component here */}
+      <div className="favorites-container">
+        {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'book').map(fav => (
+          <div key={fav.id} className="favorite-item">
+            <img src={fav.book.cover_image} alt={fav.book.title} />
+            <p>{fav.book.title}</p>
+            <p>{fav.book.author}</p>
             <button onClick={() => handleRemoveFavorite(fav.id)}>Delete</button>
           </div>
         ))}
