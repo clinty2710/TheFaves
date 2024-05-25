@@ -15,10 +15,10 @@ export const AuthProvider = ({ children }) => {
       try {
         const response = await axios.get('/auth/check-session');
         setAuthenticated(response.data.isAuthenticated);
-        localStorage.setItem('isAuthenticated', response.data.isAuthenticated);
+        localStorage.setItem('isAuthenticated', JSON.stringify(response.data.isAuthenticated));
       } catch (error) {
         setAuthenticated(false);
-        localStorage.setItem('isAuthenticated', false);
+        localStorage.setItem('isAuthenticated', JSON.stringify(false));
       }
     };
 

@@ -21,8 +21,8 @@ function App() {
         </header>
         <ErrorBoundary>
           <Routes>
-            <Route path="/" element={<Navigate replace to="/login" />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Navigate replace to={isAuthenticated ? "/profile" : "/login"} />} />
+            <Route path="/login" element={isAuthenticated ? <Navigate replace to="/profile" /> : <Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate replace to="/login" />} />
             <Route path="/favorite-items" element={isAuthenticated ? <FavoriteItems /> : <Navigate replace to="/login" />} />

@@ -65,19 +65,20 @@ router.get('/logout', (req, res) => {
   res.redirect('/auth/login');
 });
 
+// Logout route
 router.post('/logout', (req, res) => {
   req.logout((err) => {
     if (err) {
       console.error('Logout error:', err);
-      return res.status(500).send('Something went wrong during logout.');
+      return res.status(500).json({ message: 'Logout failed', error: err.message });
     }
     req.session.destroy((err) => {
       if (err) {
         console.error('Session destruction error:', err);
-        return res.status(500).send('Failed to destroy the session.');
+        return res.status(500).json({ message: 'Failed to destroy the session.', error: err.message });
       }
       res.clearCookie('connect.sid');
-      res.redirect('/login');
+      return res.status(200).json({ message: 'Logout successful' });
     });
   });
 });
