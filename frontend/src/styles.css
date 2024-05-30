@@ -131,6 +131,9 @@ h2 {
     margin: 0 auto !important; /* Center the menu */
     left: 50% !important; /* Center align the dropdown */
     transform: translateX(-50%) !important; /* Adjust for center alignment */
+    border-left: 2px solid #ff6347 !important; /* Orange border */
+    border-right: 2px solid #ff6347 !important; /* Orange border */
+    border-bottom: 2px solid #ff6347 !important; /* Orange border */
 }
 
 .select__option {
