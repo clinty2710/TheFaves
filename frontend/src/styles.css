@@ -1,0 +1,116 @@
+/* styles.css */
+
+body {
+    background-color: #0a2540;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.App-header {
+    text-align: center;
+    padding: 20px;
+    background-color: #0a2540;
+    border-bottom: 2px solid #ffffff;
+}
+
+.App-header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    color: #ffffff;
+}
+
+.favorites-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.favorite-item {
+    background-color: #1a374d;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    width: 150px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.favorite-item img {
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+}
+
+.favorite-item p {
+    color: #ffffff;
+    margin: 10px 0;
+}
+
+button {
+    background-color: #ff6347;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #ff4500;
+}
+
+.search-container {
+    margin: 20px;
+    text-align: center;
+}
+
+.search-container input {
+    padding: 10px;
+    width: 40%; /* Adjusted to half the length */
+    border-radius: 5px;
+    border: 2px solid #ffffff;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Styling for react-select components */
+.select__control {
+    width: 40%; /* Adjusted to half the length */
+    margin: 0 auto; /* Center the search bar */
+}
+
+.select__menu {
+    background-color: #1a374d;
+}
+
+.select__option {
+    color: #000000 !important; /* Black text color for options */
+}
+
+.select__option--is-focused {
+    background-color: #ff6347;
+}
+
+.select__option--is-selected {
+    background-color: #ff4500;
+    color: #ffffff;
+}
+
+/* Ensure the input text is black */
+.select__input {
+    color: #000000 !important;
+}
+
+/* Ensure the placeholder text is visible */
+.select__placeholder {
+    color: #000000 !important;
+}

@@ -68,6 +68,7 @@ const SearchBooks = ({ favorites, setFavorites }) => {
                 placeholder="Search books..."
                 noOptionsMessage={() => 'No books found'}
                 isLoading={inputValue && options.length === 0}
+                classNamePrefix="select"
             />
         </>
     );

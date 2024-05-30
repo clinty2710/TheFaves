@@ -57,6 +57,7 @@ const SearchMovies = ({ favorites, setFavorites }) => {
                 placeholder="Search movies..."
                 noOptionsMessage={() => 'No movies found'}
                 isLoading={inputValue && options.length === 0}
+                classNamePrefix="select"
             />
         </>
     );

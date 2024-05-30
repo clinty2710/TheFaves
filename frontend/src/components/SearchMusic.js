@@ -63,6 +63,7 @@ const SearchMusic = ({ favorites, setFavorites }) => {
                 placeholder="Search music..."
                 noOptionsMessage={() => 'No music found'}
                 isLoading={inputValue && options.length === 0}
+                classNamePrefix="select"
             />
         </>
     );

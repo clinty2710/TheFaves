@@ -91,9 +91,10 @@ const Profile = () => {
   return (
     <div>
       <h2>Welcome, {user.nickname}!</h2>
-      <p>Email: {user.email}</p>
       <h2>Favorite Movies</h2>
-      <SearchMovies favorites={favorites} setFavorites={setFavorites} />
+      <div className="search-container">
+        <SearchMovies favorites={favorites} setFavorites={setFavorites} />
+      </div>
       <div className="favorites-container">
         {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'movie').map(fav => (
           <div key={fav.id} className="favorite-item">
@@ -104,7 +105,9 @@ const Profile = () => {
         ))}
       </div>
       <h2>Favorite Music</h2>
-      <SearchMusic favorites={favorites} setFavorites={setFavorites} />
+      <div className="search-container">
+        <SearchMusic favorites={favorites} setFavorites={setFavorites} />
+      </div>
       <div className="favorites-container">
         {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'music').map(fav => (
           <div key={fav.id} className="favorite-item">
@@ -115,7 +118,9 @@ const Profile = () => {
         ))}
       </div>
       <h2>Favorite Books</h2>
-      <SearchBooks favorites={favorites} setFavorites={setFavorites} />  {/* Add SearchBooks component here */}
+      <div className="search-container">
+        <SearchBooks favorites={favorites} setFavorites={setFavorites} />
+      </div>
       <div className="favorites-container">
         {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'book').map(fav => (
           <div key={fav.id} className="favorite-item">
