@@ -35,7 +35,7 @@ const Login = () => {
     return (
         <div>
             <h2>Login</h2>
-            <form onSubmit={(e) => e.preventDefault()}>
+            <form onSubmit={handleLogin}>
                 <div>
                     <label htmlFor="email">Email:</label>
                     <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" />
@@ -44,7 +44,7 @@ const Login = () => {
                     <label htmlFor="password">Password:</label>
                     <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="current-password" />
                 </div>
-                <LoginButton email={email} password={password} />
+                <button type="submit">Login</button>
             </form>
         </div>
     );

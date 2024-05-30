@@ -2,6 +2,7 @@
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
     "@babel/register": "^7.23.7",
+    "@fortawesome/fontawesome-free": "^6.5.2",
     "async_hooks": "^1.0.0",
     "axios": "^1.6.8",
     "bcrypt": "^5.1.1",

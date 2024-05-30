@@ -49,17 +49,17 @@ const SearchMovies = ({ favorites, setFavorites }) => {
     };
 
     return (
-        <>
+        <div className="search-container">
             <Select
+                classNamePrefix="select"
                 onInputChange={handleInputChange}
                 onChange={handleAddToFavorites}
                 options={options}
                 placeholder="Search movies..."
                 noOptionsMessage={() => 'No movies found'}
                 isLoading={inputValue && options.length === 0}
-                classNamePrefix="select"
             />
-        </>
+        </div>
     );
 };
 

@@ -1,4 +1,4 @@
-// frontend/src/components/Profile.js
+// src/components/Profile.js
 
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
@@ -8,6 +8,7 @@ import { UserContext } from './UserContext';
 import SearchMovies from './SearchMovies';
 import SearchMusic from './SearchMusic';
 import SearchBooks from './SearchBooks';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const Profile = () => {
   const [loading, setLoading] = useState(true);
@@ -92,42 +93,36 @@ const Profile = () => {
     <div>
       <h2>Welcome, {user.nickname}!</h2>
       <h2>Favorite Movies</h2>
-      <div className="search-container">
-        <SearchMovies favorites={favorites} setFavorites={setFavorites} />
-      </div>
+      <SearchMovies favorites={favorites} setFavorites={setFavorites} />
       <div className="favorites-container">
         {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'movie').map(fav => (
           <div key={fav.id} className="favorite-item">
             <img src={fav.movie.poster_path} alt={fav.movie.title} />
             <p>{fav.movie.title}</p>
-            <button onClick={() => handleRemoveFavorite(fav.id)}>Delete</button>
+            <i className="fas fa-trash-alt delete-icon" onClick={() => handleRemoveFavorite(fav.id)}></i>
           </div>
         ))}
       </div>
       <h2>Favorite Music</h2>
-      <div className="search-container">
-        <SearchMusic favorites={favorites} setFavorites={setFavorites} />
-      </div>
+      <SearchMusic favorites={favorites} setFavorites={setFavorites} />
       <div className="favorites-container">
         {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'music').map(fav => (
           <div key={fav.id} className="favorite-item">
             <img src={fav.music.cover_image} alt={fav.music.title} />
             <p>{fav.music.title}</p>
-            <button onClick={() => handleRemoveFavorite(fav.id)}>Delete</button>
+            <i className="fas fa-trash-alt delete-icon" onClick={() => handleRemoveFavorite(fav.id)}></i>
           </div>
         ))}
       </div>
       <h2>Favorite Books</h2>
-      <div className="search-container">
-        <SearchBooks favorites={favorites} setFavorites={setFavorites} />
-      </div>
+      <SearchBooks favorites={favorites} setFavorites={setFavorites} />  {/* Add SearchBooks component here */}
       <div className="favorites-container">
         {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'book').map(fav => (
           <div key={fav.id} className="favorite-item">
             <img src={fav.book.cover_image} alt={fav.book.title} />
             <p>{fav.book.title}</p>
             <p>{fav.book.author}</p>
-            <button onClick={() => handleRemoveFavorite(fav.id)}>Delete</button>
+            <i className="fas fa-trash-alt delete-icon" onClick={() => handleRemoveFavorite(fav.id)}></i>
           </div>
         ))}
       </div>
