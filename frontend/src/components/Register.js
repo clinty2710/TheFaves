@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -51,6 +51,7 @@ const Register = () => {
         <button type="submit">Register</button>
         {error && <p>{error}</p>}
       </form>
+      <p className="center-links">Already have an account? <Link to="/login">Login here</Link></p>
     </div>
   );
 };

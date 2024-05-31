@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from './../AuthContext';
 import LoginButton from './LoginButton';
 
@@ -46,6 +46,7 @@ const Login = () => {
                 </div>
                 <button type="submit">Login</button>
             </form>
+            <p className="center-links">Don't have an account? <Link to="/register">Register here</Link></p>
         </div>
     );
 };
