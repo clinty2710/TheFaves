@@ -38,6 +38,7 @@ body {
     width: 150px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: relative;
+    transition: width 0.3s, padding 0.3s, font-size 0.3s;
 }
 
 .favorite-item img {
@@ -50,6 +51,7 @@ body {
 .favorite-item p {
     color: #ffffff;
     margin: 10px 0;
+    font-size: 1rem; /* Base font size */
 }
 
 .favorite-item .delete-icon {
@@ -110,6 +112,7 @@ button:hover {
 h2 {
     color: #ffffff;
     text-align: center;
+    font-size: 2rem; /* Base font size for headings */
 }
 
 /* Styling for react-select components */
@@ -221,4 +224,125 @@ form p {
 
 .center-links a:hover {
     color: #ff4500;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+    .favorite-item {
+        width: 130px;
+        padding: 8px;
+        font-size: 0.9rem; /* Adjust font size */
+    }
+
+    .favorite-item p {
+        font-size: 0.9rem; /* Adjust font size */
+    }
+
+    h2 {
+        font-size: 1.8rem; /* Adjust heading size */
+    }
+
+    button {
+        width: 180px;
+        font-size: 0.9rem; /* Adjust font size */
+    }
+
+    .select__control,
+    .select__menu {
+        width: 60%;
+    }
+
+    .search-container input {
+        width: 60%;
+    }
+}
+
+@media (max-width: 992px) {
+    .favorite-item {
+        width: 110px;
+        padding: 6px;
+        font-size: 0.8rem; /* Adjust font size */
+    }
+
+    .favorite-item p {
+        font-size: 0.8rem; /* Adjust font size */
+    }
+
+    h2 {
+        font-size: 1.6rem; /* Adjust heading size */
+    }
+
+    button {
+        width: 160px;
+        font-size: 0.8rem; /* Adjust font size */
+    }
+
+    .select__control,
+    .select__menu {
+        width: 80%;
+    }
+
+    .search-container input {
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .favorite-item {
+        width: 90px;
+        padding: 4px;
+        font-size: 0.7rem; /* Adjust font size */
+    }
+
+    .favorite-item p {
+        font-size: 0.7rem; /* Adjust font size */
+    }
+
+    h2 {
+        font-size: 1.4rem; /* Adjust heading size */
+    }
+
+    button {
+        width: 140px;
+        font-size: 0.7rem; /* Adjust font size */
+    }
+
+    .select__control,
+    .select__menu {
+        width: 90%;
+    }
+
+    .search-container input {
+        width: 90%;
+    }
+}
+
+@media (max-width: 576px) {
+    .favorite-item {
+        width: 70px;
+        padding: 2px;
+        font-size: 0.6rem; /* Adjust font size */
+    }
+
+    .favorite-item p {
+        font-size: 0.6rem; /* Adjust font size */
+    }
+
+    h2 {
+        font-size: 1.2rem; /* Adjust heading size */
+    }
+
+    button {
+        width: 120px;
+        font-size: 0.6rem; /* Adjust font size */
+    }
+
+    .select__control,
+    .select__menu {
+        width: 100%;
+    }
+
+    .search-container input {
+        width: 100%;
+    }
 }
