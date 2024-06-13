@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from './../AuthContext';
+import { toast } from 'react-toastify';
 import LoginButton from './LoginButton';
 
 const Login = () => {
@@ -21,14 +22,16 @@ const Login = () => {
             if (response.data.success) {
                 setAuthenticated(true);
                 sessionStorage.setItem('isAuthenticated', true); // Persist authentication state
+                toast.success('Login successful');
                 navigate('/profile');
             } else {
                 setAuthenticated(false);
                 sessionStorage.removeItem('isAuthenticated');
-                alert('Login failed. Please check your credentials.');
+                toast.error('Login failed. Please check your credentials.');
             }
         } catch (error) {
             console.error('Login error:', error);
+            toast.error('An error occurred during login.');
         }
     };
 

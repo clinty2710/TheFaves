@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -25,10 +26,12 @@ const Register = () => {
     try {
       const response = await axios.post('/auth/register', formData);
       console.log('Registration successful:', response.data);
+      toast.success('Registration successful');
       navigate('/login'); // Redirect to login after successful registration
     } catch (error) {
       console.error('Registration failed:', error.response.data.message);
       setError(error.response.data.message); // Display error from server
+      toast.error('Registration failed: ' + error.response.data.message);
     }
   };
 
