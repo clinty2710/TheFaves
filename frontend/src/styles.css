@@ -346,3 +346,37 @@ form p {
         width: 100%;
     }
 }
+
+/* Custom Toast Notification Styles */
+.Toastify__toast {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+}
+
+/* Success notification styling */
+.Toastify__toast--success {
+  background-color: #1a374d; /* Match background color to theme */
+  border-left: 6px solid #ff6347; /* Orange border */
+}
+
+/* Error notification styling */
+.Toastify__toast--error {
+  background-color: #1a374d; /* Match background color to theme */
+  border-left: 6px solid #ff4500; /* Darker orange border */
+}
+
+/* Override default close button color */
+.Toastify__close-button {
+  color: #ffffff;
+}
+
+/* Customize progress bar */
+.Toastify__progress-bar--success {
+  background: #ff6347; /* Orange color for progress bar */
+}
+
+.Toastify__progress-bar--error {
+  background: #ff4500; /* Darker orange color for progress bar */
+}
