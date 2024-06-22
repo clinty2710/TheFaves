@@ -20,7 +20,9 @@ function App() {
     <UserProvider>
       <div className="App">
         <header className="App-header">
-          <h1>theFAVES</h1>
+        <h1>
+            <span className="title-the">the</span><span className="title-faves">FAVES</span>
+        </h1>
         </header>
         <ErrorBoundary>
           <Routes>
