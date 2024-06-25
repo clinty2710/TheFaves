@@ -6,7 +6,7 @@ const session = require('express-session');
 const passport = require('./config/passport');
 const path = require('path');
 const crypto = require('crypto');
-const { Sequelize } = require('sequelize');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const authMiddleware = require('./middlewares/auth');
 const favoriteRoutes = require('./routes/Favorites');
 const cors = require('cors');
@@ -29,17 +29,28 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-const sequelize = new Sequelize('thefavesdb', 'root', 'Studman081!', {
-  host: 'localhost',
-  dialect: 'mysql',
+// MongoDB connection
+const uri = process.env.MONGODB_URI;
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
 });
 
-sequelize.authenticate().then(() => {
-  console.log('Connected to the database');
-  return sequelize.sync();
-}).catch((err) => {
-  console.error('Unable to synchronize models with the database:', err);
-});
+async function run() {
+  try {
+    // Connect the client to the server (optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } catch (error) {
+    console.error('Failed to connect to MongoDB:', error);
+  }
+}
+run().catch(console.dir);
 
 app.use('/auth', authMiddleware.router);
 app.use('/api/favorites', favoriteRoutes);
