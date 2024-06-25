@@ -21,7 +21,7 @@ function App() {
       <div className="App">
         <header className="App-header">
         <h1>
-            <span className="title-the">the</span><span className="title-faves">FAVES</span>
+            <span className="title-the">my</span><span className="title-faves">FAVES</span>
         </h1>
         </header>
         <ErrorBoundary>
