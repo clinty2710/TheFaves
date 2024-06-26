@@ -1,38 +1,34 @@
 // /Users/clinty2710/Desktop/TheFaves/models/user.js
 
-const { Model, DataTypes } = require('sequelize');
-const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
-class User extends Model {
-  static init(sequelize) {
-    return super.init({
-      nickname: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-      },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false
-      }
-    }, {
-      sequelize,
-      modelName: 'User',
-      timestamps: false,
-      hooks: {
-        beforeCreate: async (user) => {
-          if (user.password) {
-            const hashedPassword = await bcrypt.hash(user.password, 10);
-            user.password = hashedPassword;
-          }
-        }
-      }
-    });
+const userSchema = new mongoose.Schema({
+  nickname: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  password: {
+    type: String,
+    required: true
   }
-}
+});
 
-module.exports = User;
+userSchema.pre('save', async function(next) {
+  if (this.isModified('password') || this.isNew) {
+    const hashedPassword = await bcrypt.hash(this.password, 10);
+    this.password = hashedPassword;
+  }
+  next();
+});
+
+userSchema.methods.comparePassword = function(password) {
+  return bcrypt.compare(password, this.password);
+};
+
+module.exports = mongoose.model('User', userSchema);

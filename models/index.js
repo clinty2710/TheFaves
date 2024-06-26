@@ -8,38 +8,18 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.email, config.password, config);
-}
+const mongoose = require('mongoose');
 
-// Read all model files in the current directory (except index.js)
-fs.readdirSync(__dirname)
-  .filter(file => {
-    return (
-      file.indexOf('.') !== 0 &&
-      file !== basename &&
-      file.slice(-3) === '.js' &&
-      file.indexOf('.test.js') === -1
-    );
-  })
-  .forEach(file => {
-    const model = require(path.join(__dirname, file));
-    model.init(sequelize);
-    db[model.name] = model;
-  });
-
-// Run associate method if it exists in the model
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("MongoDB connected.");
+  } catch (error) {
+    console.error("Error connecting to MongoDB:", error);
   }
-});
+};
 
-// Export the Sequelize instance and models
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
-
-module.exports = db;
+module.exports = { connectDB };

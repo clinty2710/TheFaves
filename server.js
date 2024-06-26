@@ -15,8 +15,8 @@ const app = express();
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
 // Set up body parsing middleware
-app.use(express.json());  // for parsing application/json
-app.use(express.urlencoded({ extended: true }));  // for parsing application/x-www-form-urlencoded
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 const randomSessionSecret = crypto.randomBytes(32).toString('hex');
@@ -24,7 +24,7 @@ app.use(session({
   secret: randomSessionSecret,
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: !isDevelopment }  // Set secure to true if in production
+  cookie: { secure: !isDevelopment }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -41,9 +41,7 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    // Connect the client to the server (optional starting in v4.7)
     await client.connect();
-    // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } catch (error) {
