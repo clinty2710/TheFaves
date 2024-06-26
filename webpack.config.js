@@ -4,17 +4,19 @@ const path = require('path');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CompressionPlugin = require('compression-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin'); // Add this line
 
 // Load environment variables from .env file
 dotenv.config();
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: './frontend/src/index.js',
   output: {
     path: path.resolve(__dirname, 'frontend', 'dist'),
-    filename: '[name].[contenthash].js', // Unique filenames for each chunk
+    filename: '[name].[contenthash].js',
     publicPath: '/'
   },
   module: {
@@ -32,6 +34,16 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.(ttf|woff2)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[name].[hash].[ext]',
+            outputPath: 'fonts',
+          }
+        }
       }
     ]
   },
@@ -56,27 +68,27 @@ module.exports = {
     }
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(process.env)
     }),
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'frontend', 'dist', 'index.html')
-    })
+    new BundleAnalyzerPlugin(),
+    new CompressionPlugin({
+      test: /\.(js|css|html|ttf|woff2)$/,
+      algorithm: 'gzip',
+    }),
   ],
-  externals: {
-    express: 'express'
-  },
   optimization: {
     splitChunks: {
       chunks: 'all',
-      name: false // Avoids emitting duplicate asset names
-    }
+    },
+    minimize: true,
+    minimizer: [
+      `...`, // This syntax extends existing minimizers (i.e. `terser-webpack-plugin`), if any
+      new CssMinimizerPlugin(), // Ensure CSS is also minimized
+    ],
   },
-  devServer: {
-    contentBase: path.join(__dirname, 'frontend', 'dist'),
-    compress: true,
-    port: 9000,
-    historyApiFallback: true
+  externals: {
+    express: 'express'
   }
 };
