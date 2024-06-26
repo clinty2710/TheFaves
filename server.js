@@ -31,8 +31,8 @@ app.use(passport.session());
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
+  // useNewUrlParser: true, // deprecated
+  // useUnifiedTopology: true, // deprecated
 }).then(() => {
   console.log("MongoDB connected.");
 }).catch(err => {

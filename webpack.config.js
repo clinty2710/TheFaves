@@ -3,6 +3,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // Load environment variables from .env file
 dotenv.config();
@@ -12,7 +14,7 @@ module.exports = {
   entry: './frontend/src/index.js',
   output: {
     path: path.resolve(__dirname, 'frontend', 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].[contenthash].js', // Unique filenames for each chunk
     publicPath: '/'
   },
   module: {
@@ -56,9 +58,25 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(process.env)
+    }),
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'frontend', 'dist', 'index.html')
     })
   ],
   externals: {
     express: 'express'
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      name: false // Avoids emitting duplicate asset names
+    }
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'frontend', 'dist'),
+    compress: true,
+    port: 9000,
+    historyApiFallback: true
   }
 };
