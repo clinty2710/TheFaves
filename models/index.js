@@ -2,13 +2,10 @@
 
 const fs = require('fs');
 const path = require('path');
-const Sequelize = require('sequelize');
-const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
-const db = {};
-
 const mongoose = require('mongoose');
+
+const basename = path.basename(__filename);
+const db = {};
 
 const connectDB = async () => {
   try {
@@ -22,4 +19,19 @@ const connectDB = async () => {
   }
 };
 
-module.exports = { connectDB };
+// Read all model files in the current directory (except index.js) and require them
+fs.readdirSync(__dirname)
+  .filter(file => {
+    return (
+      file.indexOf('.') !== 0 &&
+      file !== basename &&
+      file.slice(-3) === '.js' &&
+      file.indexOf('.test.js') === -1
+    );
+  })
+  .forEach(file => {
+    const model = require(path.join(__dirname, file))(mongoose);
+    db[model.modelName] = model;
+  });
+
+module.exports = { connectDB, db };

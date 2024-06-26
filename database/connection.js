@@ -1,4 +1,4 @@
-// database/connection.js
+/* // database/connection.js
 
 const { Sequelize } = require('sequelize');
 
