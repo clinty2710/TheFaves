@@ -1,26 +1,18 @@
 // models/movie.js
 
-const { Model, DataTypes } = require('sequelize');
+const mongoose = require('mongoose');
 
-class Movie extends Model {
-  static init(sequelize) {
-    return super.init({
-      title: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      release_date: {
-        type: DataTypes.DATE,
-      },
-      poster_path: {
-        type: DataTypes.STRING,
-      },
-    }, {
-      sequelize,
-      modelName: 'Movie',
-      timestamps: false,
-    });
+const movieSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  release_date: {
+    type: Date
+  },
+  poster_path: {
+    type: String
   }
-}
+});
 
-module.exports = Movie;
+module.exports = mongoose.model('Movie', movieSchema);

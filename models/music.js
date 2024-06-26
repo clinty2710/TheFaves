@@ -1,37 +1,22 @@
 // models/music.js
 
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../database/connection');
+const mongoose = require('mongoose');
 
-class Music extends Model {
-  static init(sequelize) {
-    return super.init({
-      title: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      release_year: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
-      cover_image: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      artist: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      }
-    }, {
-      sequelize,
-      modelName: 'Music',
-      timestamps: false,
-    });
+const musicSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  release_year: {
+    type: Number
+  },
+  cover_image: {
+    type: String
+  },
+  artist: {
+    type: String,
+    required: true
   }
+});
 
-  static associate(models) {
-    this.hasMany(models.Favorite, { foreignKey: 'item_Id', as: 'favorites' });
-  }
-}
-
-module.exports = Music;
+module.exports = mongoose.model('Music', musicSchema);

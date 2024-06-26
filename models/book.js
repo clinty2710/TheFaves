@@ -1,38 +1,24 @@
 // models/book.js
 
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../database/connection');
+const mongoose = require('mongoose');
 
-class Book extends Model {
-    static init(sequelize) {
-      return super.init({
-        id: {
-          type: DataTypes.STRING(50),
-          allowNull: false,
-          primaryKey: true
-        },
-        title: {
-          type: DataTypes.STRING,
-          allowNull: false
-        },
-        author: {
-          type: DataTypes.STRING,
-          allowNull: false
-        },
-        cover_image: {
-          type: DataTypes.STRING,
-          allowNull: true
-        }
-      }, {
-        sequelize,
-        modelName: 'Book',
-        timestamps: false,
-      });
-    }
-  
-    static associate(models) {
-      this.hasMany(models.Favorite, { foreignKey: 'book_id', as: 'favorites' });
-    }
+const bookSchema = new mongoose.Schema({
+  id: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  title: {
+    type: String,
+    required: true
+  },
+  author: {
+    type: String,
+    required: true
+  },
+  cover_image: {
+    type: String
   }
-  
-  module.exports = Book;
+});
+
+module.exports = mongoose.model('Book', bookSchema);

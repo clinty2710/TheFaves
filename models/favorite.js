@@ -1,35 +1,21 @@
 // models/favorite.js
 
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../database/connection');
+const mongoose = require('mongoose');
 
-class Favorite extends Model {
-  static init(sequelize) {
-    return super.init({
-      user_Id: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      },
-      item_Id: {
-        type: DataTypes.STRING(50),
-        allowNull: false
-      },
-      item_Type: {
-        type: DataTypes.STRING,
-        allowNull: false
-      }
-    }, {
-      sequelize,
-      modelName: 'Favorite',
-      timestamps: false
-    });
+const favoriteSchema = new mongoose.Schema({
+  user_Id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  item_Id: {
+    type: String,
+    required: true
+  },
+  item_Type: {
+    type: String,
+    required: true
   }
+});
 
-  static associate(models) {
-    this.belongsTo(models.Movie, { foreignKey: 'item_Id', as: 'movie' });
-    this.belongsTo(models.Music, { foreignKey: 'item_Id', as: 'music' });
-    this.belongsTo(models.Book, { foreignKey: 'item_Id', as: 'book' });
-  }
-}
-
-module.exports = Favorite;
+module.exports = mongoose.model('Favorite', favoriteSchema);

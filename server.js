@@ -1,12 +1,12 @@
 // server.js
 
-require('dotenv').config(); 
+require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const passport = require('./config/passport');
 const path = require('path');
 const crypto = require('crypto');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const mongoose = require('mongoose');
 const authMiddleware = require('./middlewares/auth');
 const favoriteRoutes = require('./routes/Favorites');
 const cors = require('cors');
@@ -30,25 +30,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // MongoDB connection
-const uri = process.env.MONGODB_URI;
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => {
+  console.log("MongoDB connected.");
+}).catch(err => {
+  console.error("Error connecting to MongoDB:", err);
 });
-
-async function run() {
-  try {
-    await client.connect();
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } catch (error) {
-    console.error('Failed to connect to MongoDB:', error);
-  }
-}
-run().catch(console.dir);
 
 app.use('/auth', authMiddleware.router);
 app.use('/api/favorites', favoriteRoutes);
