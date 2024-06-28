@@ -18,7 +18,12 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors());
+// Update CORS configuration
+app.use(cors({
+  origin: 'https://myfavessite.netlify.app', // Update this to your actual Netlify site URL
+  credentials: true
+}));
+
 const randomSessionSecret = crypto.randomBytes(32).toString('hex');
 app.use(session({
   secret: randomSessionSecret,
@@ -31,8 +36,8 @@ app.use(passport.session());
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
-  // useNewUrlParser: true, // deprecated
-  // useUnifiedTopology: true, // deprecated
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 }).then(() => {
   console.log("MongoDB connected.");
 }).catch(err => {
@@ -45,7 +50,7 @@ app.use('/api/favorites', favoriteRoutes);
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 app.get('/profile', (req, res) => {
   if (req.isAuthenticated()) {
-    res.sendFile(path.join(__dirname, 'frontend', 'public', 'profile.html'));
+    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'profile.html'));
   } else {
     res.status(401).send('Unauthorized');
   }
