@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Update CORS configuration
 app.use(cors({
-  origin: 'https://www.myfavessite.com', // Update this to your actual Netlify site URL
+  origin: 'https://www.myfavessite.com', //
   credentials: true
 }));
 
@@ -36,8 +36,8 @@ app.use(passport.session());
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+  // useNewUrlParser: true, // deprecated
+  // useUnifiedTopology: true, // deprecated
 }).then(() => {
   console.log("MongoDB connected.");
 }).catch(err => {
