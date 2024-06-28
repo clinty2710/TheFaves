@@ -1,6 +1,9 @@
 [build]
   command = "npm run build"
   publish = "frontend/dist"
+    cache = [
+    "node_modules"
+  ]
 
 [context.production.environment]
   NODE_ENV = "production"
