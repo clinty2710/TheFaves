@@ -1,4 +1,13 @@
 {
+  "name": "thefaves",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "patch-package",
+    "build": "webpack --mode production",
+    "start": "node server.js"
+  },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
     "@babel/register": "^7.23.7",
@@ -48,18 +57,6 @@
     "vm-browserify": "^1.1.2",
     "ws": "^8.16.0"
   },
-  "name": "thefaves",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "patch-package",
-    "build": "webpack --mode production"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "devDependencies": {
     "@babel/core": "^7.24.4",
     "@babel/preset-env": "^7.24.4",
