@@ -1,5 +1,6 @@
 [build]
   command = "npm run build"
+  command = "npm start"
   publish = "frontend/dist"
 
 [context.production.environment]
