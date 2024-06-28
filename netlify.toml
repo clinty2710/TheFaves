@@ -1,13 +1,11 @@
 [build]
-  command = "npm run build"
+  command = "npm install && npm run build"
   publish = "frontend/dist"
 
 [context.production.environment]
-  NODE_ENV = "development"
+  NODE_ENV = "production"
   MONGODB_URI = "mongodb+srv://clinty2710:Studman081!@thefaves.2hunxaq.mongodb.net"
   # other environment variables
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+[[plugins]]
+  package = "@netlify/plugin-functions-core"
