@@ -12,7 +12,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 dotenv.config();
 
 module.exports = (env, argv) => {
-  const isProduction = argv.mode === 'production';
+  const isProduction = argv.mode === 'development';
 
   const plugins = [
     new CleanWebpackPlugin(),
