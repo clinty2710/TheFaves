@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Update CORS configuration
 app.use(cors({
-  origin: 'https://myfavessite.netlify.app', // Update this to your actual Netlify site URL
+  origin: 'https://your-netlify-site.netlify.app', // Update this to your actual Netlify site URL
   credentials: true
 }));
 
