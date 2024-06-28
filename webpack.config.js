@@ -8,8 +8,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-// Load environment variables from .env file
 dotenv.config();
 
 module.exports = {
@@ -75,15 +75,17 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: './frontend/public/index.html',
-      inject: 'body',
+      filename: 'index.html'
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
+      filename: '[name].[contenthash].css'
     }),
+    new CssMinimizerPlugin(),
     new CompressionPlugin({
       test: /\.(js|css|html|ttf|woff2)$/,
       algorithm: 'gzip',
     }),
+    new BundleAnalyzerPlugin()
   ],
   optimization: {
     splitChunks: {
@@ -91,8 +93,8 @@ module.exports = {
     },
     minimize: true,
     minimizer: [
-      '...', // This syntax extends existing minimizers (i.e. `terser-webpack-plugin`), if any
-      new CssMinimizerPlugin(), // Ensure CSS is also minimized
+      `...`,
+      new CssMinimizerPlugin(),
     ],
   },
   externals: {
