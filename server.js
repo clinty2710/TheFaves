@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Update CORS configuration
 app.use(cors({
-  origin: 'https://www.myfavessite.com', //
+  origin: isDevelopment ? 'http://localhost:3000' : 'https://www.myfavessite.com',
   credentials: true
 }));
 
@@ -36,8 +36,8 @@ app.use(passport.session());
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
-  // useNewUrlParser: true, // deprecated
-  // useUnifiedTopology: true, // deprecated
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 }).then(() => {
   console.log("MongoDB connected.");
 }).catch(err => {

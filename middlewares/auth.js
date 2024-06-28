@@ -2,7 +2,7 @@
 
 const express = require('express');
 const passport = require('passport');
-const User = require('../models').User;
+const User = require('../models/user');
 const path = require('path');
 
 const router = express.Router();
@@ -20,7 +20,12 @@ router.post('/register', async (req, res) => {
     return res.status(400).json({ message: 'All fields required' });
   }
   try {
-    const newUser = await User.create({ email, password, nickname });
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: 'User already exists' });
+    }
+    const newUser = new User({ email, password, nickname });
+    await newUser.save();
     res.json({ message: 'User registered successfully', user: newUser });
   } catch (error) {
     res.status(500).json({ message: 'Error registering user', error: error.message });
@@ -49,7 +54,7 @@ router.get('/profile', ensureAuthenticated, async (req, res) => {
     return res.status(404).json({ message: 'User not found' });
   }
   try {
-    const user = await User.findByPk(req.user.id);
+    const user = await User.findById(req.user.id);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -65,7 +70,6 @@ router.get('/logout', (req, res) => {
   res.redirect('/auth/login');
 });
 
-// Logout route
 router.post('/logout', (req, res) => {
   req.logout((err) => {
     if (err) {
