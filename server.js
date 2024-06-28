@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Update CORS configuration
 app.use(cors({
-  origin: 'https://your-netlify-site.netlify.app', // Update this to your actual Netlify site URL
+  origin: 'https://myfavessite.netlify.app', // Update this to your actual Netlify site URL
   credentials: true
 }));
 
@@ -50,13 +50,13 @@ app.use('/api/favorites', favoriteRoutes);
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 app.get('/profile', (req, res) => {
   if (req.isAuthenticated()) {
-    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'profile.html'));
+    res.sendFile(path.join(__dirname, 'frontend', 'public', 'profile.html'));
   } else {
     res.status(401).send('Unauthorized');
   }
 });
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, 'frontend', 'public', 'index.html'));
 });
 app.use((err, req, res, next) => {
   console.error(err.stack);
