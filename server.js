@@ -12,7 +12,7 @@ const favoriteRoutes = require('./routes/Favorites');
 const cors = require('cors');
 
 const app = express();
-const isDevelopment = process.env.NODE_ENV !== 'development';
+const isDevelopment = process.env.NODE_ENV !== 'production';
 
 // Set up body parsing middleware
 app.use(express.json());
