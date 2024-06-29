@@ -19,11 +19,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Update CORS configuration
-app.use(cors({
-  origin: ['https://www.myfavessite.com', 'http://localhost:3000'], // Include your local development server
-  methods: 'GET,POST,PUT,DELETE,OPTIONS',
+const corsOptions = {
+  origin: ['https://www.myfavessite.com', 'http://localhost:3000'], // Include your local development server if necessary
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
-}));
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Handle preflight requests
 
 const randomSessionSecret = crypto.randomBytes(32).toString('hex');
 app.use(session({
@@ -48,22 +52,17 @@ mongoose.connect(process.env.MONGODB_URI, {
 app.use('/auth', authMiddleware.router);
 app.use('/api/favorites', favoriteRoutes);
 
-app.use(express.static(path.join(__dirname, 'frontend', 'public'))); // Serve static files from public folder
-
-app.options('*', cors()); // Preflight request handling
-
+app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 app.get('/profile', (req, res) => {
   if (req.isAuthenticated()) {
-    res.sendFile(path.join(__dirname, 'frontend', 'public', 'profile.html')); // Corrected path
+    res.sendFile(path.join(__dirname, 'frontend', 'public', 'profile.html'));
   } else {
     res.status(401).send('Unauthorized');
   }
 });
-
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html')); // Serve the Webpack-created index.html for React app
+  res.sendFile(path.join(__dirname, 'frontend', 'public', 'index.html'));
 });
-
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');

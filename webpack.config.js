@@ -8,16 +8,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 dotenv.config();
 
 module.exports = (env, argv) => {
-  const isProduction = argv.mode === 'development';
+  const isProduction = argv.mode === 'production';
 
   const plugins = [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: './frontend/public/index.html',
+      template: './frontend/public/index.html', // Ensure this is the correct path
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
