@@ -20,18 +20,15 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
 const corsOptions = {
-  origin: ['myfavessite.com'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  origin: 'https://myfavessite.com', // Ensure this is your actual frontend URL
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
-  preflightContinue: false,
-  optionsSuccessStatus: 204
+  allowedHeaders: 'Content-Type, Authorization'
 };
 
-// Apply CORS to all routes
 app.use(cors(corsOptions));
 
-// Ensure all preflight requests are answered with a successful status code
+// Ensure the OPTIONS requests are properly handled
 app.options('*', cors(corsOptions));
 
 // Set up session and passport
