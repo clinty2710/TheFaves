@@ -20,19 +20,19 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
 const corsOptions = {
-  origin: ['https://www.myfavessite.com', 'http://localhost:3000'],
+  origin: ['https://www.myfavessite.com', 'https://myfavessite.com', 'http://localhost:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 };
 
 // Apply CORS to all routes
 app.use(cors(corsOptions));
 
 // Ensure all preflight requests are answered with a successful status code
-app.options('*', cors(corsOptions), (req, res) => {
-  res.sendStatus(204);
-});
+app.options('*', cors(corsOptions));
 
 // Set up session and passport
 const randomSessionSecret = crypto.randomBytes(32).toString('hex');
