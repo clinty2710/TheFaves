@@ -50,6 +50,8 @@ app.use('/api/favorites', favoriteRoutes);
 
 app.use(express.static(path.join(__dirname, 'frontend', 'public'))); // Serve static files from public folder
 
+app.options('*', cors()); // Preflight request handling
+
 app.get('/profile', (req, res) => {
   if (req.isAuthenticated()) {
     res.sendFile(path.join(__dirname, 'frontend', 'public', 'profile.html')); // Corrected path
