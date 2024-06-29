@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Update CORS configuration
 const corsOptions = {
-  origin: ['https://www.myfavessite.com', 'http://localhost:3000'], // Include your local development server if necessary
+  origin: ['https://www.myfavessite.com', 'http://localhost:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
@@ -29,11 +29,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Handle preflight requests
-app.options('*', (req, res) => {
-  console.log(`Preflight request for ${req.originalUrl}`);
-  cors(corsOptions)(req, res, () => res.sendStatus(204));
-});
+app.options('*', cors(corsOptions));
 
+// Set up session and passport
 const randomSessionSecret = crypto.randomBytes(32).toString('hex');
 app.use(session({
   secret: randomSessionSecret,
@@ -54,9 +52,11 @@ mongoose.connect(process.env.MONGODB_URI, {
   console.error("Error connecting to MongoDB:", err);
 });
 
+// Routes
 app.use('/auth', authMiddleware.router);
 app.use('/api/favorites', favoriteRoutes);
 
+// Static files
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 app.get('/profile', (req, res) => {
   if (req.isAuthenticated()) {
@@ -68,11 +68,14 @@ app.get('/profile', (req, res) => {
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'public', 'index.html'));
 });
+
+// Error handling
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
 
+// Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
