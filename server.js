@@ -28,7 +28,11 @@ const corsOptions = {
 
 // Apply CORS to all routes
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Preflight options
+
+// Ensure all preflight requests are answered with a successful status code
+app.options('*', cors(corsOptions), (req, res) => {
+  res.sendStatus(204);
+});
 
 // Set up session and passport
 const randomSessionSecret = crypto.randomBytes(32).toString('hex');
