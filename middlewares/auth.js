@@ -14,6 +14,10 @@ const ensureAuthenticated = (req, res, next) => {
   res.status(401).json({ message: 'Unauthorized' });
 };
 
+router.options('*', (req, res) => {
+  res.sendStatus(200);
+});
+
 router.post('/register', async (req, res) => {
   const { email, password, nickname } = req.body;
   if (!email || !password || !nickname) {

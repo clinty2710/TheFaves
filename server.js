@@ -20,8 +20,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // Update CORS configuration
 app.use(cors({
-  origin: ['https://www.myfavessite.com', 'http://localhost:3000'], 
-  credentials: true
+  origin: ['https://www.myfavessite.com', 'http://localhost:3000'], // Include your local development server
+  methods: 'GET,POST,PUT,DELETE,OPTIONS',
+  credentials: true,
 }));
 
 const randomSessionSecret = crypto.randomBytes(32).toString('hex');
@@ -47,7 +48,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 app.use('/auth', authMiddleware.router);
 app.use('/api/favorites', favoriteRoutes);
 
-app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
+app.use(express.static(path.join(__dirname, 'frontend', 'public')));
 app.get('/profile', (req, res) => {
   if (req.isAuthenticated()) {
     res.sendFile(path.join(__dirname, 'frontend', 'public', 'profile.html'));
