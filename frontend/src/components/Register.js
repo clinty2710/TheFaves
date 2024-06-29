@@ -24,7 +24,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://www.myfavessite.com/register', formData, {
+      const response = await axios.post('www.myfavessite.com/auth/register', formData, {
         headers: {
           'Content-Type': 'application/json',
         },
