@@ -27,7 +27,12 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Handle preflight requests
+
+// Handle preflight requests
+app.options('*', (req, res) => {
+  console.log(`Preflight request for ${req.originalUrl}`);
+  cors(corsOptions)(req, res, () => res.sendStatus(204));
+});
 
 const randomSessionSecret = crypto.randomBytes(32).toString('hex');
 app.use(session({
