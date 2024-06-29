@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
 const corsOptions = {
-  origin: [''],
+  origin: ['myfavessite.com'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
