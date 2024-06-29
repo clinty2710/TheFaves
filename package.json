@@ -24,7 +24,7 @@
     "express-session": "^1.18.0",
     "express-ws": "^5.0.2",
     "https-browserify": "^1.0.0",
-    "mongodb": "^6.7.0",
+    "mongodb": "^6.8.0",
     "mongoose": "^8.4.4",
     "mysql": "^2.18.1",
     "mysql2": "^3.9.1",
