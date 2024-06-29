@@ -9,7 +9,7 @@ const Register = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    nickname: '' 
+    nickname: ''
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -24,13 +24,18 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://www.myfavessite.com/auth/register', formData);
+      const response = await axios.post('https://www.myfavessite.com/auth/register', formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      });
       console.log('Registration successful:', response.data);
       toast.success('Registration successful');
       navigate('/login'); // Redirect to login after successful registration
     } catch (error) {
       console.error('Registration failed:', error.response?.data?.message || error.message);
-      setError(error.response?.data?.message || 'Registration failed'); // Display error from server
+      setError(error.response?.data?.message || 'Registration failed');
       toast.error('Registration failed: ' + (error.response?.data?.message || error.message));
     }
   };

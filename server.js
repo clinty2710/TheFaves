@@ -18,7 +18,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Update CORS configuration
+// CORS configuration
 const corsOptions = {
   origin: ['https://www.myfavessite.com', 'http://localhost:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -26,10 +26,9 @@ const corsOptions = {
   credentials: true,
 };
 
+// Apply CORS to all routes
 app.use(cors(corsOptions));
-
-// Handle preflight requests
-app.options('*', cors(corsOptions));
+app.options('*', cors(corsOptions)); // Preflight options
 
 // Set up session and passport
 const randomSessionSecret = crypto.randomBytes(32).toString('hex');
