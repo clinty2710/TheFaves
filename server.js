@@ -12,7 +12,7 @@ const favoriteRoutes = require('./routes/Favorites');
 const cors = require('cors');
 
 const app = express();
-const isProduction = process.env.NODE_ENV === 'production'; // Updated for clarity
+const isDevelopment = process.env.NODE_ENV !== 'production';
 
 // Set up body parsing middleware
 app.use(express.json());
@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
 const corsOptions = {
-  origin: 'https://myfavessite.com', 
+  origin: 'https://myfavessite.com', // Ensure this is your actual frontend URL
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   allowedHeaders: 'Content-Type, Authorization'
@@ -37,7 +37,7 @@ app.use(session({
   secret: randomSessionSecret,
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: isProduction }
+  cookie: { secure: !isDevelopment }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
