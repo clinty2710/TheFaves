@@ -6,6 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "patch-package",
     "build": "webpack --mode production",
+    "dev": "webpack --mode development",
     "start": "node server.js"
   },
   "dependencies": {
