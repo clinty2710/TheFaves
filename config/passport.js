@@ -11,14 +11,19 @@ passport.use(new LocalStrategy({
   },
   async function(email, password, done) {
     try {
+      // Find user by email
       const user = await User.findOne({ email });
       if (!user) {
         return done(null, false, { message: 'Incorrect email.' });
       }
+
+      // Compare password
       const passwordMatch = await bcrypt.compare(password, user.password);
       if (!passwordMatch) {
         return done(null, false, { message: 'Incorrect password.' });
       }
+
+      // Authentication successful
       return done(null, user);
     } catch (err) {
       return done(err);
@@ -26,10 +31,12 @@ passport.use(new LocalStrategy({
   }
 ));
 
+// Serialize user to store in session
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
 
+// Deserialize user from session
 passport.deserializeUser(async function(id, done) {
   try {
     const user = await User.findById(id);

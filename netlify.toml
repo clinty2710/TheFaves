@@ -3,6 +3,6 @@
   publish = "frontend/dist"
 
 [context.production.environment]
-  NODE_ENV = "devlopment"
+  NODE_ENV = "production"
   MONGODB_URI = "mongodb+srv://clinty2710:<password>@thefaves.2hunxaq.mongodb.net/?retryWrites=true&w=majority&appName=TheFaves"
   # other environment variables
