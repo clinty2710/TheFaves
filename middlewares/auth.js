@@ -14,17 +14,14 @@ const ensureAuthenticated = (req, res, next) => {
   res.status(401).json({ message: 'Unauthorized' });
 };
 
-router.options('*', (req, res) => {
-  res.sendStatus(200);
-});
-
 router.post('/register', async (req, res) => {
   const { email, password, nickname } = req.body;
   if (!email || !password || !nickname) {
     return res.status(400).json({ message: 'All fields required' });
   }
   try {
-    const newUser = await User.create({ email, password, nickname });
+    const newUser = new User({ email, password, nickname });
+    await newUser.save();
     res.json({ message: 'User registered successfully', user: newUser });
   } catch (error) {
     res.status(500).json({ message: 'Error registering user', error: error.message });
@@ -64,12 +61,6 @@ router.get('/profile', ensureAuthenticated, async (req, res) => {
   }
 });
 
-router.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/auth/login');
-});
-
-// Logout route
 router.post('/logout', (req, res) => {
   req.logout((err) => {
     if (err) {
