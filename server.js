@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Update CORS configuration
 app.use(cors({
-  origin: isDevelopment ? 'http://localhost:3000' : 'https://www.myfavessite.com',
+  origin: ['https://www.myfavessite.com', 'http://localhost:3000'], 
   credentials: true
 }));
 

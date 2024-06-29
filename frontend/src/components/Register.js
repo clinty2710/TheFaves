@@ -29,9 +29,9 @@ const Register = () => {
       toast.success('Registration successful');
       navigate('/login'); // Redirect to login after successful registration
     } catch (error) {
-      console.error('Registration failed:', error.response ? error.response.data.message : error.message);
-      setError(error.response ? error.response.data.message : 'Registration failed. Please try again later.'); // Display error from server
-      toast.error('Registration failed: ' + (error.response ? error.response.data.message : error.message));
+      console.error('Registration failed:', error.response?.data?.message || error.message);
+      setError(error.response?.data?.message || 'Registration failed'); // Display error from server
+      toast.error('Registration failed: ' + (error.response?.data?.message || error.message));
     }
   };
 
