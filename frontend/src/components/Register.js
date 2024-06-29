@@ -24,7 +24,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/auth/register', formData);
+      const response = await axios.post('/register', formData);
       console.log('Registration successful:', response.data);
       toast.success('Registration successful');
       navigate('/login'); // Redirect to login after successful registration
