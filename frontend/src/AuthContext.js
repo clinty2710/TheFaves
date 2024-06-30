@@ -24,11 +24,16 @@ export const AuthProvider = ({ children }) => {
     const checkAuth = async () => {
       try {
         const response = await axios.get('/auth/check-session');
-        setAuthenticated(response.data.isAuthenticated);
-        localStorage.setItem('isAuthenticated', JSON.stringify(response.data.isAuthenticated));
+        if (response.data && typeof response.data.isAuthenticated !== 'undefined') {
+          setAuthenticated(response.data.isAuthenticated);
+          localStorage.setItem('isAuthenticated', JSON.stringify(response.data.isAuthenticated));
+        } else {
+          throw new Error('Invalid response structure');
+        }
       } catch (error) {
         setAuthenticated(false);
         localStorage.setItem('isAuthenticated', JSON.stringify(false));
+        console.error('Error during authentication check:', error);
       }
     };
 

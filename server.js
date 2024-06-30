@@ -20,15 +20,13 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
 const corsOptions = {
-  origin: 'https://myfavessite.com',
+  origin: ['https://myfavessite.com', 'http://localhost:3000'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   allowedHeaders: 'Content-Type, Authorization'
 };
 
 app.use(cors(corsOptions));
-
-// Ensure the OPTIONS requests are properly handled
 app.options('*', cors(corsOptions));
 
 // Set up session and passport

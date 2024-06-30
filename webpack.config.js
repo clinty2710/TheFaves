@@ -18,8 +18,7 @@ module.exports = (env, argv) => {
   const plugins = [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: './frontend/public/index.html',
-      filename: 'index.html'
+      template: './frontend/public/index.html', // Ensure this is the correct path
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
