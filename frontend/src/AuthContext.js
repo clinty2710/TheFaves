@@ -6,9 +6,19 @@ import axios from 'axios';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setAuthenticated] = useState(
-    JSON.parse(localStorage.getItem('isAuthenticated')) || false
-  );
+  // Safely parse the value from localStorage
+  const getInitialAuthState = () => {
+    const storedValue = localStorage.getItem('isAuthenticated');
+    if (storedValue === null) return false;
+    try {
+      return JSON.parse(storedValue);
+    } catch (error) {
+      console.error('Error parsing isAuthenticated from localStorage', error);
+      return false;
+    }
+  };
+
+  const [isAuthenticated, setAuthenticated] = useState(getInitialAuthState);
 
   useEffect(() => {
     const checkAuth = async () => {
