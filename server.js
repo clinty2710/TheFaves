@@ -59,7 +59,6 @@ app.use('/api/favorites', favoriteRoutes);
 // Static files
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
-// Serve profile.html
 app.get('/profile', (req, res) => {
   if (req.isAuthenticated()) {
     res.sendFile(path.join(__dirname, 'frontend', 'dist', 'profile.html'));
@@ -68,10 +67,10 @@ app.get('/profile', (req, res) => {
   }
 });
 
-// Serve index.html for all other routes
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
 });
+
 
 // Error handling
 app.use((err, req, res, next) => {
