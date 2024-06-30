@@ -28,6 +28,11 @@ router.post('/register', async (req, res) => {
   }
 });
 
+// Serve registration form (if you have one)
+router.get('/register', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'public', 'registration_form.html'));
+});
+
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) {
