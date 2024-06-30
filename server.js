@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
 const corsOptions = {
-  origin: 'https://myfavessite.com',
+  origin: ['https://myfavessite.com', 'http://localhost:3000'], // List of allowed origins
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   allowedHeaders: 'Content-Type, Authorization'
@@ -58,17 +58,15 @@ app.use('/api/favorites', favoriteRoutes);
 
 // Static files
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
-
 app.get('/profile', (req, res) => {
   if (req.isAuthenticated()) {
-    res.sendFile(path.join(__dirname, 'frontend', 'public', 'profile.html'));
+    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'profile.html'));
   } else {
     res.status(401).send('Unauthorized');
   }
 });
-
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
 });
 
 // Error handling
