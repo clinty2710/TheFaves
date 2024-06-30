@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
 const corsOptions = {
-  origin: 'https://myfavessite.com',
+  origin: 'https://myfavessite.com', // Ensure this is your actual frontend URL
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   allowedHeaders: 'Content-Type, Authorization'

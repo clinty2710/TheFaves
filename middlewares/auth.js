@@ -3,8 +3,16 @@
 const express = require('express');
 const passport = require('passport');
 const User = require('../models/user');
+const path = require('path');
 
 const router = express.Router();
+
+const ensureAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.status(401).json({ message: 'Unauthorized' });
+};
 
 router.post('/register', async (req, res) => {
   const { email, password, nickname } = req.body;
@@ -78,4 +86,4 @@ router.get('/check-session', (req, res) => {
   }
 });
 
-module.exports = { router };
+module.exports = { ensureAuthenticated, router };
