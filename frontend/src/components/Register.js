@@ -30,23 +30,15 @@ const Register = () => {
         },
         withCredentials: true,
       });
-  
-      console.log('Response:', response);
-  
-      if (response.data) {
-        console.log('Registration successful:', response.data);
-        toast.success('Registration successful');
-        navigate('/login'); // Redirect to login after successful registration
-      } else {
-        throw new Error('No data received from the server');
-      }
+      console.log('Registration successful:', response.data);
+      toast.success('Registration successful');
+      navigate('/login'); // Redirect to login after successful registration
     } catch (error) {
       console.error('Registration failed:', error.response?.data?.message || error.message);
       setError(error.response?.data?.message || 'Registration failed');
       toast.error('Registration failed: ' + (error.response?.data?.message || error.message));
     }
   };
-  
 
   return (
     <div>
