@@ -24,21 +24,29 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post( '/auth/register', formData, {
+      const response = await axios.post('/auth/register', formData, {
         headers: {
           'Content-Type': 'application/json',
         },
         withCredentials: true,
       });
-      console.log('Registration successful:', response.data);
-      toast.success('Registration successful');
-      navigate('/login'); // Redirect to login after successful registration
+  
+      console.log('Response:', response);
+  
+      if (response.data) {
+        console.log('Registration successful:', response.data);
+        toast.success('Registration successful');
+        navigate('/login'); // Redirect to login after successful registration
+      } else {
+        throw new Error('No data received from the server');
+      }
     } catch (error) {
       console.error('Registration failed:', error.response?.data?.message || error.message);
       setError(error.response?.data?.message || 'Registration failed');
       toast.error('Registration failed: ' + (error.response?.data?.message || error.message));
     }
   };
+  
 
   return (
     <div>
