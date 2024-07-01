@@ -29,6 +29,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 
+
 // Set up session and passport
 const randomSessionSecret = crypto.randomBytes(32).toString('hex');
 app.use(session({
