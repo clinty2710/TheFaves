@@ -1,8 +1,0 @@
-diff --git a/node_modules/express-ws/index.js b/node_modules/express-ws/index.js
-index 651c499..676acea 100644
---- a/node_modules/express-ws/index.js
-+++ b/node_modules/express-ws/index.js
-@@ -1 +1,3 @@
-+// Patch for ws version compatibility
-+
- module.exports = require("./lib").default;
