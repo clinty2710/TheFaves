@@ -19,6 +19,7 @@ const musicApiClient = axios.create({
 
 // Route to search movies using TMDB API
 router.get('/movies/search', async (req, res) => {
+  console.log('Movies search route hit');
   const { query } = req.query;
   if (!query) {
     return res.status(400).json({ message: "Query parameter is required." });
@@ -45,6 +46,7 @@ router.get('/movies/search', async (req, res) => {
 });
 
 router.post('/add', async (req, res) => {
+  console.log('Add favorite route hit');
   const { user_Id, item_Id, item_Type, movieId, movieTitle, posterPath, musicId, musicTitle, coverImage, bookId, bookTitle, author } = req.body;
   console.log("Adding a new favorite:", req.body);
 
@@ -141,6 +143,7 @@ router.post('/add', async (req, res) => {
 // Endpoint to fetch a user's favorites
 router.get('/user/:userId', async (req, res) => {
   const { userId } = req.params;
+  console.log(`Fetching favorites for user ${userId}`);
 
   try {
     const favorites = await Favorite.findAll({
@@ -171,6 +174,7 @@ router.get('/user/:userId', async (req, res) => {
 // Endpoint to delete a favorite
 router.delete('/delete/:id', async (req, res) => {
   const { id } = req.params;
+  console.log(`Deleting favorite with id ${id}`);
 
   try {
     const favorite = await Favorite.findByPk(id);
@@ -205,6 +209,7 @@ router.delete('/delete/:id', async (req, res) => {
 
 // Route to search music using Spotify API
 router.get('/music/search', async (req, res) => {
+  console.log('Music search route hit');
   const { query } = req.query;
   if (!query) {
     return res.status(400).json({ message: "Query parameter is required." });
