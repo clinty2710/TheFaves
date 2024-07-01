@@ -15,6 +15,7 @@ const ensureAuthenticated = (req, res, next) => {
 };
 
 router.post('/register', async (req, res) => {
+  console.log('Register route hit');
   const { email, password, nickname } = req.body;
   if (!email || !password || !nickname) {
     return res.status(400).json({ message: 'All fields required' });
@@ -28,13 +29,9 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// Serve registration form (if you have one)
-router.get('/register', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'frontend', 'public', 'registration_form.html'));
-});
-
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
+    console.log('Login route hit');
     if (err) {
       return res.status(500).json({ message: 'Internal Server Error' });
     }
@@ -51,6 +48,7 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/profile', ensureAuthenticated, async (req, res) => {
+  console.log('Profile route hit');
   if (!req.user || !req.user.id) {
     return res.status(404).json({ message: 'User not found' });
   }
