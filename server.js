@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
 const corsOptions = {
-  origin: ['https://myfavessite.com', 'http://localhost:3000'],
+  origin: ['http://myfavessite.com', 'http://localhost:3000'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   allowedHeaders: 'Content-Type, Authorization'
@@ -28,7 +28,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
-
 
 // Set up session and passport
 const randomSessionSecret = crypto.randomBytes(32).toString('hex');
@@ -55,16 +54,8 @@ mongoose.connect(process.env.MONGODB_URI, {
 app.use('/auth', authMiddleware.router);
 app.use('/api/favorites', favoriteRoutes);
 
-// Static files
+// Static files (only if serving frontend from backend, which is not needed for Netlify)
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
-
-app.get('/profile', (req, res) => {
-  if (req.isAuthenticated()) {
-    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'profile.html'));
-  } else {
-    res.status(401).send('Unauthorized');
-  }
-});
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
