@@ -1,0 +1,408 @@
+/* styles.css */
+
+body {
+    background-color: #0a2540;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1.6; /* Increase line height for readability */
+    font-weight: 300; /* Lighten the font weight */
+}
+
+.App-header {
+    text-align: center;
+    padding: 20px;
+    background-color: #0a2540;
+    border-bottom: 2px solid #ff6347; /* Adjusted to orange color */
+}
+
+.App-header h1 {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    margin: 0;
+}
+
+.title-the {
+    font-family: 'Anton', Arial, sans-serif;
+    color: #ffffff;
+    font-size: 1.5rem; /* Adjust the size as needed */
+    text-transform: lowercase;
+    letter-spacing: 1px;
+    margin-right: 5px; /* Adjust the spacing between 'the' and 'FAVES' */
+}
+
+.title-faves {
+    font-family: 'Anton', Arial, sans-serif;
+    color: #ffffff;
+    font-size: 3rem; /* Adjust the size as needed */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.favorites-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.favorite-item {
+    background-color: #1a374d;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    width: 150px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transition: width 0.3s, padding 0.3s, font-size 0.3s;
+}
+
+.favorite-item img {
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+    transition: opacity 0.3s;
+}
+
+.favorite-item p {
+    color: #ffffff;
+    margin: 10px 0;
+    font-size: 1rem; /* Base font size */
+}
+
+.favorite-item .delete-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #ff6347; /* Orange color for the delete icon */
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.favorite-item:hover .delete-icon {
+    opacity: 1;
+}
+
+.favorite-item:hover img {
+    opacity: 0.5;
+}
+
+button {
+    background-color: #ff6347;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-size: 1rem; /* Increase font size */
+    width: 200px; /* Adjust width */
+    display: block;
+    margin: 10px auto; /* Center the button */
+    font-weight: 400; /* Lighten the font weight */
+}
+
+button:hover {
+    background-color: #ff4500;
+}
+
+.search-container {
+    margin: 20px;
+    text-align: center;
+}
+
+.search-container input {
+    padding: 10px;
+    width: 40%; /* Adjusted to half the length */
+    border-radius: 5px;
+    border: 2px solid #ffffff;
+    background-color: #1a374d;
+    color: #ffffff !important;
+    margin-bottom: 20px;
+    height: 40px; /* Match height with login/register forms */
+}
+
+h2 {
+    color: #ffffff;
+    text-align: center;
+    font-size: 2rem; /* Base font size for headings */
+    font-weight: 300; /* Lighten the font weight */
+    line-height: 1.4; /* Adjust line height for readability */
+}
+
+/* Styling for react-select components */
+.select__control {
+    width: 40% !important; /* Ensure width */
+    margin: 0 auto !important; /* Center the search bar */
+    border-radius: 5px !important; /* Match form field styling */
+    border: 2px solid #ffffff !important; /* Match form field styling */
+    background-color: #1a374d !important; /* Match form field styling */
+    color: #ffffff !important; /* Match form field styling */
+    height: 40px !important; /* Match height with login/register forms */
+    display: flex !important;
+    align-items: center !important; /* Vertical alignment */
+}
+
+.select__menu {
+    background-color: #1a374d !important;
+    width: 40% !important; /* Adjust width to match the control */
+    margin: 0 auto !important; /* Center the menu */
+    left: 50% !important; /* Center align the dropdown */
+    transform: translateX(-50%) !important; /* Adjust for center alignment */
+    border-left: 2px solid #ff6347 !important; /* Orange border */
+    border-right: 2px solid #ff6347 !important; /* Orange border */
+    border-bottom: 2px solid #ff6347 !important; /* Orange border */
+}
+
+.select__option {
+    color: #ffffff !important; /* White text color for options */
+    text-align: left !important; /* Align text to the left */
+}
+
+.select__option--is-focused {
+    background-color: #ff6347 !important;
+}
+
+.select__option--is-selected {
+    background-color: #ff4500 !important;
+    color: #ffffff !important;
+}
+
+/* Ensure the input text is white */
+.select__input {
+    color: #ffffff !important;
+    padding: 0 !important; /* Remove padding for better alignment */
+    height: 100% !important; /* Ensure the input height matches the control */
+    display: flex !important;
+    align-items: center !important; /* Center the text vertically */
+}
+
+/* Ensure the placeholder text is visible */
+.select__placeholder {
+    color: #ffffff !important;
+    display: flex !important;
+    align-items: center !important; /* Center the text vertically */
+}
+
+/* Center the form on the login and register pages */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.6; /* Increase line height for readability */
+    font-weight: 300; /* Lighten the font weight */
+}
+
+form div {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+form input {
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: 2px solid #ffffff;
+    background-color: #1a374d;
+    color: #ffffff;
+}
+
+form button {
+    width: 200px; /* Adjust width */
+    font-size: 1rem; /* Increase font size */
+    display: block;
+    margin: 10px auto; /* Center the button */
+    font-weight: 400; /* Lighten the font weight */
+}
+
+form p {
+    color: #ff6347;
+    text-align: center;
+}
+
+/* Center the links below the forms */
+.center-links {
+    text-align: center;
+}
+
+/* Style the links to match the login button color */
+.center-links a {
+    color: #ff6347;
+    text-decoration: none;
+}
+
+.center-links a:hover {
+    color: #ff4500;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+    .favorite-item {
+        width: 130px;
+        padding: 8px;
+        font-size: 0.9rem; /* Adjust font size */
+    }
+
+    .favorite-item p {
+        font-size: 0.9rem; /* Adjust font size */
+    }
+
+    h2 {
+        font-size: 1.8rem; /* Adjust heading size */
+    }
+
+    button {
+        width: 180px;
+        font-size: 0.9rem; /* Adjust font size */
+    }
+
+    .select__control,
+    .select__menu {
+        width: 60%;
+    }
+
+    .search-container input {
+        width: 60%;
+    }
+}
+
+@media (max-width: 992px) {
+    .favorite-item {
+        width: 110px;
+        padding: 6px;
+        font-size: 0.8rem; /* Adjust font size */
+    }
+
+    .favorite-item p {
+        font-size: 0.8rem; /* Adjust font size */
+    }
+
+    h2 {
+        font-size: 1.6rem; /* Adjust heading size */
+    }
+
+    button {
+        width: 160px;
+        font-size: 0.8rem; /* Adjust font size */
+    }
+
+    .select__control,
+    .select__menu {
+        width: 80%;
+    }
+
+    .search-container input {
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .favorite-item {
+        width: 90px;
+        padding: 4px;
+        font-size: 0.7rem; /* Adjust font size */
+    }
+
+    .favorite-item p {
+        font-size: 0.7rem; /* Adjust font size */
+    }
+
+    h2 {
+        font-size: 1.4rem; /* Adjust heading size */
+    }
+
+    button {
+        width: 140px;
+        font-size: 0.7rem; /* Adjust font size */
+    }
+
+    .select__control,
+    .select__menu {
+        width: 90%;
+    }
+
+    .search-container input {
+        width: 90%;
+    }
+}
+
+@media (max-width: 576px) {
+    .favorite-item {
+        width: 70px;
+        padding: 2px;
+        font-size: 0.6rem; /* Adjust font size */
+    }
+
+    .favorite-item p {
+        font-size: 0.6rem; /* Adjust font size */
+    }
+
+    h2 {
+        font-size: 1.2rem; /* Adjust heading size */
+    }
+
+    button {
+        width: 120px;
+        font-size: 0.6rem; /* Adjust font size */
+    }
+
+    .select__control,
+    .select__menu {
+        width: 100%;
+    }
+
+    .search-container input {
+        width: 100%;
+    }
+}
+
+/* Custom Toast Notification Styles */
+.Toastify__toast {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+}
+
+/* Success notification styling */
+.Toastify__toast--success {
+  background-color: #1a374d; /* Match background color to theme */
+  border-left: 6px solid #ff6347; /* Orange border */
+}
+
+/* Error notification styling */
+.Toastify__toast--error {
+  background-color: #1a374d; /* Match background color to theme */
+  border-left: 6px solid #ff4500; /* Darker orange border */
+}
+
+/* Override default close button color */
+.Toastify__close-button {
+  color: #ffffff;
+}
+
+/* Customize progress bar */
+.Toastify__progress-bar--success {
+  background: #ff6347; /* Orange color for progress bar */
+}
+
+.Toastify__progress-bar--error {
+  background: #ff4500; /* Darker orange color for progress bar */
+}
