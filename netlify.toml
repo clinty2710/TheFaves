@@ -8,7 +8,7 @@
   status = 200
   
 [context.production.environment]
-NODE_ENV = "production"
+NODE_ENV = "development"
 MONGODB_URI = "mongodb+srv://clinty2710:Studman081!@thefaves.2hunxaq.mongodb.net/?retryWrites=true&w=majority&appName=TheFaves"
 REACT_APP_GOOGLE_BOOKS_API_KEY = "AIzaSyBk2yUzALtbnnSjMl-dKG49RKWZL9Ngu20"
 RAPIDAPI_KEY = "014ad17094msh34fd14ee21bdfdfp10539ejsn6c92c98944bf"
