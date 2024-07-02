@@ -6,7 +6,6 @@ import axios from 'axios';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  // Safely parse the value from localStorage
   const getInitialAuthState = () => {
     const storedValue = localStorage.getItem('isAuthenticated');
     if (storedValue === null) return false;

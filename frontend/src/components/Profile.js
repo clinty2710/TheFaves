@@ -115,7 +115,7 @@ const Profile = () => {
         ))}
       </div>
       <h2>Favorite Books</h2>
-      <SearchBooks favorites={favorites} setFavorites={setFavorites} />  {/* Add SearchBooks component here */}
+      <SearchBooks favorites={favorites} setFavorites={setFavorites} />
       <div className="favorites-container">
         {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'book').map(fav => (
           <div key={fav.id} className="favorite-item">
