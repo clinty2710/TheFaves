@@ -1,11 +1,13 @@
 // src/components/UserContext.js
 
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import { useAuth } from '../AuthContext';
 
 export const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
+  const { isAuthenticated } = useAuth();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -24,8 +26,10 @@ export const UserProvider = ({ children }) => {
       }
     };
 
-    fetchUser();
-  }, []);
+    if (isAuthenticated) {
+      fetchUser();
+    }
+  }, [isAuthenticated]);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
@@ -33,3 +37,5 @@ export const UserProvider = ({ children }) => {
     </UserContext.Provider>
   );
 };
+
+export const useUser = () => useContext(UserContext);

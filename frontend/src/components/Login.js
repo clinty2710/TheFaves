@@ -4,27 +4,28 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { loginUser } from '../services/api';
-import { useAuth } from './../AuthContext'; // Import useAuth
+import { useAuth } from '../AuthContext';
+import { useUser } from './UserContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const { setAuthenticated } = useAuth(); // Use useAuth hook
+  const { setAuthenticated } = useAuth();
+  const { setUser } = useUser();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await loginUser({ email, password });
-      console.log('Login response:', response); // Debugging log
       if (response.success) {
-        setAuthenticated(true); // Set authentication state
+        setAuthenticated(true);
+        setUser(response.user);
         sessionStorage.setItem('isAuthenticated', true);
         toast.success('Login successful');
-        console.log('Navigating to profile'); // Debugging log
         navigate('/profile');
       } else {
-        setAuthenticated(false); // Set authentication state
+        setAuthenticated(false);
         sessionStorage.removeItem('isAuthenticated');
         toast.error('Login failed. Please check your credentials.');
       }

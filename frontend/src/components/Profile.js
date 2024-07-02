@@ -4,7 +4,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import LogoutButton from './LogoutButton';
 import { useAuth } from '../AuthContext';
-import { UserContext } from './UserContext';
+import { useUser } from './UserContext';
 import SearchMovies from './SearchMovies';
 import SearchMusic from './SearchMusic';
 import SearchBooks from './SearchBooks';
@@ -15,7 +15,7 @@ const Profile = () => {
   const [error, setError] = useState(null);
   const [favorites, setFavorites] = useState([]);
   const { isAuthenticated } = useAuth();
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser } = useUser();
 
   useEffect(() => {
     const fetchUserProfile = async () => {
