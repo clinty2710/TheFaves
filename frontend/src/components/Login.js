@@ -18,6 +18,7 @@ const Login = () => {
       if (response.success) {
         sessionStorage.setItem('isAuthenticated', true);
         toast.success('Login successful');
+        console.log('Navigating to profile'); // Debugging log
         navigate('/profile');
       } else {
         sessionStorage.removeItem('isAuthenticated');
