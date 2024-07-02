@@ -33,7 +33,7 @@ function App() {
             <Route path="/favorite-items" element={isAuthenticated ? <FavoriteItems /> : <Navigate replace to="/login" />} />
           </Routes>
         </ErrorBoundary>
-        <ToastContainer autoClose={3000} /> {/* Add this line */}
+        <ToastContainer autoClose={3000} />
       </div>
     </UserProvider>
   );

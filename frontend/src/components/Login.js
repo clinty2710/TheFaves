@@ -14,6 +14,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await loginUser({ email, password });
+      console.log('Login response:', response); // Debugging log
       if (response.success) {
         sessionStorage.setItem('isAuthenticated', true);
         toast.success('Login successful');
