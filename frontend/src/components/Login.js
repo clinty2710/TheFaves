@@ -4,13 +4,13 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { loginUser } from '../services/api';
-import { useAuth } from './../AuthContext';
+import { useAuth } from './../AuthContext'; // Import useAuth
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const { setAuthenticated } = useAuth();
+  const { setAuthenticated } = useAuth(); // Use useAuth hook
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -18,13 +18,13 @@ const Login = () => {
       const response = await loginUser({ email, password });
       console.log('Login response:', response); // Debugging log
       if (response.success) {
-        setAuthenticated(true);
+        setAuthenticated(true); // Set authentication state
         sessionStorage.setItem('isAuthenticated', true);
         toast.success('Login successful');
         console.log('Navigating to profile'); // Debugging log
         navigate('/profile');
       } else {
-        setAuthenticated(false);
+        setAuthenticated(false); // Set authentication state
         sessionStorage.removeItem('isAuthenticated');
         toast.error('Login failed. Please check your credentials.');
       }
