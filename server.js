@@ -5,12 +5,11 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('./config/passport');
 const path = require('path');
-const crypto = require('crypto');
 const mongoose = require('mongoose');
 const authMiddleware = require('./middlewares/auth');
 const favoriteRoutes = require('./routes/Favorites');
 const cors = require('cors');
-const MongoStore = require('connect-mongo'); // Add this line
+const MongoStore = require('connect-mongo');
 
 const app = express();
 const isDevelopment = process.env.NODE_ENV !== 'production';
@@ -42,9 +41,9 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 // Set up session and passport with MongoStore
-const randomSessionSecret = crypto.randomBytes(32).toString('hex');
+const sessionSecret = process.env.SESSION_SECRET;
 app.use(session({
-  secret: randomSessionSecret,
+  secret: sessionSecret,
   resave: false,
   saveUninitialized: false,
   cookie: { secure: !isDevelopment },
