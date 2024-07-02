@@ -44,6 +44,7 @@ app.use(passport.session());
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  dbName: 'thefaves'  // Explicitly set the database name
 }).then(() => {
   console.log("MongoDB connected.");
 }).catch(err => {
