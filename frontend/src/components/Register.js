@@ -1,9 +1,10 @@
 // src/components/Register.js
 
-import React, { useState } from 'react';
 import axios from 'axios';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { registerUser } from '../services/api';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -24,19 +25,14 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/auth/register', formData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true,
-      });
-      console.log('Registration successful:', response.data);
+      const response = await registerUser(formData);
+      console.log('Registration successful:', response);
       toast.success('Registration successful');
       navigate('/login'); // Redirect to login after successful registration
     } catch (error) {
-      console.error('Registration failed:', error.response?.data?.message || error.message);
-      setError(error.response?.data?.message || 'Registration failed');
-      toast.error('Registration failed: ' + (error.response?.data?.message || error.message));
+      console.error('Registration failed:', error);
+      setError('Registration failed');
+      toast.error('Registration failed');
     }
   };
 
