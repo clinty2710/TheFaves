@@ -1,4 +1,4 @@
-// server.js/
+// server.js
 
 require('dotenv').config();
 const express = require('express');
@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const authMiddleware = require('./middlewares/auth');
 const favoriteRoutes = require('./routes/Favorites');
 const cors = require('cors');
+const MongoStore = require('connect-mongo'); // Add this line
 
 const app = express();
 const isDevelopment = process.env.NODE_ENV !== 'production';
@@ -29,27 +30,31 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 
-// Set up session and passport
-const randomSessionSecret = crypto.randomBytes(32).toString('hex');
-app.use(session({
-  secret: randomSessionSecret,
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: !isDevelopment }
-}));
-app.use(passport.initialize());
-app.use(passport.session());
-
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  dbName: 'thefaves'
+  dbName: 'thefaves'  // Explicitly set the database name
 }).then(() => {
   console.log("MongoDB connected.");
 }).catch(err => {
   console.error("Error connecting to MongoDB:", err);
 });
+
+// Set up session and passport with MongoStore
+const randomSessionSecret = crypto.randomBytes(32).toString('hex');
+app.use(session({
+  secret: randomSessionSecret,
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: !isDevelopment },
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGODB_URI,
+    dbName: 'thefaves'  // Explicitly set the database name
+  })
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routes
 app.use('/auth', authMiddleware.router);
