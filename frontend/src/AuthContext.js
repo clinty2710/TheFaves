@@ -6,6 +6,7 @@ import axios from 'axios';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  // Safely parse the value from localStorage
   const getInitialAuthState = () => {
     const storedValue = localStorage.getItem('isAuthenticated');
     if (storedValue === null) return false;
@@ -22,7 +23,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/auth/check-session`);
+        const response = await axios.get('/auth/check-session');
         if (response.data && typeof response.data.isAuthenticated !== 'undefined') {
           setAuthenticated(response.data.isAuthenticated);
           localStorage.setItem('isAuthenticated', JSON.stringify(response.data.isAuthenticated));

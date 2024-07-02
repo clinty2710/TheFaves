@@ -20,9 +20,9 @@ function App() {
     <UserProvider>
       <div className="App">
         <header className="App-header">
-          <h1>
+        <h1>
             <span className="title-the">my</span><span className="title-faves">FAVES</span>
-          </h1>
+        </h1>
         </header>
         <ErrorBoundary>
           <Routes>
@@ -33,7 +33,7 @@ function App() {
             <Route path="/favorite-items" element={isAuthenticated ? <FavoriteItems /> : <Navigate replace to="/login" />} />
           </Routes>
         </ErrorBoundary>
-        <ToastContainer autoClose={3000} />
+        <ToastContainer autoClose={3000} /> {/* Add this line */}
       </div>
     </UserProvider>
   );

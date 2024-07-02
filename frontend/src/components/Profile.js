@@ -22,7 +22,7 @@ const Profile = () => {
       console.log("Fetching user profile...");
       try {
         setLoading(true);
-        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/auth/profile`);
+        const response = await axios.get('/auth/profile');
         console.log("Profile data received:", response.data);
         if (response.data) {
           setUser(response.data);
@@ -49,7 +49,7 @@ const Profile = () => {
     const fetchUserFavorites = async () => {
       if (user && user.id) {
         try {
-          const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/favorites/user/${user.id}`);
+          const response = await axios.get(`/api/favorites/user/${user.id}`);
           console.log("User favorites fetched:", response.data);
           setFavorites(response.data);
         } catch (error) {
@@ -65,7 +65,7 @@ const Profile = () => {
 
   const handleRemoveFavorite = async (id) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/favorites/delete/${id}`);
+      await axios.delete(`/api/favorites/delete/${id}`);
       setFavorites(favorites.filter(fav => fav.id !== id));
     } catch (error) {
       console.error('Error removing favorite:', error);
