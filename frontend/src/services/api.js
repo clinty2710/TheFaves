@@ -29,3 +29,14 @@ export const loginUser = async (userData) => {
     throw error;
   }
 };
+
+// Function to get user profile
+export const getUserProfile = async () => {
+  try {
+    const response = await axios.get(constructURL('/auth/profile'));
+    return response.data;
+  } catch (error) {
+    console.error('Failed to fetch profile:', error);
+    throw error;
+  }
+};
