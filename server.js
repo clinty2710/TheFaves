@@ -14,7 +14,7 @@ const MongoStore = require('connect-mongo');
 const app = express();
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
-app.set('trust proxy');
+app.set('trust proxy', 1);
 
 // Set up body parsing middleware
 app.use(express.json());
