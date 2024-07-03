@@ -6,7 +6,7 @@ const session = require('express-session');
 const passport = require('./config/passport');
 const path = require('path');
 const mongoose = require('mongoose');
-const authMiddleware = require('./middlewares/auth');
+const { ensureAuthenticated } = require('./middlewares/auth');
 const favoriteRoutes = require('./routes/Favorites');
 const cors = require('cors');
 const MongoStore = require('connect-mongo');
@@ -14,8 +14,7 @@ const MongoStore = require('connect-mongo');
 const app = express();
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
-// Trust the first proxy
-app.set('trust proxy', 1); // Trust first proxy
+app.set('trust proxy', 1); // trust first proxy
 
 // Set up body parsing middleware
 app.use(express.json());
@@ -34,6 +33,8 @@ app.options('*', cors(corsOptions));
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
   dbName: 'thefaves',
 }).then(() => {
   console.log('MongoDB connected.');
@@ -49,28 +50,23 @@ app.use(session({
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
   cookie: {
-    secure: true, // Ensure it's true for HTTPS
-    sameSite: 'None', // Set SameSite to 'None' for cross-origin requests
+    secure: true, // Set to true since you are using HTTPS
+    sameSite: 'none', // Ensure cookies are sent cross-origin
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
 }));
-
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.use('/auth', authMiddleware.router);
+app.use('/auth', require('./routes/auth'));
 app.use('/api/favorites', favoriteRoutes);
 
 // Static files
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
-app.get('/profile', (req, res) => {
-  if (req.isAuthenticated()) {
-    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'profile.html'));
-  } else {
-    res.status(401).send('Unauthorized');
-  }
+app.get('/profile', ensureAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'profile.html'));
 });
 
 app.get('*', (req, res) => {
