@@ -57,6 +57,7 @@ router.get('/profile', ensureAuthenticated, async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
+    console.log('User data sent from profile route:', user);
     res.json({ id: user._id, nickname: user.nickname, email: user.email });
   } catch (error) {
     console.error('Error fetching user profile:', error);

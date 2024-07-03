@@ -33,24 +33,24 @@ app.options('*', cors(corsOptions));
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  dbName: 'thefaves'  // Explicitly set the database name
+  dbName: 'thefaves', // Ensure the correct database name
 }).then(() => {
-  console.log("MongoDB connected.");
+  console.log('MongoDB connected.');
 }).catch(err => {
-  console.error("Error connecting to MongoDB:", err);
+  console.error('MongoDB connection error:', err);
 });
 
 // Set up session and passport with MongoStore
 const sessionSecret = process.env.SESSION_SECRET;
 app.use(session({
-  secret: sessionSecret,
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: !isDevelopment },
-  store: MongoStore.create({
-    mongoUrl: process.env.MONGODB_URI,
-    dbName: 'thefaves'  // Explicitly set the database name
-  })
+  store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
+  cookie: {
+    secure: false, // Set to true if using https
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  }
 }));
 app.use(passport.initialize());
 app.use(passport.session());

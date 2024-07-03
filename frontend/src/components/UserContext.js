@@ -14,6 +14,7 @@ export const UserProvider = ({ children }) => {
     const fetchUser = async () => {
       try {
         const response = await axios.get('/auth/profile');
+        console.log("User data fetched in UserContext:", response.data);
         setUser(response.data);
         console.log("User data set in UserContext:", response.data);
       } catch (error) {

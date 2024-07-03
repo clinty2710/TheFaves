@@ -1,6 +1,6 @@
 // src/components/Profile.js
 
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import LogoutButton from './LogoutButton';
 import { useAuth } from '../AuthContext';
@@ -26,6 +26,7 @@ const Profile = () => {
         console.log("Profile data received:", response.data);
         if (response.data) {
           setUser(response.data);
+          console.log("User data set in useUser:", response.data);
           setError(null);
         } else {
           throw new Error('Failed to fetch profile data');
