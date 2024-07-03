@@ -1,4 +1,7 @@
-// config.js
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://thefaves-8616b810d2fc.herokuapp.com';
+// src/config.js
+
+const API_BASE_URL = process.env.NODE_ENV === 'production'
+  ? 'https://thefaves-8616b810d2fc.herokuapp.com'
+  : 'http://localhost:3000';
 
 export default API_BASE_URL;

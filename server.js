@@ -41,15 +41,15 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 // Set up session and passport with MongoStore
+const sessionSecret = process.env.SESSION_SECRET;
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: sessionSecret,
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
   cookie: {
-    secure: process.env.NODE_ENV === 'production', // Ensure secure cookies in production
-    httpOnly: true,
-    sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax', // Adjust sameSite attribute as needed
+    secure: true, // Set to true if using https
+    sameSite: 'None', // Ensure this is set to 'None' for cross-site cookies
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
 }));
