@@ -14,7 +14,7 @@ const MongoStore = require('connect-mongo');
 const app = express();
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
-app.set('trust proxy', 1); // trust first proxy
+app.set('trust proxy');
 
 // Set up body parsing middleware
 app.use(express.json());
@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
 const corsOptions = {
-  origin: ['https://myfavessite.com', 'http://localhost:3000'],
+  origin: ['https://myfavessite.com', 'http://localhost:3000', 'https://thefaves-8616b810d2fc.herokuapp.com'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   allowedHeaders: 'Content-Type, Authorization'
