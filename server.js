@@ -12,7 +12,7 @@ const { router: authRoutes } = require('./middlewares/auth');
 const favoriteRoutes = require('./routes/Favorites');
 const app = express();
 
-app.set('trust proxy', 1); // Trust first proxy
+app.set('trust proxy', 1); // Trust first proxy/
 
 // Set up body parsing middleware
 app.use(express.json());
