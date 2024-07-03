@@ -13,8 +13,7 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get('/auth/profile');
-        console.log("User data fetched in UserContext:", response.data);
+        const response = await axios.get('/auth/profile', { withCredentials: true });
         setUser(response.data);
         console.log("User data set in UserContext:", response.data);
       } catch (error) {

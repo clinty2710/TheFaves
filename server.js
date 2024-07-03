@@ -46,20 +46,12 @@ app.use(session({
   secret: sessionSecret,
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: process.env.MONGODB_URI,
-    dbName: 'thefaves', // Ensure sessions are stored in the correct database
-    collectionName: 'sessions'
-  }),
+  store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
   cookie: {
-    secure: process.env.NODE_ENV === 'production', // Set to true if using https in production
-    maxAge: 24 * 60 * 60 * 1000, // 24 hours
-    httpOnly: true,
-    sameSite: 'strict' // Helps mitigate CSRF attacks
+    secure: false, // Set to true if using https
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
 }));
-
-// Initialize passport and sessions
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -70,13 +62,11 @@ app.use('/api/favorites', favoriteRoutes);
 // Static files
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
-// Route to fetch profile
-app.get('/auth/profile', (req, res) => {
+app.get('/profile', (req, res) => {
   if (req.isAuthenticated()) {
-    console.log('User is authenticated:', req.user);
-    res.json(req.user);
+    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'profile.html'));
   } else {
-    res.status(401).json({ message: 'Unauthorized' });
+    res.status(401).send('Unauthorized');
   }
 });
 

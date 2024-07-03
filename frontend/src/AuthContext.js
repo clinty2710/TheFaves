@@ -8,13 +8,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const getInitialAuthState = () => {
     const storedValue = localStorage.getItem('isAuthenticated');
-    if (storedValue === null) return false;
-    try {
-      return JSON.parse(storedValue);
-    } catch (error) {
-      console.error('Error parsing isAuthenticated from localStorage', error);
-      return false;
-    }
+    return storedValue === 'true';
   };
 
   const [isAuthenticated, setAuthenticated] = useState(getInitialAuthState);
@@ -22,16 +16,17 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await axios.get('/auth/check-session');
-        if (response.data && typeof response.data.isAuthenticated !== 'undefined') {
-          setAuthenticated(response.data.isAuthenticated);
-          localStorage.setItem('isAuthenticated', JSON.stringify(response.data.isAuthenticated));
+        const response = await axios.get('/auth/check-session', { withCredentials: true });
+        if (response.data && response.data.isAuthenticated) {
+          setAuthenticated(true);
+          localStorage.setItem('isAuthenticated', 'true');
         } else {
-          throw new Error('Invalid response structure');
+          setAuthenticated(false);
+          localStorage.setItem('isAuthenticated', 'false');
         }
       } catch (error) {
         setAuthenticated(false);
-        localStorage.setItem('isAuthenticated', JSON.stringify(false));
+        localStorage.setItem('isAuthenticated', 'false');
         console.error('Error during authentication check:', error);
       }
     };

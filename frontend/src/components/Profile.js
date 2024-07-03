@@ -8,6 +8,7 @@ import SearchMovies from './SearchMovies';
 import SearchMusic from './SearchMusic';
 import SearchBooks from './SearchBooks';
 import { getUserProfile } from '../services/api';
+import axios from 'axios';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const Profile = () => {
@@ -49,7 +50,7 @@ const Profile = () => {
     const fetchUserFavorites = async () => {
       if (user && user._id) {
         try {
-          const response = await axios.get(`/api/favorites/user/${user._id}`);
+          const response = await axios.get(`/api/favorites/user/${user._id}`, { withCredentials: true });
           console.log("User favorites fetched:", response.data);
           setFavorites(response.data);
         } catch (error) {
@@ -66,7 +67,7 @@ const Profile = () => {
   const handleRemoveFavorite = async (id) => {
     try {
       await axios.delete(`/api/favorites/delete/${id}`);
-      setFavorites(favorites.filter(fav => fav.id !== id));
+      setFavorites(favorites.filter(fav => fav._id !== id));
     } catch (error) {
       console.error('Error removing favorite:', error);
     }
@@ -96,10 +97,10 @@ const Profile = () => {
       <SearchMovies favorites={favorites} setFavorites={setFavorites} />
       <div className="favorites-container">
         {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'movie').map(fav => (
-          <div key={fav.id} className="favorite-item">
+          <div key={fav._id} className="favorite-item">
             <img src={fav.movie.poster_path} alt={fav.movie.title} />
             <p>{fav.movie.title}</p>
-            <i className="fas fa-trash-alt delete-icon" onClick={() => handleRemoveFavorite(fav.id)}></i>
+            <i className="fas fa-trash-alt delete-icon" onClick={() => handleRemoveFavorite(fav._id)}></i>
           </div>
         ))}
       </div>
@@ -107,10 +108,10 @@ const Profile = () => {
       <SearchMusic favorites={favorites} setFavorites={setFavorites} />
       <div className="favorites-container">
         {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'music').map(fav => (
-          <div key={fav.id} className="favorite-item">
+          <div key={fav._id} className="favorite-item">
             <img src={fav.music.cover_image} alt={fav.music.title} />
             <p>{fav.music.title}</p>
-            <i className="fas fa-trash-alt delete-icon" onClick={() => handleRemoveFavorite(fav.id)}></i>
+            <i className="fas fa-trash-alt delete-icon" onClick={() => handleRemoveFavorite(fav._id)}></i>
           </div>
         ))}
       </div>
@@ -118,11 +119,11 @@ const Profile = () => {
       <SearchBooks favorites={favorites} setFavorites={setFavorites} />
       <div className="favorites-container">
         {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'book').map(fav => (
-          <div key={fav.id} className="favorite-item">
+          <div key={fav._id} className="favorite-item">
             <img src={fav.book.cover_image} alt={fav.book.title} />
             <p>{fav.book.title}</p>
             <p>{fav.book.author}</p>
-            <i className="fas fa-trash-alt delete-icon" onClick={() => handleRemoveFavorite(fav.id)}></i>
+            <i className="fas fa-trash-alt delete-icon" onClick={() => handleRemoveFavorite(fav._id)}></i>
           </div>
         ))}
       </div>
