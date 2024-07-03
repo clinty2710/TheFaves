@@ -53,7 +53,7 @@ router.get('/profile', ensureAuthenticated, async (req, res) => {
     return res.status(404).json({ message: 'User not found' });
   }
   try {
-    const user = await User.findById(req.user.id); // Updated to findById
+    const user = await User.findById(req.user.id);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }

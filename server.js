@@ -49,7 +49,7 @@ app.use(session({
   cookie: { secure: !isDevelopment },
   store: MongoStore.create({
     mongoUrl: process.env.MONGODB_URI,
-    dbName: 'thefaves'  // Explicitly set the database name
+    dbName: 'thefaves'
   })
 }));
 app.use(passport.initialize());
