@@ -47,9 +47,9 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchUserFavorites = async () => {
-      if (user && user.id) {
+      if (user && user._id) {
         try {
-          const response = await axios.get(`/api/favorites/user/${user.id}`);
+          const response = await axios.get(`/api/favorites/user/${user._id}`);
           console.log("User favorites fetched:", response.data);
           setFavorites(response.data);
         } catch (error) {
