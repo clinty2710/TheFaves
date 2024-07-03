@@ -63,7 +63,7 @@ app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
 app.get('/profile', (req, res) => {
   if (req.isAuthenticated()) {
-    res.sendFile(path.join(__dirname, 'frontend', 'public', 'profile.html'));
+    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'profile.html'));
   } else {
     res.status(401).send('Unauthorized');
   }
