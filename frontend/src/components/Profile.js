@@ -22,7 +22,7 @@ const Profile = () => {
       console.log("Fetching user profile...");
       try {
         setLoading(true);
-        const response = await axios.get('/auth/profile', { withCredentials: true });
+        const response = await axios.get('auth/profile', { withCredentials: true });
         console.log("Profile data received:", response.data);
         if (response.data) {
           setUser(response.data);
