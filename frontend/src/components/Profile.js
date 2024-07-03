@@ -66,7 +66,7 @@ const Profile = () => {
 
   const handleRemoveFavorite = async (id) => {
     try {
-      await axios.delete(`/api/favorites/delete/${id}`);
+      await axios.delete(`/api/favorites/delete/${id}`, { withCredentials: true });
       setFavorites(favorites.filter(fav => fav._id !== id));
     } catch (error) {
       console.error('Error removing favorite:', error);

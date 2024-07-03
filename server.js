@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
 const corsOptions = {
-  origin: ['https://myfavessite.com', 'https://thefaves-8616b810d2fc.herokuapp.com', 'http://localhost:3000'],
+  origin: ['https://myfavessite.com', 'http://localhost:3000'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   allowedHeaders: 'Content-Type, Authorization'
@@ -41,9 +41,8 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 // Set up session and passport with MongoStore
-const sessionSecret = process.env.SESSION_SECRET;
 app.use(session({
-  secret: sessionSecret,
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
