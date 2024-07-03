@@ -1,13 +1,13 @@
 // src/components/Profile.js
 
-import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
-import LogoutButton from './LogoutButton';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../AuthContext';
 import { useUser } from './UserContext';
+import LogoutButton from './LogoutButton';
 import SearchMovies from './SearchMovies';
 import SearchMusic from './SearchMusic';
 import SearchBooks from './SearchBooks';
+import { getUserProfile } from '../services/api';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const Profile = () => {
@@ -22,10 +22,10 @@ const Profile = () => {
       console.log("Fetching user profile...");
       try {
         setLoading(true);
-        const response = await axios.get('auth/profile', { withCredentials: true });
-        console.log("Profile data received:", response.data);
-        if (response.data) {
-          setUser(response.data);
+        const response = await getUserProfile();
+        console.log("Profile data received:", response);
+        if (response) {
+          setUser(response);
           setError(null);
         } else {
           throw new Error('Failed to fetch profile data');
@@ -47,9 +47,9 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchUserFavorites = async () => {
-      if (user && user._id) {  // Changed from user.id to user._id
+      if (user && user._id) {
         try {
-          const response = await axios.get(`/api/favorites/user/${user._id}`, { withCredentials: true });  // Changed from user.id to user._id
+          const response = await axios.get(`/api/favorites/user/${user._id}`);
           console.log("User favorites fetched:", response.data);
           setFavorites(response.data);
         } catch (error) {
@@ -65,7 +65,7 @@ const Profile = () => {
 
   const handleRemoveFavorite = async (id) => {
     try {
-      await axios.delete(`/api/favorites/delete/${id}`, { withCredentials: true });
+      await axios.delete(`/api/favorites/delete/${id}`);
       setFavorites(favorites.filter(fav => fav.id !== id));
     } catch (error) {
       console.error('Error removing favorite:', error);
