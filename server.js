@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
 const corsOptions = {
-  origin: ['https://myfavessite.com', 'https://thefaves-8616b810d2fc.herokuapp.com/', 'http://localhost:3000'],
+  origin: ['https://myfavessite.com', 'http://localhost:3000', 'https://thefaves-8616b810d2fc.herokuapp.com'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   allowedHeaders: 'Content-Type, Authorization'
@@ -47,7 +47,9 @@ app.use(session({
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
   cookie: {
-    secure: false, // Set to true if using https
+    secure: process.env.NODE_ENV === 'production', // Ensure secure cookies in production
+    httpOnly: true,
+    sameSite: 'Lax', // Adjust sameSite attribute as needed
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
 }));
