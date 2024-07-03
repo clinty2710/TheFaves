@@ -36,9 +36,9 @@ passport.serializeUser(function(user, done) {
 });
 
 // Deserialize user from session
-passport.deserializeUser(async function(id, done) {
+passport.deserializeUser(async function(_id, done) {
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(_id);
     done(null, user);
   } catch (err) {
     done(err, null);
