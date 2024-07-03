@@ -6,15 +6,13 @@ const session = require('express-session');
 const passport = require('./config/passport');
 const path = require('path');
 const mongoose = require('mongoose');
-const { ensureAuthenticated } = require('./middlewares/auth');
-const favoriteRoutes = require('./routes/Favorites');
 const cors = require('cors');
 const MongoStore = require('connect-mongo');
-
+const { router: authRoutes } = require('./middlewares/auth');
+const favoriteRoutes = require('./routes/Favorites');
 const app = express();
-const isDevelopment = process.env.NODE_ENV !== 'production';
 
-app.set('trust proxy', 1);
+app.set('trust proxy', 1); // Trust first proxy
 
 // Set up body parsing middleware
 app.use(express.json());
@@ -22,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
 const corsOptions = {
-  origin: ['https://myfavessite.com', 'http://localhost:3000', 'https://thefaves-8616b810d2fc.herokuapp.com'],
+  origin: ['https://myfavessite.com', 'http://localhost:3000'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   allowedHeaders: 'Content-Type, Authorization'
@@ -33,9 +31,7 @@ app.options('*', cors(corsOptions));
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  dbName: 'thefaves',
+  dbName: 'thefaves', // Ensure the correct database name
 }).then(() => {
   console.log('MongoDB connected.');
 }).catch(err => {
@@ -43,30 +39,34 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 // Set up session and passport with MongoStore
-const sessionSecret = process.env.SESSION_SECRET;
 app.use(session({
-  secret: sessionSecret,
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
   cookie: {
-    secure: true, // Set to true since you are using HTTPS
-    sameSite: 'none', // Ensure cookies are sent cross-origin
+    secure: true, // Ensure this is true for HTTPS
+    sameSite: 'none', // Ensure cross-site cookies are allowed
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.use('/auth', require('./routes/auth'));
+app.use('/auth', authRoutes);
 app.use('/api/favorites', favoriteRoutes);
 
 // Static files
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
-app.get('/profile', ensureAuthenticated, (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'profile.html'));
+app.get('/profile', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'profile.html'));
+  } else {
+    res.status(401).send('Unauthorized');
+  }
 });
 
 app.get('*', (req, res) => {
@@ -77,12 +77,6 @@ app.get('*', (req, res) => {
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
-});
-
-app.use((req, res, next) => {
-  console.log('Session ID:', req.sessionID);
-  console.log('Session:', req.session);
-  next();
 });
 
 // Start server
