@@ -7,6 +7,14 @@ const ensureAuthenticated = require('./ensureAuthenticated');
 
 const router = express.Router();
 
+const ensureAuthenticated = (req, res, next) => {
+  console.log('Checking authentication status:', req.isAuthenticated());
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.status(401).json({ message: 'Unauthorized' });
+};
+
 router.post('/register', async (req, res) => {
   console.log('Register route hit');
   const { email, password, nickname } = req.body;
@@ -35,7 +43,7 @@ router.post('/login', (req, res, next) => {
       if (err) {
         return next(err);
       }
-      console.log('Login successful, session ID:', req.sessionID);
+      console.log('User logged in successfully:', user);
       return res.json({ success: true, message: 'Authentication successful', user: user });
     });
   })(req, res, next);
@@ -47,11 +55,11 @@ router.get('/profile', ensureAuthenticated, async (req, res) => {
     return res.status(404).json({ message: 'User not found' });
   }
   try {
-    const user = await User.findById(req.user._id); // Updated to findById
+    const user = await User.findById(req.user._id); // Ensure correct ID field
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    res.json({ id: user._id, nickname: user.nickname, email: user.email });
+    res.json({ _id: user._id, nickname: user.nickname, email: user.email });
   } catch (error) {
     console.error('Error fetching user profile:', error);
     res.status(500).json({ message: 'Internal server error' });
@@ -76,6 +84,7 @@ router.post('/logout', (req, res) => {
 });
 
 router.get('/check-session', (req, res) => {
+  console.log('Check session status:', req.isAuthenticated());
   if (req.isAuthenticated()) {
     return res.json({ isAuthenticated: true });
   } else {

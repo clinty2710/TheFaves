@@ -14,6 +14,9 @@ const MongoStore = require('connect-mongo');
 const app = express();
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
+// Trust the first proxy
+app.set('trust proxy', 1); // Trust first proxy
+
 // Set up body parsing middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -31,7 +34,7 @@ app.options('*', cors(corsOptions));
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
-  dbName: 'thefaves', // Ensure the correct database name
+  dbName: 'thefaves',
 }).then(() => {
   console.log('MongoDB connected.');
 }).catch(err => {
@@ -52,7 +55,6 @@ app.use(session({
   }
 }));
 
-// Initialize Passport and restore authentication state, if any, from the session.
 app.use(passport.initialize());
 app.use(passport.session());
 
