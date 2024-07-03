@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
 const corsOptions = {
-  origin: ['https://thefaves-8616b810d2fc.herokuapp.com', 'https://myfavessite.com', 'http://localhost:3000'],
+  origin: ['https://myfavessite.com', 'http://localhost:3000'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   allowedHeaders: 'Content-Type, Authorization'
@@ -33,7 +33,7 @@ app.options('*', cors(corsOptions));
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  dbName: 'thefaves', // Ensure the correct database name
+  dbName: 'thefaves',
 }).then(() => {
   console.log('MongoDB connected.');
 }).catch(err => {
@@ -48,8 +48,8 @@ app.use(session({
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
   cookie: {
-    secure: true, // Set to true if using https
-    sameSite: 'None', // Ensure this is set to 'None' for cross-site cookies
+    secure: true, // Ensure it's true for HTTPS
+    sameSite: 'None', // Set SameSite to 'None' for cross-origin requests
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
 }));
