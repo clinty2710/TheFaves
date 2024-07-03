@@ -43,6 +43,8 @@ router.post('/login', (req, res, next) => {
         return next(err);
       }
       console.log('User logged in successfully:', user);
+      console.log('Session ID:', req.sessionID);
+      console.log('Session:', req.session);
       return res.json({ success: true, message: 'Authentication successful', user: user });
     });
   })(req, res, next);
@@ -50,6 +52,8 @@ router.post('/login', (req, res, next) => {
 
 router.get('/profile', ensureAuthenticated, async (req, res) => {
   console.log('Profile route hit');
+  console.log('Session ID:', req.sessionID);
+  console.log('Session:', req.session);
   if (!req.user || !req.user._id) {
     return res.status(404).json({ message: 'User not found' });
   }

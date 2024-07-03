@@ -6,13 +6,13 @@ const session = require('express-session');
 const passport = require('./config/passport');
 const path = require('path');
 const mongoose = require('mongoose');
-const authMiddleware = require('./middlewares/auth');
-const favoriteRoutes = require('./routes/Favorites');
 const cors = require('cors');
 const MongoStore = require('connect-mongo');
-
+const { router: authRoutes } = require('./middlewares/auth');
+const favoriteRoutes = require('./routes/Favorites');
 const app = express();
-const isDevelopment = process.env.NODE_ENV !== 'production';
+
+app.set('trust proxy', 1); // Trust first proxy/
 
 // Set up body parsing middleware
 app.use(express.json());
@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
 const corsOptions = {
-  origin: ['https://myfavessite.com', 'http://localhost:3000'],
+  origin: ['https://myfavessite.com', 'http://localhost:3000', 'https://thefaves-8616b810d2fc.herokuapp.com'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   allowedHeaders: 'Content-Type, Authorization'
@@ -39,24 +39,23 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 // Set up session and passport with MongoStore
-const sessionSecret = process.env.SESSION_SECRET;
 app.use(session({
-  secret: sessionSecret,
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
   cookie: {
-    secure: true, // Ensure secure cookies
-    httpOnly: true,
-    sameSite: 'None', // Set SameSite to None for cross-site cookies
+    secure: true, // Ensure this is true for HTTPS
+    sameSite: 'none', // Ensure cross-site cookies are allowed
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.use('/auth', authMiddleware.router);
+app.use('/auth', authRoutes);
 app.use('/api/favorites', favoriteRoutes);
 
 // Static files
