@@ -70,11 +70,13 @@ app.use('/api/favorites', favoriteRoutes);
 // Static files
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
-app.get('/profile', (req, res) => {
+// Route to fetch profile
+app.get('/auth/profile', (req, res) => {
   if (req.isAuthenticated()) {
-    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'profile.html'));
+    console.log('User is authenticated:', req.user);
+    res.json(req.user);
   } else {
-    res.status(401).send('Unauthorized');
+    res.status(401).json({ message: 'Unauthorized' });
   }
 });
 
