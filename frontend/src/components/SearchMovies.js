@@ -27,14 +27,14 @@ const SearchMovies = ({ favorites, setFavorites }) => {
     };
 
     const handleAddToFavorites = async (movie) => {
-        if (!user || !user.id) {
+        if (!user || !user._id) {
             console.error('No user logged in or user ID is missing');
             return;
         }
         try {
             console.log('Attempting to add movie to favorites:', movie);
             const { data } = await axios.post('/api/favorites/add', {
-                user_Id: user.id,
+                user_Id: user._id,
                 item_Id: movie.value,
                 item_Type: 'movie',
                 movieId: movie.value,

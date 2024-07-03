@@ -39,13 +39,13 @@ const SearchBooks = ({ favorites, setFavorites }) => {
     };
 
     const handleAddToFavorites = async (book) => {
-        if (!user || !user.id) {
+        if (!user || !user._id) {
             console.error('No user logged in or user ID is missing');
             return;
         }
         try {
             const { data } = await axios.post('/api/favorites/add', {
-                user_Id: user.id,
+                user_Id: user._id,
                 item_Id: book.value,
                 item_Type: 'book',
                 bookId: book.value,

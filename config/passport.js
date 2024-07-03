@@ -32,7 +32,7 @@ async function(email, password, done) {
 
 // Serialize user to store in session
 passport.serializeUser(function(user, done) {
-  done(null, user.id);
+  done(null, user._id);
 });
 
 // Deserialize user from session

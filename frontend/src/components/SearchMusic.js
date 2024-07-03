@@ -35,13 +35,13 @@ const SearchMusic = ({ favorites, setFavorites }) => {
     };
 
     const handleAddToFavorites = async (music) => {
-        if (!user || !user.id) {
+        if (!user || !user._id) {
             console.error('No user logged in or user ID is missing');
             return;
         }
         try {
             const { data } = await axios.post('/api/favorites/add', {
-                user_Id: user.id,
+                user_Id: user._id,
                 item_Id: music.value,
                 item_Type: 'music',
                 musicId: music.value,
