@@ -31,9 +31,7 @@ app.options('*', cors(corsOptions));
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  dbName: 'thefaves',
+  dbName: 'thefaves', // Ensure the correct database name
 }).then(() => {
   console.log('MongoDB connected.');
 }).catch(err => {
@@ -53,6 +51,8 @@ app.use(session({
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
 }));
+
+// Initialize Passport and restore authentication state, if any, from the session.
 app.use(passport.initialize());
 app.use(passport.session());
 
