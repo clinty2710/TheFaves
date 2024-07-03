@@ -43,15 +43,15 @@ router.post('/login', (req, res, next) => {
 
 router.get('/profile', ensureAuthenticated, async (req, res) => {
   console.log('Profile route hit');
-  if (!req.user || !req.user.id) {
+  if (!req.user || !req.user._id) {
     return res.status(404).json({ message: 'User not found' });
   }
   try {
-    const user = await User.findById(req.user.id); // Updated to findById
+    const user = await User.findById(req.user._id); // Updated to findById
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    res.json({ id: user.id, nickname: user.nickname, email: user.email });
+    res.json({ id: user._id, nickname: user.nickname, email: user.email });
   } catch (error) {
     console.error('Error fetching user profile:', error);
     res.status(500).json({ message: 'Internal server error' });
