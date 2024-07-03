@@ -43,15 +43,23 @@ mongoose.connect(process.env.MONGODB_URI, {
 // Set up session and passport with MongoStore
 const sessionSecret = process.env.SESSION_SECRET;
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: sessionSecret,
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGODB_URI,
+    dbName: 'thefaves', // Ensure sessions are stored in the correct database
+    collectionName: 'sessions'
+  }),
   cookie: {
-    secure: false, // Set to true if using https
-    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+    secure: process.env.NODE_ENV === 'production', // Set to true if using https in production
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    httpOnly: true,
+    sameSite: 'strict' // Helps mitigate CSRF attacks
   }
 }));
+
+// Initialize passport and sessions
 app.use(passport.initialize());
 app.use(passport.session());
 

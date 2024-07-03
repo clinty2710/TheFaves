@@ -1,18 +1,11 @@
-// middlewares/auth.js
+// Middlewares/auth.js
 
 const express = require('express');
 const passport = require('passport');
 const User = require('../models/user');
-const path = require('path');
+const ensureAuthenticated = require('./ensureAuthenticated');
 
 const router = express.Router();
-
-const ensureAuthenticated = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.status(401).json({ message: 'Unauthorized' });
-};
 
 router.post('/register', async (req, res) => {
   console.log('Register route hit');
@@ -42,6 +35,7 @@ router.post('/login', (req, res, next) => {
       if (err) {
         return next(err);
       }
+      console.log('Login successful, session ID:', req.sessionID);
       return res.json({ success: true, message: 'Authentication successful', user: user });
     });
   })(req, res, next);
@@ -49,16 +43,15 @@ router.post('/login', (req, res, next) => {
 
 router.get('/profile', ensureAuthenticated, async (req, res) => {
   console.log('Profile route hit');
-  if (!req.user || !req.user._id) {
+  if (!req.user || !req.user.id) {
     return res.status(404).json({ message: 'User not found' });
   }
   try {
-    const user = await User.findById(req.user._id);
+    const user = await User.findById(req.user.id); // Updated to findById
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    console.log('User data sent from profile route:', user);
-    res.json({ id: user._id, nickname: user.nickname, email: user.email });
+    res.json({ id: user.id, nickname: user.nickname, email: user.email });
   } catch (error) {
     console.error('Error fetching user profile:', error);
     res.status(500).json({ message: 'Internal server error' });
