@@ -36,7 +36,7 @@ router.get('/movies/search', async (req, res) => {
 });
 
 router.post('/add', async (req, res) => {
-  const { user_Id, item_Id, item_Type, movieId, movieTitle, posterPath, musicId, musicTitle, coverImage, bookId, bookTitle, author } = req.body;
+  const { user_Id, item_Type, movieId, movieTitle, posterPath, musicId, musicTitle, coverImage, bookId, bookTitle, author } = req.body;
   
   try {
     console.log('Add favorite request body:', req.body);
@@ -130,9 +130,7 @@ router.get('/user/:userId', async (req, res) => {
 
   try {
     const favorites = await Favorite.find({ user_Id: userId })
-      .populate('movie')
-      .populate('music')
-      .populate('book')
+      .populate({ path: 'item_Id', select: 'title release_date poster_path' })
       .exec();
 
     console.log('Fetched favorites:', favorites);
