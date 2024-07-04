@@ -20,9 +20,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
 const corsOptions = {
-  origin: ['https://myfavessite.com'],
+  origin: ['https://myfavessite.com', 'https://thefaves-8616b810d2fc.herokuapp.com'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
+  credentials: true,  // Allow credentials
   allowedHeaders: 'Content-Type, Authorization'
 };
 
