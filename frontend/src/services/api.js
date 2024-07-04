@@ -5,6 +5,7 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+axios.defaults.baseURL = API_BASE_URL;
 
 // Helper function to ensure no double slashes in URLs
 const constructURL = (path) => `${API_BASE_URL}${path.startsWith('/') ? '' : '/'}${path}`;
@@ -34,12 +35,10 @@ export const loginUser = async (userData) => {
 // Function to fetch the user profile
 export const getUserProfile = async () => {
   try {
-    const response = await axios.get(constructURL('/auth/profile'), {
-      withCredentials: true
-    });
+    const response = await axios.get('/auth/profile');
     return response.data;
   } catch (error) {
-    console.error('Failed to fetch profile:', error);
+    console.error('Error fetching profile:', error);
     throw error;
   }
 };
