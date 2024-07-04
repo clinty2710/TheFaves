@@ -19,6 +19,6 @@ const bookSchema = new mongoose.Schema({
   cover_image: {
     type: String
   }
-}, { _id: false });
+});
 
 module.exports = mongoose.model('Book', bookSchema);

@@ -3,6 +3,11 @@
 const mongoose = require('mongoose');
 
 const movieSchema = new mongoose.Schema({
+  _id: {
+    type: String,
+    required: true,
+    unique: true
+  },
   title: {
     type: String,
     required: true
