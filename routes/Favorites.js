@@ -19,7 +19,6 @@ const musicApiClient = axios.create({
 
 // Route to search movies using TMDB API
 router.get('/movies/search', async (req, res) => {
-  console.log('Movies search route hit');
   const { query } = req.query;
   if (!query) {
     return res.status(400).json({ message: "Query parameter is required." });
@@ -29,7 +28,6 @@ router.get('/movies/search', async (req, res) => {
       params: { query, include_adult: false, language: 'en-US' },
       headers: { 'Authorization': API_TOKEN, 'Accept': 'application/json' }
     });
-    console.log("TMDB Response:", response.data);
     res.json(response.data.results);
   } catch (error) {
     console.error('Search API error:', error);
@@ -38,19 +36,19 @@ router.get('/movies/search', async (req, res) => {
 });
 
 router.post('/add', async (req, res) => {
-  console.log('Add favorite route hit');
   const { user_Id, item_Id, item_Type, movieId, movieTitle, posterPath, musicId, musicTitle, coverImage, bookId, bookTitle, author } = req.body;
-  console.log("Adding a new favorite:", req.body);
-
+  
   try {
+    console.log('Add favorite request body:', req.body);
+
     if (item_Type === 'movie') {
-      console.log("Processing movie favorite");
+      console.log('Processing movie favorite');
       const movieDetailsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
         params: { language: 'en-US' },
         headers: { 'Authorization': API_TOKEN, 'Accept': 'application/json' }
       });
       const movieDetails = movieDetailsResponse.data;
-      console.log("Fetched movie details:", movieDetails);
+      console.log('Fetched movie details:', movieDetails);
 
       let movie = await Movie.findOne({ _id: movieId });
       if (!movie) {
@@ -61,7 +59,7 @@ router.post('/add', async (req, res) => {
           poster_path: posterPath,
         });
         await movie.save();
-        console.log("Inserted new movie into movies collection:", movie);
+        console.log('Saved new movie to database:', movie);
       }
 
       const newFavorite = new Favorite({
@@ -70,11 +68,11 @@ router.post('/add', async (req, res) => {
         item_Type: item_Type,
       });
       await newFavorite.save();
-      console.log("Inserted new favorite into favorites collection:", newFavorite);
+      console.log('Saved new favorite to database:', newFavorite);
       res.status(201).json(newFavorite);
 
     } else if (item_Type === 'music') {
-      console.log("Processing music favorite");
+      console.log('Processing music favorite');
       let music = await Music.findOne({ _id: musicId });
       if (!music) {
         music = new Music({
@@ -84,7 +82,7 @@ router.post('/add', async (req, res) => {
           artist: musicTitle.split(' by ')[1] || ''
         });
         await music.save();
-        console.log("Inserted new music into music collection:", music);
+        console.log('Saved new music to database:', music);
       }
 
       const newFavorite = new Favorite({
@@ -93,11 +91,11 @@ router.post('/add', async (req, res) => {
         item_Type: item_Type,
       });
       await newFavorite.save();
-      console.log("Inserted new favorite into favorites collection:", newFavorite);
+      console.log('Saved new favorite to database:', newFavorite);
       res.status(201).json(newFavorite);
 
     } else if (item_Type === 'book') {
-      console.log("Processing book favorite");
+      console.log('Processing book favorite');
       let book = await Book.findOne({ _id: bookId });
       if (!book) {
         book = new Book({
@@ -107,7 +105,7 @@ router.post('/add', async (req, res) => {
           cover_image: coverImage
         });
         await book.save();
-        console.log("Inserted new book into books collection:", book);
+        console.log('Saved new book to database:', book);
       }
 
       const newFavorite = new Favorite({
@@ -116,7 +114,7 @@ router.post('/add', async (req, res) => {
         item_Type: item_Type,
       });
       await newFavorite.save();
-      console.log("Inserted new favorite into favorites collection:", newFavorite);
+      console.log('Saved new favorite to database:', newFavorite);
       res.status(201).json(newFavorite);
     }
   } catch (error) {
@@ -137,7 +135,7 @@ router.get('/user/:userId', async (req, res) => {
       .populate('book')
       .exec();
 
-    console.log("Fetched favorites:", favorites);
+    console.log('Fetched favorites:', favorites);
     res.json(favorites);
   } catch (error) {
     console.error('Failed to fetch favorites:', error);
@@ -163,7 +161,6 @@ router.delete('/delete/:id', async (req, res) => {
 
     const remainingFavorites = await Favorite.countDocuments({ item_Id: itemId });
     if (remainingFavorites === 0) {
-      // No more references to this item, safe to delete from the respective collection
       if (itemType === 'movie') {
         await Movie.deleteOne({ _id: itemId });
       } else if (itemType === 'music') {
@@ -173,7 +170,6 @@ router.delete('/delete/:id', async (req, res) => {
       }
     }
 
-    console.log(`Deleted favorite and possibly item ${itemId} of type ${itemType}`);
     res.status(200).json({ message: 'Favorite deleted successfully' });
   } catch (error) {
     console.error('Failed to delete favorite:', error);
@@ -183,7 +179,6 @@ router.delete('/delete/:id', async (req, res) => {
 
 // Route to search music using Spotify API
 router.get('/music/search', async (req, res) => {
-  console.log('Music search route hit');
   const { query } = req.query;
   if (!query) {
     return res.status(400).json({ message: "Query parameter is required." });
@@ -207,7 +202,6 @@ router.get('/music/search', async (req, res) => {
 
 // Proxy route for Google Books API
 router.get('/books/search', async (req, res) => {
-  console.log('Books search route hit');
   const { query } = req.query;
   if (!query) {
     return res.status(400).json({ message: "Query parameter is required." });
