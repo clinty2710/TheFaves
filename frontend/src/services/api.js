@@ -35,10 +35,12 @@ export const loginUser = async (userData) => {
 // Function to fetch the user profile
 export const getUserProfile = async () => {
   try {
-    const response = await axios.get('/auth/profile');
+    const response = await axios.get(constructURL('/auth/profile'), {
+      withCredentials: true
+    });
     return response.data;
   } catch (error) {
-    console.error('Error fetching profile:', error);
+    console.error('Failed to fetch profile:', error);
     throw error;
   }
 };
