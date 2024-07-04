@@ -1,7 +1,7 @@
 // routes/Favorites.js
 
 const express = require('express');
-const { Favorite, Movie, Music, Book } = require('../models');
+const { Favorite, Movie, Music, Book } = require('../models'); // Ensure models are correctly imported
 const router = express.Router();
 const axios = require('axios');
 
@@ -52,7 +52,6 @@ router.post('/add', async (req, res) => {
 
   try {
     if (item_Type === 'movie') {
-      // Fetch movie details from TMDB to get release_date
       const movieDetailsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
         params: { language: 'en-US' },
         headers: {
@@ -63,10 +62,8 @@ router.post('/add', async (req, res) => {
       const movieDetails = movieDetailsResponse.data;
       console.log("Fetched movie details:", movieDetails);
 
-      // Check if the movie already exists in the movies table
-      let movie = await Movie.findOne({ _id: movieId });
+      let movie = await Movie.findOne({ id: movieId });
       if (!movie) {
-        // If the movie doesn't exist, insert it into the movies table
         movie = new Movie({
           _id: movieId,
           title: movieTitle,
@@ -74,25 +71,22 @@ router.post('/add', async (req, res) => {
           poster_path: posterPath,
         });
         await movie.save();
-        console.log("Inserted new movie into movies collection:", movie);
+        console.log("Inserted new movie into movies table:", movie);
       }
 
-      // Insert the favorite into the favorites collection
       const newFavorite = new Favorite({
         user_Id,
         item_Id: movieId,
         item_Type: item_Type,
       });
       await newFavorite.save();
-      console.log("Inserted new favorite into favorites collection:", newFavorite);
+      console.log("Inserted new favorite into favorites table:", newFavorite);
 
       res.status(201).json(newFavorite);
 
     } else if (item_Type === 'music') {
-      // Check if the music already exists in the music collection
-      let music = await Music.findOne({ _id: musicId });
+      let music = await Music.findOne({ id: musicId });
       if (!music) {
-        // If the music doesn't exist, insert it into the music collection
         music = new Music({
           _id: musicId,
           title: musicTitle,
@@ -100,25 +94,22 @@ router.post('/add', async (req, res) => {
           artist: musicTitle.split(' by ')[1] || ''
         });
         await music.save();
-        console.log("Inserted new music into music collection:", music);
+        console.log("Inserted new music into music table:", music);
       }
 
-      // Insert the favorite into the favorites collection
       const newFavorite = new Favorite({
         user_Id,
         item_Id: musicId,
         item_Type: item_Type,
       });
       await newFavorite.save();
-      console.log("Inserted new favorite into favorites collection:", newFavorite);
+      console.log("Inserted new favorite into favorites table:", newFavorite);
 
       res.status(201).json(newFavorite);
 
     } else if (item_Type === 'book') {
-      // Check if the book already exists in the books collection
-      let book = await Book.findOne({ _id: bookId });
+      let book = await Book.findOne({ id: bookId });
       if (!book) {
-        // If the book doesn't exist, insert it into the books collection
         book = new Book({
           _id: bookId,
           title: bookTitle.split(' by ')[0],
@@ -126,17 +117,16 @@ router.post('/add', async (req, res) => {
           cover_image: coverImage
         });
         await book.save();
-        console.log("Inserted new book into books collection:", book);
+        console.log("Inserted new book into books table:", book);
       }
 
-      // Insert the favorite into the favorites collection
       const newFavorite = new Favorite({
         user_Id,
         item_Id: bookId,
         item_Type: item_Type,
       });
       await newFavorite.save();
-      console.log("Inserted new favorite into favorites collection:", newFavorite);
+      console.log("Inserted new favorite into favorites table:", newFavorite);
 
       res.status(201).json(newFavorite);
     }
@@ -152,7 +142,12 @@ router.get('/user/:userId', async (req, res) => {
   console.log(`Fetching favorites for user ${userId}`);
 
   try {
-    const favorites = await Favorite.find({ user_Id: userId }).populate('item_Id');
+    const favorites = await Favorite.find({ user_Id: userId })
+      .populate('movie')
+      .populate('music')
+      .populate('book')
+      .exec();
+
     res.json(favorites);
   } catch (error) {
     console.error('Failed to fetch favorites:', error);
@@ -171,15 +166,13 @@ router.delete('/delete/:id', async (req, res) => {
       return res.status(404).json({ message: 'Favorite not found' });
     }
 
-    const itemId = favorite.item_Id; // Get the item ID before deleting the favorite
+    const itemId = favorite.item_Id;
     const itemType = favorite.item_Type;
 
-    await favorite.deleteOne();
+    await favorite.remove();
 
-    // Check if the item is still referenced in the Favorites collection
     const remainingFavorites = await Favorite.countDocuments({ item_Id: itemId });
     if (remainingFavorites === 0) {
-      // No more references to this item, safe to delete from the respective collection
       if (itemType === 'movie') {
         await Movie.deleteOne({ _id: itemId });
       } else if (itemType === 'music') {
