@@ -13,11 +13,8 @@ const SearchBooks = ({ favorites, setFavorites }) => {
     useEffect(() => {
         if (inputValue.length > 2) {
             const delayDebounce = setTimeout(() => {
-                axios.get(`https://www.googleapis.com/books/v1/volumes`, {
-                    params: {
-                        q: inputValue,
-                        key: process.env.REACT_APP_GOOGLE_BOOKS_API_KEY
-                    }
+                axios.get('/api/favorites/books/search', {
+                    params: { query: inputValue }
                 }).then(response => {
                     const data = response.data.items.map(item => ({
                         value: item.id,

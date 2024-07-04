@@ -185,4 +185,25 @@ router.get('/music/search', async (req, res) => {
   }
 });
 
+// Proxy route for Google Books API
+router.get('/books/search', async (req, res) => {
+  const { query } = req.query;
+  if (!query) {
+    return res.status(400).json({ message: "Query parameter is required." });
+  }
+
+  try {
+    const response = await axios.get(`https://www.googleapis.com/books/v1/volumes`, {
+      params: {
+        q: query,
+        key: process.env.REACT_APP_GOOGLE_BOOKS_API_KEY
+      }
+    });
+    res.json(response.data);
+  } catch (error) {
+    console.error('Google Books API error:', error);
+    res.status(500).json({ message: "Failed to fetch books", error: error.message });
+  }
+});
+
 module.exports = router;
