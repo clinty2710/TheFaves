@@ -14,6 +14,7 @@ const favoriteSchema = new mongoose.Schema({
   },
   item_Type: {
     type: String,
+    enum: ['book', 'movie', 'music'], // Optional: to enforce valid types
     required: true
   }
 });

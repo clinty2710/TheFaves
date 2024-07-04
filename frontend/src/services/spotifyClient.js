@@ -24,10 +24,15 @@ export const searchMusic = async (query) => {
         numberOfTopResults: '5',
       },
     });
-    return response.data;
+    // Process the response to match your application's expected format
+    return response.data.tracks.items.map(track => ({
+      label: `${track.name} by ${track.artists.map(artist => artist.name).join(', ')}`,
+      value: track.id,
+      poster: track.album.images[0].url,
+    }));
   } catch (error) {
     console.error('Error searching music:', error);
-    throw error;
+    return [];
   }
 };
 

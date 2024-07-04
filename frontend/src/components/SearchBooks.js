@@ -66,8 +66,8 @@ const SearchBooks = ({ favorites, setFavorites }) => {
                 onInputChange={handleInputChange}
                 onChange={handleAddToFavorites}
                 options={options}
-                placeholder="Search movies..."
-                noOptionsMessage={() => 'No movies found'}
+                placeholder="Search books..."
+                noOptionsMessage={() => 'No books found'}
                 isLoading={inputValue && options.length === 0}
             />
         </div>

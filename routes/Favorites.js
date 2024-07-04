@@ -64,73 +64,79 @@ router.post('/add', async (req, res) => {
       console.log("Fetched movie details:", movieDetails);
 
       // Check if the movie already exists in the movies table
-      let movie = await Movie.findOne({ where: { id: movieId } });
+      let movie = await Movie.findOne({ _id: movieId });
       if (!movie) {
         // If the movie doesn't exist, insert it into the movies table
-        movie = await Movie.create({
-          id: movieId,
+        movie = new Movie({
+          _id: movieId,
           title: movieTitle,
           release_date: movieDetails.release_date || null,
           poster_path: posterPath,
         });
-        console.log("Inserted new movie into movies table:", movie);
+        await movie.save();
+        console.log("Inserted new movie into movies collection:", movie);
       }
 
-      // Insert the favorite into the favorites table
-      const newFavorite = await Favorite.create({
+      // Insert the favorite into the favorites collection
+      const newFavorite = new Favorite({
         user_Id,
         item_Id: movieId,
         item_Type: item_Type,
       });
-      console.log("Inserted new favorite into favorites table:", newFavorite);
+      await newFavorite.save();
+      console.log("Inserted new favorite into favorites collection:", newFavorite);
 
       res.status(201).json(newFavorite);
 
     } else if (item_Type === 'music') {
-      // Check if the music already exists in the music table
-      let music = await Music.findOne({ where: { id: musicId } });
+      // Check if the music already exists in the music collection
+      let music = await Music.findOne({ _id: musicId });
       if (!music) {
-        // If the music doesn't exist, insert it into the music table
-        music = await Music.create({
-          id: musicId,
+        // If the music doesn't exist, insert it into the music collection
+        music = new Music({
+          _id: musicId,
           title: musicTitle,
           cover_image: coverImage,
           artist: musicTitle.split(' by ')[1] || ''
         });
-        console.log("Inserted new music into music table:", music);
+        await music.save();
+        console.log("Inserted new music into music collection:", music);
       }
 
-      // Insert the favorite into the favorites table
-      const newFavorite = await Favorite.create({
+      // Insert the favorite into the favorites collection
+      const newFavorite = new Favorite({
         user_Id,
         item_Id: musicId,
         item_Type: item_Type,
       });
-      console.log("Inserted new favorite into favorites table:", newFavorite);
+      await newFavorite.save();
+      console.log("Inserted new favorite into favorites collection:", newFavorite);
 
       res.status(201).json(newFavorite);
 
     } else if (item_Type === 'book') {
-      // Check if the book already exists in the books table
-      let book = await Book.findOne({ where: { id: bookId } });
+      // Check if the book already exists in the books collection
+      let book = await Book.findOne({ _id: bookId });
       if (!book) {
-        // If the book doesn't exist, insert it into the books table
-        book = await Book.create({
-          id: bookId,
+        // If the book doesn't exist, insert it into the books collection
+        book = new Book({
+          _id: bookId,
           title: bookTitle.split(' by ')[0],
           author: author,
           cover_image: coverImage
         });
-        console.log("Inserted new book into books table:", book);
+        await book.save();
+        console.log("Inserted new book into books collection:", book);
       }
 
-      // Insert the favorite into the favorites table
-      const newFavorite = await Favorite.create({
+      // Insert the favorite into the favorites collection
+      const newFavorite = new Favorite({
         user_Id,
         item_Id: bookId,
         item_Type: item_Type,
       });
-      console.log("Inserted new favorite into favorites table:", newFavorite);
+      await newFavorite.save();
+      console.log("Inserted new favorite into favorites collection:", newFavorite);
 
       res.status(201).json(newFavorite);
     }
@@ -146,24 +152,7 @@ router.get('/user/:userId', async (req, res) => {
   console.log(`Fetching favorites for user ${userId}`);
 
   try {
-    const favorites = await Favorite.findAll({
-      where: { user_Id: userId },
-      include: [
-        {
-          model: Movie,
-          as: 'movie', // This should match the alias used in the association
-        },
-        {
-          model: Music,
-          as: 'music', // This should match the alias used in the association
-        },
-        {
-          model: Book,
-          as: 'book', // This should match the alias used in the association
-        }
-      ]
-    });
-
+    const favorites = await Favorite.find({ user_Id: userId }).populate('item_Id');
     res.json(favorites);
   } catch (error) {
     console.error('Failed to fetch favorites:', error);
@@ -177,7 +166,7 @@ router.delete('/delete/:id', async (req, res) => {
   console.log(`Deleting favorite with id ${id}`);
 
   try {
-    const favorite = await Favorite.findByPk(id);
+    const favorite = await Favorite.findById(id);
     if (!favorite) {
       return res.status(404).json({ message: 'Favorite not found' });
     }
@@ -185,18 +174,18 @@ router.delete('/delete/:id', async (req, res) => {
     const itemId = favorite.item_Id; // Get the item ID before deleting the favorite
     const itemType = favorite.item_Type;
 
-    await favorite.destroy();
+    await favorite.deleteOne();
 
-    // Check if the item is still referenced in the Favorites table
-    const remainingFavorites = await Favorite.count({ where: { item_Id: itemId } });
+    // Check if the item is still referenced in the Favorites collection
+    const remainingFavorites = await Favorite.countDocuments({ item_Id: itemId });
     if (remainingFavorites === 0) {
-      // No more references to this item, safe to delete from the respective table
+      // No more references to this item, safe to delete from the respective collection
       if (itemType === 'movie') {
-        await Movie.destroy({ where: { id: itemId } });
+        await Movie.deleteOne({ _id: itemId });
       } else if (itemType === 'music') {
-        await Music.destroy({ where: { id: itemId } });
+        await Music.deleteOne({ _id: itemId });
       } else if (itemType === 'book') {
-        await Book.destroy({ where: { id: itemId } });
+        await Book.deleteOne({ _id: itemId });
       }
     }
 

@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 const bookSchema = new mongoose.Schema({
-  id: {
+  _id: {
     type: String,
     required: true,
     unique: true
@@ -19,6 +19,6 @@ const bookSchema = new mongoose.Schema({
   cover_image: {
     type: String
   }
-});
+}, { _id: false });
 
 module.exports = mongoose.model('Book', bookSchema);

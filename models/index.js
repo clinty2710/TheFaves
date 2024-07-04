@@ -30,7 +30,7 @@ fs.readdirSync(__dirname)
     );
   })
   .forEach(file => {
-    const model = require(path.join(__dirname, file))(mongoose);
+    const model = require(path.join(__dirname, file));
     db[model.modelName] = model;
   });
 

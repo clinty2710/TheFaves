@@ -23,7 +23,14 @@ const searchMovies = async (query, page = 1) => {
                 language: 'en-US'
             }
         });
+
         return response.data.results.map(movie => ({
+            _id: movie.id,  // using TMDB id as MongoDB _id
+            title: movie.title,
+            release_date: movie.release_date,
+            poster_path: movie.poster_path,
+            overview: movie.overview,
+            vote_average: movie.vote_average,
             label: `${movie.title} (${movie.release_date ? movie.release_date.split('-')[0] : 'Unknown'})`,
             value: movie.id,
             poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}`
