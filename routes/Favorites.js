@@ -156,7 +156,7 @@ router.delete('/delete/:id', async (req, res) => {
       return res.status(404).json({ message: 'Favorite not found' });
     }
 
-    const itemId = favorite.item_Id; // Get the item ID before deleting the favorite
+    const itemId = favorite.item_Id;
     const itemType = favorite.item_Type;
 
     await favorite.remove();
