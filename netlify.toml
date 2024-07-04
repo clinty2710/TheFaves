@@ -7,8 +7,8 @@
   to = "/index.html"
   status = 200
 
-[context.development.environment]
-  NODE_ENV = "development"
+[context.production.environment]
+  NODE_ENV = "production"
   SESSION_SECRET = "NvzxTlKV6DTv3RZn67Vgt2eYdQHKjzzAh0znx+eR0rQ="
   REACT_APP_API_BASE_URL = "https://thefaves-8616b810d2fc.herokuapp.com"
   MONGODB_URI = "mongodb+srv://clinty2710:Studman081@thefaves.2hunxaq.mongodb.net/thefaves?retryWrites=true&w=majority&appName=TheFaves"

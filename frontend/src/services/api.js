@@ -1,12 +1,13 @@
 // src/services/api.js
 
 import axios from 'axios';
-import API_BASE_URL from '../config';
+
+axios.defaults.withCredentials = true;
+
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 // Helper function to ensure no double slashes in URLs
 const constructURL = (path) => `${API_BASE_URL}${path.startsWith('/') ? '' : '/'}${path}`;
-
-axios.defaults.withCredentials = true; // Ensure credentials (cookies) are sent with every request
 
 // Example function to register a user
 export const registerUser = async (userData) => {
@@ -30,10 +31,12 @@ export const loginUser = async (userData) => {
   }
 };
 
-// Function to get user profile
+// Function to fetch the user profile
 export const getUserProfile = async () => {
   try {
-    const response = await axios.get(constructURL('/auth/profile'), { withCredentials: true });
+    const response = await axios.get(constructURL('/auth/profile'), {
+      withCredentials: true
+    });
     return response.data;
   } catch (error) {
     console.error('Failed to fetch profile:', error);
