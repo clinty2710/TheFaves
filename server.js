@@ -8,6 +8,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const MongoStore = require('connect-mongo');
+const { connectDB } = require('./models'); // Import the connectDB function
 const { router: authRoutes } = require('./middlewares/auth');
 const favoriteRoutes = require('./routes/Favorites');
 const app = express();
@@ -30,13 +31,7 @@ app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 
 // MongoDB connection
-mongoose.connect(process.env.MONGODB_URI, {
-  dbName: 'thefaves', // Ensure the correct database name
-}).then(() => {
-  console.log('MongoDB connected.');
-}).catch(err => {
-  console.error('MongoDB connection error:', err);
-});
+connectDB(); // Connect to the database
 
 // Set up session and passport with MongoStore
 app.use(session({
