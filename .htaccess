@@ -1,0 +1,6 @@
+# Serve correct MIME types for fonts
+AddType application/font-woff2 .woff2
+AddType application/font-woff .woff
+AddType application/vnd.ms-fontobject .eot
+AddType font/ttf .ttf
+AddType font/otf .otf
