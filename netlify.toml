@@ -3,18 +3,15 @@
   publish = "frontend/dist"
 
 [[redirects]]
+  from = "/api/*"
+  to = "https://thefaves-8616b810d2fc.herokuapp.com/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-[context.development.environment]
-  NODE_ENV = "development"
-  SESSION_SECRET = "your-session-secret"
-  REACT_APP_API_BASE_URL = "https://thefaves-8616b810d2fc.herokuapp.com"
-  MONGODB_URI = "your-mongodb-uri"
-  REACT_APP_GOOGLE_BOOKS_API_KEY = "your-google-books-api-key"
-  RAPIDAPI_KEY = "your-rapidapi-key"
-  THEMOVIEDB_API_TOKEN = "your-tmdb-api-token"
 
 [[headers]]
   for = "/*"
@@ -23,3 +20,12 @@
     Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
     Access-Control-Allow-Headers = "Content-Type, Authorization"
     Access-Control-Allow-Credentials = "true"
+
+[context.development.environment]
+  NODE_ENV = "development"
+  SESSION_SECRET = "NvzxTlKV6DTv3RZn67Vgt2eYdQHKjzzAh0znx+eR0rQ="
+  REACT_APP_API_BASE_URL = "https://thefaves-8616b810d2fc.herokuapp.com"
+  MONGODB_URI = "mongodb+srv://clinty2710:Studman081!@thefaves.2hunxaq.mongodb.net/thefaves?retryWrites=true&w=majority&appName=TheFaves"
+  REACT_APP_GOOGLE_BOOKS_API_KEY = "AIzaSyBk2yUzALtbnnSjMl-dKG49RKWZL9Ngu20"
+  RAPIDAPI_KEY = "014ad17094msh34fd14ee21bdfdfp10539ejsn6c92c98944bf"
+  THEMOVIEDB_API_TOKEN = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ZDdjODdlMmM0YzdkOGNlMjVhMWJlYzMxMDAzMTNlNSIsInN1YiI6IjY2M2NmNDUwMWEzZDAyYTE0MDc4YjM4NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.uXAn0dT_6ZNH_xJrQNSrbby-5UOXP6d2SVpk5HStAM0"

@@ -1,14 +1,13 @@
 // server.js
 
-require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const passport = require('./config/passport');
 const path = require('path');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const MongoStore = require('connect-mongo');
 const helmet = require('helmet');
+const MongoStore = require('connect-mongo');
 const { router: authRoutes } = require('./middlewares/auth');
 const favoriteRoutes = require('./routes/Favorites');
 const app = express();
@@ -19,18 +18,7 @@ app.set('trust proxy', 1); // Trust first proxy
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// CORS configuration
-const corsOptions = {
-  origin: ['https://myfavessite.com', 'https://thefaves-8616b810d2fc.herokuapp.com'],
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,  // Allow credentials
-  allowedHeaders: 'Content-Type, Authorization'
-};
-
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
-
-// Use Helmet to set security-related HTTP headers, including CSP
+// Security Headers and CSP configuration
 app.use(helmet());
 app.use(
   helmet.contentSecurityPolicy({
@@ -46,8 +34,27 @@ app.use(
   })
 );
 
+// CORS configuration
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (['https://myfavessite.com', 'https://thefaves-8616b810d2fc.herokuapp.com'].includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  allowedHeaders: 'Content-Type, Authorization'
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
   dbName: 'thefaves', // Ensure the correct database name
 }).then(() => {
   console.log('MongoDB connected.');
@@ -63,7 +70,7 @@ app.use(session({
   store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
   cookie: {
     secure: true, // Ensure this is true for HTTPS
-    sameSite: 'none', // Ensure cross-site cookies are allowed
+    sameSite: 'None', // Ensure cross-site cookies are allowed
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
 }));
