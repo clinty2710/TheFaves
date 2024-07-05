@@ -8,7 +8,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const MongoStore = require('connect-mongo');
-const { connectDB } = require('./models'); // Import the connectDB function
+const helmet = require('helmet');
 const { router: authRoutes } = require('./middlewares/auth');
 const favoriteRoutes = require('./routes/Favorites');
 const app = express();
@@ -30,8 +30,30 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 
+// Use Helmet to set security-related HTTP headers, including CSP
+app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    useDefaults: true,
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'"],
+      styleSrc: ["'self'"],
+      imgSrc: ["'self'"],
+      connectSrc: ["'self'", 'https://myfavessite.com', 'https://thefaves-8616b810d2fc.herokuapp.com'],
+      upgradeInsecureRequests: [],
+    },
+  })
+);
+
 // MongoDB connection
-connectDB(); // Connect to the database
+mongoose.connect(process.env.MONGODB_URI, {
+  dbName: 'thefaves', // Ensure the correct database name
+}).then(() => {
+  console.log('MongoDB connected.');
+}).catch(err => {
+  console.error('MongoDB connection error:', err);
+});
 
 // Set up session and passport with MongoStore
 app.use(session({
