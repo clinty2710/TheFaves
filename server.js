@@ -30,6 +30,22 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 
+// Middleware to set MIME types for fonts
+app.use((req, res, next) => {
+  if (req.url.endsWith('.woff2')) {
+    res.setHeader('Content-Type', 'application/font-woff2');
+  } else if (req.url.endsWith('.woff')) {
+    res.setHeader('Content-Type', 'application/font-woff');
+  } else if (req.url.endsWith('.eot')) {
+    res.setHeader('Content-Type', 'application/vnd.ms-fontobject');
+  } else if (req.url.endsWith('.ttf')) {
+    res.setHeader('Content-Type', 'font/ttf');
+  } else if (req.url.endsWith('.otf')) {
+    res.setHeader('Content-Type', 'font/otf');
+  }
+  next();
+});
+
 // Connect to MongoDB
 connectDB().then(() => {
   // Set up session and passport with MongoStore
