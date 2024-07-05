@@ -98,12 +98,8 @@ const Profile = () => {
       <div className="favorites-container">
         {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'movie').map(fav => (
           <div key={fav._id} className="favorite-item">
-            {fav.movie && fav.movie.poster_path ? (
-              <img src={`https://image.tmdb.org/t/p/w500${fav.movie.poster_path}`} alt={fav.movie.title} />
-            ) : (
-              <div>No poster available</div>
-            )}
-            <p>{fav.movie ? fav.movie.title : 'No Title'}</p>
+            <img src={fav.movie?.poster_path ? `https://image.tmdb.org/t/p/w500${fav.movie.poster_path}` : ''} alt={fav.movie?.title || 'No Title'} />
+            <p>{fav.movie?.title || 'No Title'}</p>
             <i className="fas fa-trash-alt delete-icon" onClick={() => handleRemoveFavorite(fav._id)}></i>
           </div>
         ))}
@@ -113,12 +109,8 @@ const Profile = () => {
       <div className="favorites-container">
         {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'music').map(fav => (
           <div key={fav._id} className="favorite-item">
-            {fav.music && fav.music.cover_image ? (
-              <img src={fav.music.cover_image} alt={fav.music.title} />
-            ) : (
-              <div>No cover available</div>
-            )}
-            <p>{fav.music ? fav.music.title : 'No Title'}</p>
+            <img src={fav.music?.cover_image || ''} alt={fav.music?.title || 'No Title'} />
+            <p>{fav.music?.title || 'No Title'}</p>
             <i className="fas fa-trash-alt delete-icon" onClick={() => handleRemoveFavorite(fav._id)}></i>
           </div>
         ))}
@@ -128,13 +120,9 @@ const Profile = () => {
       <div className="favorites-container">
         {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'book').map(fav => (
           <div key={fav._id} className="favorite-item">
-            {fav.book && fav.book.cover_image ? (
-              <img src={fav.book.cover_image} alt={fav.book.title} />
-            ) : (
-              <div>No cover available</div>
-            )}
-            <p>{fav.book ? fav.book.title : 'No Title'}</p>
-            <p>{fav.book ? fav.book.author : 'Unknown Author'}</p>
+            <img src={fav.book?.cover_image || ''} alt={fav.book?.title || 'No Title'} />
+            <p>{fav.book?.title || 'No Title'}</p>
+            <p>{fav.book?.author || ''}</p>
             <i className="fas fa-trash-alt delete-icon" onClick={() => handleRemoveFavorite(fav._id)}></i>
           </div>
         ))}

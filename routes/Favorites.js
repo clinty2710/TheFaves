@@ -131,7 +131,7 @@ router.get('/user/:userId', async (req, res) => {
 
   try {
     const favorites = await Favorite.find({ user_Id: userId })
-      .populate('item_Id', 'title release_date poster_path')
+      .populate('item_Id')
       .exec();
 
     console.log('Fetched favorites:', favorites);
