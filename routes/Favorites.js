@@ -26,7 +26,7 @@ router.get('/movies/search', async (req, res) => {
   try {
     const response = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
       params: { query, include_adult: false, language: 'en-US' },
-      headers: { 'Authorization': `Bearer ${API_TOKEN}`, 'Accept': 'application/json' }
+      headers: { 'Authorization': API_TOKEN, 'Accept': 'application/json' }
     });
     res.json(response.data.results);
   } catch (error) {
@@ -45,7 +45,7 @@ router.post('/add', async (req, res) => {
       console.log('Processing movie favorite');
       const movieDetailsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
         params: { language: 'en-US' },
-        headers: { 'Authorization': `Bearer ${API_TOKEN}`, 'Accept': 'application/json' }
+        headers: { 'Authorization': API_TOKEN, 'Accept': 'application/json' }
       });
       const movieDetails = movieDetailsResponse.data;
       console.log('Fetched movie details:', movieDetails);
@@ -130,10 +130,7 @@ router.get('/user/:userId', async (req, res) => {
 
   try {
     const favorites = await Favorite.find({ user_Id: userId })
-      .populate({
-        path: 'item_Id',
-        select: 'title release_date poster_path'
-      })
+      .populate('item_Id', 'title release_date poster_path')
       .exec();
 
     console.log('Fetched favorites:', favorites);
