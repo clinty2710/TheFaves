@@ -3,7 +3,8 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const { Favorite, Movie, Music, Book } = require('../models');
+const { db } = require('../models');
+const { Favorite, Movie, Music, Book } = db; // Ensure models are correctly imported
 
 const API_TOKEN = process.env.THEMOVIEDB_API_TOKEN;
 const MUSIC_API_KEY = process.env.RAPIDAPI_KEY;

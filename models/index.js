@@ -16,6 +16,7 @@ const connectDB = async () => {
     console.log("MongoDB connected.");
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
+    throw error; // Ensure the error is caught in the server setup
   }
 };
 
