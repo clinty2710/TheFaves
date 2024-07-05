@@ -89,6 +89,7 @@ const Profile = () => {
   }
 
   console.log("User data available:", user);
+  console.log("Favorites data:", favorites);
 
   return (
     <div>
