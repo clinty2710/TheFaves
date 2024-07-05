@@ -14,7 +14,8 @@ const SearchBooks = ({ favorites, setFavorites }) => {
         if (inputValue.length > 2) {
             const delayDebounce = setTimeout(() => {
                 axios.get('/api/favorites/books/search', {
-                    params: { query: inputValue }
+                    params: { query: inputValue },
+                    withCredentials: true
                 }).then(response => {
                     const data = response.data.items.map(item => ({
                         value: item.id,
@@ -49,6 +50,8 @@ const SearchBooks = ({ favorites, setFavorites }) => {
                 bookTitle: book.label,
                 coverImage: book.cover,
                 author: book.author
+            }, {
+                withCredentials: true
             });
             setFavorites([...favorites, { ...data, book: { cover_image: book.cover, title: book.label, author: book.author } }]);
         } catch (error) {

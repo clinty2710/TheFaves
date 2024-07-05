@@ -12,7 +12,8 @@ const LoginButton = ({ email, password }) => {
   const handleLogin = async () => {
     try {
       const response = await axios.post('/auth/login', { email, password }, {
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true
       });
       if (response.data.success) {
         setAuthenticated(true);

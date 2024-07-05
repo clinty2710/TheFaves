@@ -12,7 +12,7 @@ const LogoutButton = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post('/auth/logout');
+      await axios.post('/auth/logout', {}, { withCredentials: true });
       setAuthenticated(false);
       localStorage.removeItem('isAuthenticated');
       toast.success('Logout successful');

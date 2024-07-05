@@ -13,7 +13,7 @@ const constructURL = (path) => `${API_BASE_URL}${path.startsWith('/') ? '' : '/'
 // Example function to register a user
 export const registerUser = async (userData) => {
   try {
-    const response = await axios.post(constructURL('/auth/register'), userData);
+    const response = await axios.post(constructURL('/auth/register'), userData, { withCredentials: true });
     return response.data;
   } catch (error) {
     console.error('Registration failed:', error);
@@ -24,7 +24,7 @@ export const registerUser = async (userData) => {
 // Example function to log in a user
 export const loginUser = async (userData) => {
   try {
-    const response = await axios.post(constructURL('/auth/login'), userData);
+    const response = await axios.post(constructURL('/auth/login'), userData, { withCredentials: true });
     return response.data;
   } catch (error) {
     console.error('Login failed:', error);

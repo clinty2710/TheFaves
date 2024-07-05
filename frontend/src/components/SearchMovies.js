@@ -40,6 +40,8 @@ const SearchMovies = ({ favorites, setFavorites }) => {
                 movieId: movie._id, // Use _id from the movie object
                 movieTitle: movie.title,
                 posterPath: movie.poster_path
+            }, {
+                withCredentials: true
             });
             console.log('Successfully added to favorites:', data);
             setFavorites([...favorites, { ...data, movie: { poster_path: movie.poster_path, title: movie.title } }]);

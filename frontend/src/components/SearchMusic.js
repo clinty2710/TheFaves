@@ -14,7 +14,8 @@ const SearchMusic = ({ favorites, setFavorites }) => {
         if (inputValue.length > 2) {
             const delayDebounce = setTimeout(() => {
                 axios.get('/api/favorites/music/search', {
-                    params: { query: inputValue }
+                    params: { query: inputValue },
+                    withCredentials: true
                 }).then(response => {
                     const data = response.data.tracks.items.map(item => ({
                         value: item.data.id,
@@ -47,6 +48,8 @@ const SearchMusic = ({ favorites, setFavorites }) => {
                 musicId: music.value,
                 musicTitle: music.label,
                 coverImage: music.cover
+            }, {
+                withCredentials: true
             });
             setFavorites([...favorites, { ...data, music: { cover_image: music.cover, title: music.label } }]);
         } catch (error) {
