@@ -40,7 +40,7 @@ connectDB().then(() => {
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
     cookie: {
       secure: true, // Ensure this is true for HTTPS
-      sameSite: 'none', // Ensure cross-site cookies are allowed
+      sameSite: 'None', // Ensure cross-site cookies are allowed
       maxAge: 24 * 60 * 60 * 1000 // 24 hours
     }
   }));
