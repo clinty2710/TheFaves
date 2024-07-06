@@ -78,14 +78,13 @@ router.post('/add', async (req, res) => {
 
     } else if (item_Type === 'music') {
       console.log('Processing music favorite');
-      let [songTitle, artist] = musicTitle.includes(' by ') ? musicTitle.split(' by ') : [musicTitle, 'Unknown Artist'];
       let music = await Music.findOne({ _id: musicId });
       if (!music) {
         music = new Music({
           _id: musicId,
-          title: songTitle,
+          title: musicTitle,
           cover_image: coverImage,
-          artist: artist
+          artist: musicTitle.split(' by ')[1] || ''
         });
         await music.save();
         console.log('Saved new music to database:', music);
@@ -96,7 +95,7 @@ router.post('/add', async (req, res) => {
         item_Id: musicId,
         item_Type: item_Type,
         music: {
-          title: songTitle,
+          title: musicTitle,
           cover_image: coverImage
         }
       });
@@ -106,13 +105,13 @@ router.post('/add', async (req, res) => {
 
     } else if (item_Type === 'book') {
       console.log('Processing book favorite');
-      let [title, authorName] = bookTitle.includes(' by ') ? bookTitle.split(' by ') : [bookTitle, author];
       let book = await Book.findOne({ _id: bookId });
       if (!book) {
+        const [title, authorName] = bookTitle.split(' by ');
         book = new Book({
           _id: bookId,
-          title: title,
-          author: authorName,
+          title: title || bookTitle,
+          author: authorName || author,
           cover_image: coverImage
         });
         await book.save();
@@ -124,8 +123,8 @@ router.post('/add', async (req, res) => {
         item_Id: bookId,
         item_Type: item_Type,
         book: {
-          title: bookTitle,
-          author: authorName,
+          title: bookTitle.split(' by ')[0],
+          author: author,
           cover_image: coverImage
         }
       });
