@@ -44,13 +44,6 @@ router.post('/add', async (req, res) => {
 
     if (item_Type === 'movie') {
       console.log('Processing movie favorite');
-      const movieDetailsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
-        params: { language: 'en-US' },
-        headers: { 'Authorization': `Bearer ${API_TOKEN}`, 'Accept': 'application/json' }
-      });
-      const movieDetails = movieDetailsResponse.data;
-      console.log('Fetched movie details:', movieDetails);
-
       let movie = await Movie.findOne({ _id: movieId });
       if (!movie) {
         movie = new Movie({
