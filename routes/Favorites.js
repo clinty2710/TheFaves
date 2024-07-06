@@ -18,24 +18,6 @@ const musicApiClient = axios.create({
   },
 });
 
-// Route to search movies using TMDB API
-router.get('/movies/search', async (req, res) => {
-  const { query } = req.query;
-  if (!query) {
-    return res.status(400).json({ message: "Query parameter is required." });
-  }
-  try {
-    const response = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
-      params: { query, include_adult: false, language: 'en-US' },
-      headers: { 'Authorization': `Bearer ${API_TOKEN}`, 'Accept': 'application/json' }
-    });
-    res.json(response.data.results);
-  } catch (error) {
-    console.error('Search API error:', error);
-    res.status(500).json({ message: "Failed to fetch movies", error: error.message });
-  }
-});
-
 router.post('/add', async (req, res) => {
   const { user_Id, item_Type, movieId, movieTitle, posterPath, musicId, musicTitle, coverImage, bookId, bookTitle, author } = req.body;
 
@@ -199,6 +181,24 @@ router.delete('/delete/:id', async (req, res) => {
   } catch (error) {
     console.error('Failed to delete favorite:', error);
     res.status(500).send('Failed to delete favorite.');
+  }
+});
+
+// Route to search movies using TMDB API
+router.get('/movies/search', async (req, res) => {
+  const { query } = req.query;
+  if (!query) {
+    return res.status(400).json({ message: "Query parameter is required." });
+  }
+  try {
+    const response = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
+      params: { query, include_adult: false, language: 'en-US' },
+      headers: { 'Authorization': `Bearer ${API_TOKEN}`, 'Accept': 'application/json' }
+    });
+    res.json(response.data.results);
+  } catch (error) {
+    console.error('Search API error:', error);
+    res.status(500).json({ message: "Failed to fetch movies", error: error.message });
   }
 });
 
