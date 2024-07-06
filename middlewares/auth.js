@@ -44,9 +44,12 @@ router.post('/login', (req, res, next) => {
       if (err) {
         return next(err);
       }
-      console.log('User logged in successfully:', user);
-      console.log('Session ID:', req.sessionID);
-      console.log('Session:', req.session);
+      // Set the cookie with the correct attributes
+      res.cookie('connect.sid', req.sessionID, {
+        httpOnly: true,
+        secure: true, // Ensure this is true for HTTPS
+        sameSite: 'None'
+      });
       return res.json({ success: true, message: 'Authentication successful', user: user });
     });
   })(req, res, next);
@@ -82,7 +85,11 @@ router.post('/logout', (req, res) => {
         console.error('Session destruction error:', err);
         return res.status(500).json({ message: 'Failed to destroy the session.', error: err.message });
       }
-      res.clearCookie('connect.sid');
+      res.clearCookie('connect.sid', {
+        httpOnly: true,
+        secure: true, // Ensure this is true for HTTPS
+        sameSite: 'None'
+      });
       return res.status(200).json({ message: 'Logout successful' });
     });
   });
