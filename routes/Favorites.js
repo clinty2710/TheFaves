@@ -87,6 +87,10 @@ router.post('/add', async (req, res) => {
 
     } else if (item_Type === 'book') {
       console.log('Processing book favorite');
+      if (!bookId) {
+        throw new Error('Book ID is missing');
+      }
+
       let book = await Book.findOne({ _id: bookId });
       if (!book) {
         const [title, authorName] = bookTitle.split(' by ');
@@ -105,8 +109,8 @@ router.post('/add', async (req, res) => {
         item_Id: bookId,
         item_Type: item_Type,
         book: {
-          title: bookTitle.split(' by ')[0], // Ensure title is properly split
-          author: bookTitle.split(' by ')[1] || author, // Ensure author is properly split
+          title: bookTitle.split(' by ')[0],
+          author: author,
           cover_image: coverImage
         }
       });
@@ -193,7 +197,7 @@ router.get('/movies/search', async (req, res) => {
   try {
     const response = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
       params: { query, include_adult: false, language: 'en-US' },
-      headers: { 'Authorization': `Bearer ${API_TOKEN}`, 'Accept': 'application/json' }
+      headers: { 'Authorization': `${API_TOKEN}`, 'Accept': 'application/json' }
     });
     res.json(response.data.results);
   } catch (error) {
