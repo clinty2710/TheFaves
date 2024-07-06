@@ -46,7 +46,7 @@ router.post('/add', async (req, res) => {
       console.log('Processing movie favorite');
       const movieDetailsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
         params: { language: 'en-US' },
-        headers: { 'Authorization': `Bearer ${API_TOKEN}`, 'Accept': 'application/json' }
+        headers: { 'Authorization': `${API_TOKEN}`, 'Accept': 'application/json' }
       });
       const movieDetails = movieDetailsResponse.data;
       console.log('Fetched movie details:', movieDetails);
