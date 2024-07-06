@@ -105,8 +105,8 @@ router.post('/add', async (req, res) => {
         item_Id: bookId,
         item_Type: item_Type,
         book: {
-          title: title || bookTitle,
-          author: authorName || author,
+          title: bookTitle.split(' by ')[0], // Ensure title is properly split
+          author: bookTitle.split(' by ')[1] || author, // Ensure author is properly split
           cover_image: coverImage
         }
       });
@@ -164,7 +164,7 @@ router.delete('/delete/:id', async (req, res) => {
     const itemId = favorite.item_Id;
     const itemType = favorite.item_Type;
 
-    await Favorite.deleteOne({ _id: id }); // Use deleteOne instead of remove
+    await Favorite.deleteOne({ _id: id });
 
     const remainingFavorites = await Favorite.countDocuments({ item_Id: itemId });
     if (remainingFavorites === 0) {
