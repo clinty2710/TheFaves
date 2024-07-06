@@ -11,6 +11,9 @@ const MongoStore = require('connect-mongo');
 const { connectDB } = require('./models'); // Import the connectDB function
 const authRoutes = require('./middlewares/auth').router;
 const favoriteRoutes = require('./routes/Favorites');
+const { ensureIndexes: ensureBookIndexes } = require('./models/book');
+const { ensureIndexes: ensureMusicIndexes } = require('./models/music');
+const { ensureIndexes: ensureMovieIndexes } = require('./models/movie');
 const app = express();
 
 app.set('trust proxy', 1); // Trust first proxy
@@ -47,7 +50,12 @@ app.use((req, res, next) => {
 });
 
 // Connect to MongoDB
-connectDB().then(() => {
+connectDB().then(async () => {
+  // Ensure indexes are in sync with schema definitions
+  await ensureBookIndexes();
+  await ensureMusicIndexes();
+  await ensureMovieIndexes();
+
   // Set up session and passport with MongoStore
   app.use(session({
     secret: process.env.SESSION_SECRET,
