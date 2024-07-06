@@ -8,12 +8,12 @@ const path = require('path');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const MongoStore = require('connect-mongo');
-const { connectDB } = require('./models'); // Import the connectDB function
+const { connectDB } = require('./models');
 const authRoutes = require('./middlewares/auth').router;
 const favoriteRoutes = require('./routes/Favorites');
 const app = express();
 
-app.set('trust proxy', 1); // Trust first proxy
+app.set('trust proxy', 1);
 
 // Set up body parsing middleware
 app.use(express.json());
@@ -55,9 +55,9 @@ connectDB().then(() => {
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
     cookie: {
-      secure: true, // Ensure this is true for HTTPS
-      sameSite: 'None', // Ensure cross-site cookies are allowed
-      maxAge: 24 * 60 * 60 * 1000 // 24 hours
+      secure: true,
+      sameSite: 'None',
+      maxAge: 24 * 60 * 60 * 1000
     }
   }));
 

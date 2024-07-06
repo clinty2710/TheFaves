@@ -47,7 +47,7 @@ router.post('/login', (req, res, next) => {
       // Set the cookie with the correct attributes
       res.cookie('connect.sid', req.sessionID, {
         httpOnly: true,
-        secure: true, // Ensure this is true for HTTPS
+        secure: true, // Only use this in production with HTTPS
         sameSite: 'None'
       });
       return res.json({ success: true, message: 'Authentication successful', user: user });
@@ -60,13 +60,16 @@ router.get('/profile', ensureAuthenticated, async (req, res) => {
   console.log('Session ID:', req.sessionID);
   console.log('Session:', req.session);
   if (!req.user || !req.user._id) {
+    console.log('User not found in session');
     return res.status(404).json({ message: 'User not found' });
   }
   try {
-    const user = await User.findById(req.user._id); // Ensure correct ID field
+    const user = await User.findById(req.user._id);
     if (!user) {
+      console.log('User not found in database');
       return res.status(404).json({ message: 'User not found' });
     }
+    console.log('User found:', user);
     res.json({ _id: user._id, nickname: user.nickname, email: user.email });
   } catch (error) {
     console.error('Error fetching user profile:', error);
