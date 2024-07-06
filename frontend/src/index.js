@@ -3,6 +3,7 @@
 if (navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome')) {
   document.cookie = "samesite_test=1; SameSite=None; Secure";
 }
+
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';

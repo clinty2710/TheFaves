@@ -11,6 +11,7 @@ const ensureAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
   }
+  console.log('Authentication failed');
   res.status(401).json({ message: 'Unauthorized' });
 };
 

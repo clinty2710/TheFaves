@@ -17,7 +17,9 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      console.log('Attempting login with:', { email, password });
       const response = await loginUser({ email, password });
+      console.log('Login response:', response);
       if (response.success) {
         setAuthenticated(true);
         setUser(response.user);
