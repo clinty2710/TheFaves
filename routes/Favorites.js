@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const { db } = require('../models');
-const { Favorite, Movie, Music, Book } = db; // Ensure models are correctly imported
+const { Favorite, Movie, Music, Book } = db;
 
 const API_TOKEN = process.env.THEMOVIEDB_API_TOKEN;
 const MUSIC_API_KEY = process.env.RAPIDAPI_KEY;
@@ -156,7 +156,7 @@ router.delete('/delete/:id', async (req, res) => {
     const itemId = favorite.item_Id;
     const itemType = favorite.item_Type;
 
-    await favorite.remove();
+    await Favorite.deleteOne({ _id: id }); // Use deleteOne instead of remove
 
     const remainingFavorites = await Favorite.countDocuments({ item_Id: itemId });
     if (remainingFavorites === 0) {
