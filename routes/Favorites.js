@@ -115,6 +115,8 @@ router.post('/add', async (req, res) => {
         });
         await book.save();
         console.log('Saved new book to database:', book);
+      } else {
+        console.log('Book already exists in the database:', book);
       }
 
       const newFavorite = new Favorite({
