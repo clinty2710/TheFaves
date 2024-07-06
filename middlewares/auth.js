@@ -37,6 +37,7 @@ router.post('/login', (req, res, next) => {
       return res.status(500).json({ message: 'Internal Server Error' });
     }
     if (!user) {
+      console.log('Login failed:', info.message);
       return res.status(401).json({ message: info.message });
     }
     req.logIn(user, function(err) {
