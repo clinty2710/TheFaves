@@ -38,7 +38,7 @@ router.get('/movies/search', async (req, res) => {
 
 router.post('/add', async (req, res) => {
   const { user_Id, item_Type, movieId, movieTitle, posterPath, musicId, musicTitle, coverImage, bookId, bookTitle, author } = req.body;
-  
+
   try {
     console.log('Add favorite request body:', req.body);
 
@@ -46,7 +46,7 @@ router.post('/add', async (req, res) => {
       console.log('Processing movie favorite');
       const movieDetailsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
         params: { language: 'en-US' },
-        headers: { 'Authorization': API_TOKEN, 'Accept': 'application/json' }
+        headers: { 'Authorization': `Bearer ${API_TOKEN}`, 'Accept': 'application/json' }
       });
       const movieDetails = movieDetailsResponse.data;
       console.log('Fetched movie details:', movieDetails);
@@ -67,6 +67,10 @@ router.post('/add', async (req, res) => {
         user_Id,
         item_Id: movieId,
         item_Type: item_Type,
+        movie: {
+          title: movieTitle,
+          poster_path: posterPath
+        }
       });
       await newFavorite.save();
       console.log('Saved new favorite to database:', newFavorite);
@@ -90,6 +94,10 @@ router.post('/add', async (req, res) => {
         user_Id,
         item_Id: musicId,
         item_Type: item_Type,
+        music: {
+          title: musicTitle,
+          cover_image: coverImage
+        }
       });
       await newFavorite.save();
       console.log('Saved new favorite to database:', newFavorite);
@@ -113,6 +121,11 @@ router.post('/add', async (req, res) => {
         user_Id,
         item_Id: bookId,
         item_Type: item_Type,
+        book: {
+          title: bookTitle,
+          author: author,
+          cover_image: coverImage
+        }
       });
       await newFavorite.save();
       console.log('Saved new favorite to database:', newFavorite);
@@ -130,17 +143,30 @@ router.get('/user/:userId', async (req, res) => {
   console.log(`Fetching favorites for user ${userId}`);
 
   try {
-    const favorites = await Favorite.find({ user_Id: userId })
-      .populate('item_Id')
-      .exec();
+    const favorites = await Favorite.find({ user_Id: userId }).lean();
 
-    console.log('Fetched favorites:', favorites);
-    res.json(favorites);
+    const populatedFavorites = await Promise.all(favorites.map(async (favorite) => {
+      if (favorite.item_Type === 'movie') {
+        const movie = await Movie.findById(favorite.item_Id);
+        return { ...favorite, movie };
+      } else if (favorite.item_Type === 'music') {
+        const music = await Music.findById(favorite.item_Id);
+        return { ...favorite, music };
+      } else if (favorite.item_Type === 'book') {
+        const book = await Book.findById(favorite.item_Id);
+        return { ...favorite, book };
+      }
+      return favorite;
+    }));
+
+    console.log('Fetched favorites:', populatedFavorites);
+    res.json(populatedFavorites);
   } catch (error) {
     console.error('Failed to fetch favorites:', error);
     res.status(500).send('Failed to fetch favorites.');
   }
 });
+
 
 // Endpoint to delete a favorite
 router.delete('/delete/:id', async (req, res) => {

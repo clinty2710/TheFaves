@@ -2,21 +2,24 @@
 
 const mongoose = require('mongoose');
 
-const favoriteSchema = new mongoose.Schema({
-  user_Id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
+const FavoriteSchema = new mongoose.Schema({
+  user_Id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  item_Id: { type: String, required: true },
+  item_Type: { type: String, required: true },
+  movie: {
+    title: String,
+    poster_path: String
   },
-  item_Id: {
-    type: String,
-    required: true
+  music: {
+    title: String,
+    cover_image: String
   },
-  item_Type: {
-    type: String,
-    enum: ['book', 'movie', 'music'], // Optional: to enforce valid types
-    required: true
+  book: {
+    title: String,
+    author: String,
+    cover_image: String
   }
 });
 
-module.exports = mongoose.model('Favorite', favoriteSchema);
+const Favorite = mongoose.model('Favorite', FavoriteSchema);
+module.exports = Favorite;
