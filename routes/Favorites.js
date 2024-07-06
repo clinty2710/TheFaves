@@ -105,8 +105,8 @@ router.post('/add', async (req, res) => {
         item_Id: bookId,
         item_Type: item_Type,
         book: {
-          title: bookTitle.split(' by ')[0],
-          author: author,
+          title: title || bookTitle,
+          author: authorName || author,
           cover_image: coverImage
         }
       });
