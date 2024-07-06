@@ -27,7 +27,7 @@ router.get('/movies/search', async (req, res) => {
   try {
     const response = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
       params: { query, include_adult: false, language: 'en-US' },
-      headers: { 'Authorization': API_TOKEN, 'Accept': 'application/json' }
+      headers: { 'Authorization': `Bearer ${API_TOKEN}`, 'Accept': 'application/json' }
     });
     res.json(response.data.results);
   } catch (error) {
@@ -166,7 +166,6 @@ router.get('/user/:userId', async (req, res) => {
     res.status(500).send('Failed to fetch favorites.');
   }
 });
-
 
 // Endpoint to delete a favorite
 router.delete('/delete/:id', async (req, res) => {
