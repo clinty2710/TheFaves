@@ -109,7 +109,7 @@ router.post('/add', async (req, res) => {
       if (!book) {
         book = new Book({
           _id: bookId,
-          title: bookTitle.split(' by ')[0],
+          title: bookTitle.split(' by ')[1],
           author: author,
           cover_image: coverImage
         });
