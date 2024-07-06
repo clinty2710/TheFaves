@@ -18,7 +18,7 @@ const SearchBooks = ({ favorites, setFavorites }) => {
                     withCredentials: true
                 }).then(response => {
                     const data = response.data.items.map(item => ({
-                        value: item.id,
+                        value: item.id, // Ensure this is 'id' as per Google Books API
                         label: `${item.volumeInfo.title} by ${item.volumeInfo.authors ? item.volumeInfo.authors.join(', ') : 'Unknown'}`,
                         cover: item.volumeInfo.imageLinks?.thumbnail || '',
                         author: item.volumeInfo.authors ? item.volumeInfo.authors.join(', ') : 'Unknown'
@@ -53,7 +53,7 @@ const SearchBooks = ({ favorites, setFavorites }) => {
             }, {
                 withCredentials: true
             });
-            setFavorites([...favorites, { ...data, book: { cover_image: book.cover, title: book.label, author: book.author } }]);
+            setFavorites([...favorites, { ...data, book: { cover_image: book.cover, title: book.label.split(' by ')[0], author: book.author } }]);
         } catch (error) {
             console.error('Error adding to favorites:', error);
         }
@@ -70,7 +70,7 @@ const SearchBooks = ({ favorites, setFavorites }) => {
                 noOptionsMessage={() => 'No books found'}
                 isLoading={inputValue && options.length === 0}
                 getOptionLabel={(option) => option.label}
-                getOptionValue={(option) => option.value} // Use value as the option ID
+                getOptionValue={(option) => option.value}
             />
         </div>
     );
