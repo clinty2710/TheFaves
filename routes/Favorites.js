@@ -78,13 +78,14 @@ router.post('/add', async (req, res) => {
 
     } else if (item_Type === 'music') {
       console.log('Processing music favorite');
+      let [songTitle, artist] = musicTitle.includes(' by ') ? musicTitle.split(' by ') : [musicTitle, 'Unknown Artist'];
       let music = await Music.findOne({ _id: musicId });
       if (!music) {
         music = new Music({
           _id: musicId,
-          title: musicTitle,
+          title: songTitle,
           cover_image: coverImage,
-          artist: musicTitle.split(' by ')[1] || ''
+          artist: artist
         });
         await music.save();
         console.log('Saved new music to database:', music);
@@ -95,7 +96,7 @@ router.post('/add', async (req, res) => {
         item_Id: musicId,
         item_Type: item_Type,
         music: {
-          title: musicTitle,
+          title: songTitle,
           cover_image: coverImage
         }
       });
@@ -105,18 +106,17 @@ router.post('/add', async (req, res) => {
 
     } else if (item_Type === 'book') {
       console.log('Processing book favorite');
+      let [title, authorName] = bookTitle.includes(' by ') ? bookTitle.split(' by ') : [bookTitle, author];
       let book = await Book.findOne({ _id: bookId });
       if (!book) {
         book = new Book({
           _id: bookId,
-          title: bookTitle.split(' by ')[1],
-          author: author,
+          title: title,
+          author: authorName,
           cover_image: coverImage
         });
         await book.save();
         console.log('Saved new book to database:', book);
-      } else {
-        console.log('Book already exists in the database:', book);
       }
 
       const newFavorite = new Favorite({
@@ -125,7 +125,7 @@ router.post('/add', async (req, res) => {
         item_Type: item_Type,
         book: {
           title: bookTitle,
-          author: author,
+          author: authorName,
           cover_image: coverImage
         }
       });
