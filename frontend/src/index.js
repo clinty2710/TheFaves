@@ -11,6 +11,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './AuthContext';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
