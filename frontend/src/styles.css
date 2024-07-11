@@ -85,6 +85,8 @@ body {
     cursor: pointer;
     opacity: 0;
     transition: opacity 0.3s;
+    font-family: "Font Awesome 5 Free"; /* Ensure correct font family */
+    font-weight: 900; /* Ensure correct font weight */
 }
 
 .favorite-item:hover .delete-icon {
