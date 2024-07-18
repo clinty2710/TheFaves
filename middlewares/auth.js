@@ -50,6 +50,8 @@ router.post('/login', (req, res, next) => {
         secure: true, // Only use this in production with HTTPS
         sameSite: 'None'
       });
+      console.log('Cookie settings:', req.sessionID);
+      console.log('CORS settings:', corsOptions);
       return res.json({ success: true, message: 'Authentication successful', user: user });
     });
   })(req, res, next);
