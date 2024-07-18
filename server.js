@@ -13,7 +13,7 @@ const authRoutes = require('./middlewares/auth').router;
 const favoriteRoutes = require('./routes/Favorites');
 const app = express();
 
-app.set('trust proxy', 1);
+app.set('trust proxy', 1); // Trust first proxy
 
 // Set up body parsing middleware
 app.use(express.json());
@@ -24,7 +24,7 @@ const corsOptions = {
   origin: ['https://myfavessite.com', 'https://thefaves-8616b810d2fc.herokuapp.com'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: 'Content-Type, Authorization'
 };
 
 app.use(cors(corsOptions));
@@ -55,9 +55,9 @@ connectDB().then(() => {
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
     cookie: {
-      secure: true, // Ensure this is true for HTTPS
-      sameSite: 'None', // Ensure cross-site cookies are allowed
-      maxAge: 24 * 60 * 60 * 1000 // 24 hours
+      secure: true,
+      sameSite: 'None',
+      maxAge: 24 * 60 * 60 * 1000
     }
   }));
 
