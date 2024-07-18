@@ -13,7 +13,7 @@ const authRoutes = require('./middlewares/auth').router;
 const favoriteRoutes = require('./routes/Favorites');
 const app = express();
 
-app.set('trust proxy', 1); // Trust first proxy
+app.set('trust proxy', 1);
 
 // Set up body parsing middleware
 app.use(express.json());
@@ -24,7 +24,7 @@ const corsOptions = {
   origin: ['https://myfavessite.com', 'https://thefaves-8616b810d2fc.herokuapp.com'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
-  allowedHeaders: 'Content-Type, Authorization'
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
 
 app.use(cors(corsOptions));
