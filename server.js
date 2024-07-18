@@ -1,5 +1,3 @@
-// server.js
-
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
@@ -13,7 +11,7 @@ const authRoutes = require('./middlewares/auth').router;
 const favoriteRoutes = require('./routes/Favorites');
 const app = express();
 
-app.set('trust proxy', 1);
+app.set('trust proxy', 1); // Trust first proxy
 
 // Set up body parsing middleware
 app.use(express.json());
@@ -55,9 +53,9 @@ connectDB().then(() => {
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
     cookie: {
-      secure: true,
-      sameSite: 'None',
-      maxAge: 24 * 60 * 60 * 1000
+      secure: true, // Ensure this is true for HTTPS
+      sameSite: 'None', // Ensure cross-site cookies are allowed
+      maxAge: 24 * 60 * 60 * 1000 // 24 hours
     }
   }));
 
