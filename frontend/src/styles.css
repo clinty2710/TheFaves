@@ -37,7 +37,7 @@ body {
 
 /* Styles for the profile page logo */
 .logo.profile {
-    font-size: 2.5rem;
+    font-size: 3rem;
     position: absolute;
     top: 10px;
     left: 10px;
@@ -92,6 +92,13 @@ body {
 
 .logo .s {
     margin-left: -.5px; /* Adjust spacing to bring 'S' closer */
+}
+
+.welcome-message {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-left: 20px;
+    color: #ffffff;
 }
 
 .favorites-container {

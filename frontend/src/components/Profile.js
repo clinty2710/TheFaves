@@ -93,7 +93,17 @@ const Profile = () => {
 
   return (
     <div>
-      <h2>Welcome, {user.nickname}!</h2>
+      <header className="App-header">
+        <div className="logo profile">
+          <span className="my">my</span>
+          <span className="f">F</span>
+          <span className="a">A</span>
+          <span className="heart-v"></span>
+          <span className="e">E</span>
+          <span className="s">S</span>
+          <span className="welcome-message">Welcome, {user.nickname}!</span>
+        </div>
+      </header>
       <h2>Favorite Movies</h2>
       <SearchMovies favorites={favorites} setFavorites={setFavorites} />
       <div className="favorites-container">
