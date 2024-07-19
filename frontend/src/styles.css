@@ -41,7 +41,7 @@ body {
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     color: #ffffff;
-    margin: 0 -5px; /* Reduce margin to bring letters closer */
+    margin: 0 -3px; /* Reduce margin to bring letters closer */
 }
 
 .logo .heart-v {
