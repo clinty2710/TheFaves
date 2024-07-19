@@ -43,6 +43,7 @@ body {
     font-weight: 700;
     color: #ffffff;
     position: relative;
+    z-index: 2; /* Ensure letters are on top */
 }
 
 .logo .heart-v {
@@ -53,26 +54,26 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     display: inline-block;
-    margin: 0 -15px; /* Negative margin to overlap letters */
+    margin: 0 -10px; /* Negative margin to overlap letters */
     z-index: 1; /* Ensure it overlaps correctly */
 }
 
 .logo .f {
-    margin-right: -15px; /* Adjust spacing to bring 'F' closer */
+    margin-right: -10px; /* Adjust spacing to bring 'F' closer */
 }
 
 .logo .a {
-    margin-left: -15px; /* Adjust spacing to bring 'A' closer */
-    margin-right: -15px; /* Adjust spacing to bring 'A' closer */
+    margin-left: -10px; /* Adjust spacing to bring 'A' closer */
+    margin-right: -10px; /* Adjust spacing to bring 'A' closer */
 }
 
 .logo .e {
-    margin-left: -15px; /* Adjust spacing to bring 'E' closer */
-    margin-right: -15px; /* Adjust spacing to bring 'E' closer */
+    margin-left: -10px; /* Adjust spacing to bring 'E' closer */
+    margin-right: -10px; /* Adjust spacing to bring 'E' closer */
 }
 
 .logo .s {
-    margin-left: -15px; /* Adjust spacing to bring 'S' closer */
+    margin-left: -10px; /* Adjust spacing to bring 'S' closer */
 }
 
 .favorites-container {
