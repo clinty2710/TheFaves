@@ -45,7 +45,6 @@ body {
     position: relative;
     z-index: 2; /* Ensure letters are on top */
     -webkit-text-stroke: .5px #0a2540; /* Add text stroke for webkit browsers */
-    text-stroke: .5px #0a2540; /* Add text stroke for other browsers */
 }
 
 .logo .heart-v {
