@@ -32,7 +32,7 @@ body {
     font-family: 'Dancing Script', cursive;
     color: #ff6347;
     font-weight: 700;
-    margin-right: 5px; /* Add spacing to separate 'my' */
+    margin-right: 3px; /* Add spacing to separate 'my' */
 }
 
 .logo .f,
@@ -42,6 +42,7 @@ body {
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     color: #ffffff;
+    border: #0a2540;
     position: relative;
     z-index: 2; /* Ensure letters are on top */
 }
