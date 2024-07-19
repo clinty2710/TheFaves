@@ -40,9 +40,9 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
+    <div>
       <header className="App-header">
-        <div className="logo">
+        <div className="logo large">
           <span className="my">my</span>
           <span className="f">F</span>
           <span className="a">A</span>

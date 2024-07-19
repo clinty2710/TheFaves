@@ -28,6 +28,10 @@ body {
     position: relative; /* To use absolute positioning for overlapping */
 }
 
+.logo.large {
+    font-size: 4.5rem; /* Increase the font size by 50% */
+}
+
 .profile-header {
     display: flex;
     align-items: center;
@@ -68,6 +72,12 @@ body {
     margin: 0 -10px; /* Negative margin to overlap letters */
     z-index: 1; /* Ensure it overlaps correctly */
     transform: translateY(5px); /* Adjust this value to move the image down */
+}
+
+.logo.large .heart-v {
+    width: 112.5px; /* Increase the size by 50% */
+    height: 112.5px; /* Increase the size by 50% */
+    background-size: 112.5px 112.5px; /* Adjust the background size */
 }
 
 .logo .f {
