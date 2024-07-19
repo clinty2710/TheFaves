@@ -44,6 +44,16 @@ const Register = () => {
 
   return (
     <div>
+      <header className="App-header">
+        <div className="logo">
+          <span className="my">my</span>
+          <span className="f">F</span>
+          <span className="a">A</span>
+          <span className="heart-v"></span>
+          <span className="e">E</span>
+          <span className="s">S</span>
+        </div>
+      </header>
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
         <div>
