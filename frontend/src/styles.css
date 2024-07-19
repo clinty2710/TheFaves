@@ -82,7 +82,7 @@ body {
     width: 150px; /* Increase the size */
     height: 150px; /* Increase the size */
     background-size: 150px 150px; /* Adjust the background size */
-    margin: 0 -20px; /* Adjust the margin to overlap letters correctly */
+    margin: 0 -22px; /* Adjust the margin to overlap letters correctly */
 }
 
 .logo .f {
