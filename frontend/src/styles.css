@@ -28,6 +28,21 @@ body {
     position: relative; /* To use absolute positioning for overlapping */
 }
 
+/* Styles for the login page logo */
+.logo.login {
+    font-size: 4rem;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+/* Styles for the profile page logo */
+.logo.profile {
+    font-size: 2.5rem;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
 .logo .my {
     font-family: 'Dancing Script', cursive;
     color: #ff6347;
@@ -45,7 +60,7 @@ body {
     position: relative;
     z-index: 2; /* Ensure letters are on top */
     -webkit-text-stroke: .3px #0a2540; /* Add text stroke for webkit browsers */
-    text-shadow: -1px -1px 0 #0a2540, 1px -1px 0 #0a2540, -1px 1px 0 #0a2540, 1px 1px 0 #0a2540; /* Add text shadow for better support */
+    /*text-shadow: -1px -1px 0 #0a2540, 1px -1px 0 #0a2540, -1px 1px 0 #0a2540, 1px 1px 0 #0a2540; /* Add text shadow for better support */
 }
 
 .logo .heart-v {
