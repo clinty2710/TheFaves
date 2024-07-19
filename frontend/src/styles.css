@@ -69,11 +69,11 @@ body {
 
 .logo .e {
     margin-left: -3px; /* Adjust spacing to bring 'E' closer */
-    margin-right: -3px; /* Adjust spacing to bring 'E' closer */
+    margin-right: -2.5px; /* Adjust spacing to bring 'E' closer */
 }
 
 .logo .s {
-    margin-left: -3px; /* Adjust spacing to bring 'S' closer */
+    margin-left: -2.5px; /* Adjust spacing to bring 'S' closer */
 }
 
 .favorites-container {
