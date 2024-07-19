@@ -23,7 +23,11 @@ function App() {
         <header className="App-header">
           <div className="logo">
             <span className="my">my</span>
-            <span className="faves">FAVES</span>
+            <span className="f">F</span>
+            <span className="heart-v"></span>
+            <span className="a">A</span>
+            <span className="e">E</span>
+            <span className="s">S</span>
           </div>
         </header>
         <ErrorBoundary>
