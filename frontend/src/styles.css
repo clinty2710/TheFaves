@@ -64,16 +64,16 @@ body {
 
 .logo .a {
     margin-left: -3px; /* Adjust spacing to bring 'A' closer */
-    margin-right: -5px; /* Adjust spacing to bring 'A' closer */
+    margin-right: -7px; /* Adjust spacing to bring 'A' closer */
 }
 
 .logo .e {
-    margin-left: -4px; /* Adjust spacing to bring 'E' closer */
-    margin-right: -3px; /* Adjust spacing to bring 'E' closer */
+    margin-left: -6px; /* Adjust spacing to bring 'E' closer */
+    margin-right: -2px; /* Adjust spacing to bring 'E' closer */
 }
 
 .logo .s {
-    margin-left: -3px; /* Adjust spacing to bring 'S' closer */
+    margin-left: -2px; /* Adjust spacing to bring 'S' closer */
 }
 
 .favorites-container {
