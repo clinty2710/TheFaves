@@ -28,19 +28,12 @@ body {
     position: relative; /* To use absolute positioning for overlapping */
 }
 
-/* Styles for the login page logo */
-.logo.login {
-    font-size: 4rem;
-    justify-content: center;
-    margin: 20px 0;
-}
-
-/* Styles for the profile page logo */
-.logo.profile {
-    font-size: 3rem;
-    position: absolute;
-    top: 10px;
-    left: 10px;
+.profile-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: #0a2540;
+    border-bottom: 2px solid #ff6347;
 }
 
 .logo .my {
@@ -95,10 +88,8 @@ body {
 }
 
 .welcome-message {
-    font-size: 1.5rem;
-    font-weight: 300;
-    margin-left: 20px;
-    color: #ffffff;
+    margin-left: 10px;
+    font-size: 1.5rem; /* Adjust size as needed */
 }
 
 .favorites-container {

@@ -93,16 +93,16 @@ const Profile = () => {
 
   return (
     <div>
-      <header className="App-header">
-        <div className="logo profile">
+      <header className="profile-header">
+        <div className="logo">
           <span className="my">my</span>
           <span className="f">F</span>
           <span className="a">A</span>
           <span className="heart-v"></span>
           <span className="e">E</span>
           <span className="s">S</span>
-          <span className="welcome-message">Welcome, {user.nickname}!</span>
         </div>
+        <span className="welcome-message">Welcome, {user.nickname}!</span>
       </header>
       <h2>Favorite Movies</h2>
       <SearchMovies favorites={favorites} setFavorites={setFavorites} />
