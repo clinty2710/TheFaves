@@ -4,11 +4,8 @@ import axios from 'axios';
 
 axios.defaults.withCredentials = true;
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-axios.defaults.baseURL = API_BASE_URL;
-
 // Helper function to ensure no double slashes in URLs
-const constructURL = (path) => `${API_BASE_URL}${path.startsWith('/') ? '' : '/'}${path}`;
+const constructURL = (path) => `${path.startsWith('/') ? '' : '/'}${path}`;
 
 // Example function to register a user
 export const registerUser = async (userData) => {
