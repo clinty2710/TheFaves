@@ -59,21 +59,21 @@ body {
 }
 
 .logo .f {
-    margin-right: -10px; /* Adjust spacing to bring 'F' closer */
+    margin-right: -3px; /* Adjust spacing to bring 'F' closer */
 }
 
 .logo .a {
-    margin-left: -10px; /* Adjust spacing to bring 'A' closer */
-    margin-right: -10px; /* Adjust spacing to bring 'A' closer */
+    margin-left: -3px; /* Adjust spacing to bring 'A' closer */
+    margin-right: -3px; /* Adjust spacing to bring 'A' closer */
 }
 
 .logo .e {
-    margin-left: -10px; /* Adjust spacing to bring 'E' closer */
-    margin-right: -10px; /* Adjust spacing to bring 'E' closer */
+    margin-left: -3px; /* Adjust spacing to bring 'E' closer */
+    margin-right: -3px; /* Adjust spacing to bring 'E' closer */
 }
 
 .logo .s {
-    margin-left: -10px; /* Adjust spacing to bring 'S' closer */
+    margin-left: -3px; /* Adjust spacing to bring 'S' closer */
 }
 
 .favorites-container {
