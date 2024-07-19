@@ -44,7 +44,6 @@ router.post('/login', (req, res, next) => {
       if (err) {
         return next(err);
       }
-      // Set the cookie with the correct attributes
       res.cookie('connect.sid', req.sessionID, {
         httpOnly: true,
         secure: true, // Only use this in production with HTTPS
