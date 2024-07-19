@@ -25,13 +25,14 @@ body {
     align-items: center;
     font-size: 3rem;
     justify-content: center;
+    position: relative; /* To use absolute positioning for overlapping */
 }
 
 .logo .my {
     font-family: 'Dancing Script', cursive;
     color: #ff6347;
     font-weight: 700;
-    margin-right: 5px;
+    margin-right: 10px; /* Add spacing to separate 'my' */
 }
 
 .logo .f,
@@ -41,18 +42,37 @@ body {
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     color: #ffffff;
-    margin: 0 -3px; /* Reduce margin to bring letters closer */
+    position: relative;
 }
 
 .logo .heart-v {
-    width: 70px; /* Adjust the size as needed */
-    height: 70px; /* Adjust the size as needed */
+    width: 60px; /* Adjust the size as needed */
+    height: 60px; /* Adjust the size as needed */
     background-image: url('/frontend/public/images/klipartz.com.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     display: inline-block;
-    margin: 0 -5px; /* Overlap the image slightly with letters */
+    margin: 0 -15px; /* Negative margin to overlap letters */
+    z-index: 1; /* Ensure it overlaps correctly */
+}
+
+.logo .f {
+    margin-right: -15px; /* Adjust spacing to bring 'F' closer */
+}
+
+.logo .a {
+    margin-left: -15px; /* Adjust spacing to bring 'A' closer */
+    margin-right: -15px; /* Adjust spacing to bring 'A' closer */
+}
+
+.logo .e {
+    margin-left: -15px; /* Adjust spacing to bring 'E' closer */
+    margin-right: -15px; /* Adjust spacing to bring 'E' closer */
+}
+
+.logo .s {
+    margin-left: -15px; /* Adjust spacing to bring 'S' closer */
 }
 
 .favorites-container {
