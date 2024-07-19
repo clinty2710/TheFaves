@@ -4,6 +4,9 @@ import axios from 'axios';
 
 axios.defaults.withCredentials = true;
 
+// Remove the base URL setting, rely on relative paths and Netlify's proxying
+// axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
+
 // Helper function to ensure no double slashes in URLs
 const constructURL = (path) => `${path.startsWith('/') ? '' : '/'}${path}`;
 
