@@ -5,6 +5,8 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import API_BASE_URL from '../config';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import '../styles.css';
 
 const Register = () => {
   const [formData, setFormData] = useState({
