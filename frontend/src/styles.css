@@ -48,9 +48,9 @@ body {
 
 .logo .heart-v {
     width: 75px; /* Adjust the size as needed */
-    height: 80px; /* Adjust the size as needed */
+    height: 75px; /* Adjust the size as needed */
     background-image: url('/frontend/public/images/klipartz.com.png');
-    background-size: contain;
+    background-size: cover; /* Use cover to stretch the image */
     background-repeat: no-repeat;
     background-position: center;
     display: inline-block;
@@ -76,7 +76,6 @@ body {
 .logo .s {
     margin-left: -.5px; /* Adjust spacing to bring 'S' closer */
 }
-
 
 .favorites-container {
     display: flex;
