@@ -21,14 +21,14 @@ function App() {
     <UserProvider>
       <div className="App">
         <header className="App-header">
-          <div className="logo">
+          <h1 className="logo">
             <span className="my">my</span>
-            <span className="f">F</span>
-            <span className="heart-v"></span>
-            <span className="a">A</span>
-            <span className="e">E</span>
-            <span className="s">S</span>
-          </div>
+            <span className="faves">
+              <span className="letter">FA</span>
+              <img src="/frontend/public/images/klipartz.com.png" alt="Heart Icon" className="heart-icon" />
+              <span className="letter">ES</span>
+            </span>
+          </h1>
         </header>
         <ErrorBoundary>
           <Routes>
