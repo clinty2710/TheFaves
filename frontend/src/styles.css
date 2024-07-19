@@ -33,25 +33,24 @@ body {
     font-weight: 700;
 }
 
-.logo .faves {
-    display: flex;
-    align-items: center;
+.logo .f,
+.logo .a,
+.logo .e,
+.logo .s {
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
-    background: linear-gradient(90deg, #ffffff, #ff4500);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.logo .heart-icon {
-    width: 1em;
-    height: 1em;
-    margin: 0 0.1em;
-}
-
-.logo .letter {
     color: #ffffff;
-    text-shadow: 2px 2px 8px rgba(255, 99, 71, 0.8);
+}
+
+.logo .heart-v {
+    width: 50px; /* Adjust the size as needed */
+    height: 50px; /* Adjust the size as needed */
+    background-image: url('/frontend/public/images/klipartz.com.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    margin: 0 5px;
 }
 
 .favorites-container {
@@ -150,6 +149,7 @@ h2 {
     line-height: 1.4;
 }
 
+/* Styling for react-select components */
 .select__control {
     width: 40% !important;
     margin: 0 auto !important;
@@ -187,6 +187,7 @@ h2 {
     color: #ffffff !important;
 }
 
+/* Ensure the input text is white */
 .select__input {
     color: #ffffff !important;
     padding: 0 !important;
@@ -195,12 +196,14 @@ h2 {
     align-items: center !important;
 }
 
+/* Ensure the placeholder text is visible */
 .select__placeholder {
     color: #ffffff !important;
     display: flex !important;
     align-items: center !important;
 }
 
+/* Center the form on the login and register pages */
 form {
     display: flex;
     flex-direction: column;
@@ -245,10 +248,12 @@ form p {
     text-align: center;
 }
 
+/* Center the links below the forms */
 .center-links {
     text-align: center;
 }
 
+/* Style the links to match the login button color */
 .center-links a {
     color: #ff6347;
     text-decoration: none;
@@ -258,6 +263,7 @@ form p {
     color: #ff4500;
 }
 
+/* Responsive styles */
 @media (max-width: 1200px) {
     .favorite-item {
         width: 130px;
@@ -378,6 +384,7 @@ form p {
     }
 }
 
+/* Custom Toast Notification Styles */
 .Toastify__toast {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
