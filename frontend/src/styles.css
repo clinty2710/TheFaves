@@ -42,9 +42,10 @@ body {
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     color: #ffffff;
-    border: #0a2540;
     position: relative;
     z-index: 2; /* Ensure letters are on top */
+    -webkit-text-stroke: 1px #0a2540; /* Add text stroke for webkit browsers */
+    text-stroke: 1px #0a2540; /* Add text stroke for other browsers */
 }
 
 .logo .heart-v {
@@ -77,7 +78,6 @@ body {
 .logo .s {
     margin-left: -.5px; /* Adjust spacing to bring 'S' closer */
 }
-
 
 .favorites-container {
     display: flex;
