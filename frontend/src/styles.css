@@ -29,7 +29,7 @@ body {
 }
 
 .logo.large {
-    font-size: 4.5rem; /* Increase the font size by 50% */
+    font-size: 6rem; 
 }
 
 .profile-header {
@@ -75,9 +75,9 @@ body {
 }
 
 .logo.large .heart-v {
-    width: 112.5px; /* Increase the size by 50% */
-    height: 112.5px; /* Increase the size by 50% */
-    background-size: 112.5px 112.5px; /* Adjust the background size */
+    width: 150px; /* Increase the size by 50% */
+    height: 150px; /* Increase the size by 50% */
+    background-size: 150px 150px; /* Adjust the background size */
 }
 
 .logo .f {
