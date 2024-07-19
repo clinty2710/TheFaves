@@ -56,6 +56,7 @@ body {
     display: inline-block;
     margin: 0 -10px; /* Negative margin to overlap letters */
     z-index: 1; /* Ensure it overlaps correctly */
+    transform: translateY(5px); /* Adjust this value to move the image down */
 }
 
 .logo .f {
@@ -75,6 +76,7 @@ body {
 .logo .s {
     margin-left: -.5px; /* Adjust spacing to bring 'S' closer */
 }
+
 
 .favorites-container {
     display: flex;
