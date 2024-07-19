@@ -48,7 +48,7 @@ body {
 
 .logo .heart-v {
     width: 75px; /* Adjust the size as needed */
-    height: 85px; /* Adjust the size as needed */
+    height: 100px; /* Adjust the size as needed */
     background-image: url('/frontend/public/images/klipartz.com.png');
     background-size: contain;
     background-repeat: no-repeat;
