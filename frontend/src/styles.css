@@ -47,8 +47,8 @@ body {
 }
 
 .logo .heart-v {
-    width: 70px; /* Adjust the size as needed */
-    height: 70px; /* Adjust the size as needed */
+    width: 75px; /* Adjust the size as needed */
+    height: 75px; /* Adjust the size as needed */
     background-image: url('/frontend/public/images/klipartz.com.png');
     background-size: contain;
     background-repeat: no-repeat;
@@ -64,16 +64,16 @@ body {
 
 .logo .a {
     margin-left: -3px; /* Adjust spacing to bring 'A' closer */
-    margin-right: -3px; /* Adjust spacing to bring 'A' closer */
+    margin-right: -5px; /* Adjust spacing to bring 'A' closer */
 }
 
 .logo .e {
-    margin-left: -3px; /* Adjust spacing to bring 'E' closer */
-    margin-right: -2.5px; /* Adjust spacing to bring 'E' closer */
+    margin-left: -4px; /* Adjust spacing to bring 'E' closer */
+    margin-right: -3px; /* Adjust spacing to bring 'E' closer */
 }
 
 .logo .s {
-    margin-left: -2.5px; /* Adjust spacing to bring 'S' closer */
+    margin-left: -3px; /* Adjust spacing to bring 'S' closer */
 }
 
 .favorites-container {
