@@ -56,76 +56,76 @@ body {
     font-weight: 700;
     color: #ffffff;
     position: relative;
-    z-index: 2; /* Ensure letters are on top */
-    -webkit-text-stroke: .3px #0a2540; /* Add text stroke for webkit browsers */
+    z-index: 2;
+    -webkit-text-stroke: .3px #0a2540; 
     /*text-shadow: -1px -1px 0 #0a2540, 1px -1px 0 #0a2540, -1px 1px 0 #0a2540, 1px 1px 0 #0a2540; /* Add text shadow for better support */
 }
 
 .logo .heart-v {
-    width: 75px; /* Adjust the size as needed */
-    height: 75px; /* Adjust the size as needed */
+    width: 75px; 
+    height: 75px; 
     background-image: url('/frontend/public/images/klipartz.com.png');
-    background-size: 75px 75px; /* Set specific size to match width and height */
+    background-size: 75px 75px; 
     background-repeat: no-repeat;
     background-position: center;
     display: inline-block;
-    margin: 0 -10px; /* Negative margin to overlap letters */
-    z-index: 1; /* Ensure it overlaps correctly */
-    transform: translateY(5px); /* Adjust this value to move the image down */
+    margin: 0 -10px; 
+    z-index: 1; 
+    transform: translateY(5px); 
 }
 
 .logo.large .heart-v {
-    width: 150px; /* Increase the size by 50% */
-    height: 150px; /* Increase the size by 50% */
-    background-size: 150px 150px; /* Adjust the background size */
-    margin: 0 -22px; /* Adjust the margin to overlap letters correctly */
+    width: 150px; 
+    height: 150px; 
+    background-size: 150px 150px; 
+    margin: 0 -22px; 
 }
 
 .logo .f {
-    margin-right: -3px; /* Adjust spacing to bring 'F' closer */
+    margin-right: -3px; 
 }
 
 .logo.large .f {
-    margin-right: -6px; /* Adjust spacing to bring 'F' closer */
+    margin-right: -6px;
 }
 
 .logo .a {
-    margin-left: -3px; /* Adjust spacing to bring 'A' closer */
-    margin-right: -10px; /* Adjust spacing to bring 'A' closer */
+    margin-left: -3px; 
+    margin-right: -10px; 
 }
 
 .logo.large .a {
-    margin-left: -6px; /* Adjust spacing to bring 'A' closer */
-    margin-right: -20px; /* Adjust spacing to bring 'A' closer */
+    margin-left: -6px; 
+    margin-right: -20px; 
 }
 
 .logo .e {
-    margin-left: -6px; /* Adjust spacing to bring 'E' closer */
-    margin-right: -.5px; /* Adjust spacing to bring 'E' closer */
+    margin-left: -6px; 
+    margin-right: -.5px; 
 }
 
 .logo.large .e {
-    margin-left: -12px; /* Adjust spacing to bring 'E' closer */
-    margin-right: -1px; /* Adjust spacing to bring 'E' closer */
+    margin-left: -12px; 
+    margin-right: -1px; 
 }
 
 .logo .s {
-    margin-left: -.5px; /* Adjust spacing to bring 'S' closer */
+    margin-left: -.5px; 
 }
 
 .logo.large .s {
-    margin-left: -1px; /* Adjust spacing to bring 'S' closer */
+    margin-left: -1px; 
 }
 
 .welcome-message {
     margin-left: 10px;
-    font-size: 1rem; /* Adjust size as needed */
+    font-size: 1rem; 
 }
 
 .favorites-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: left;
+    justify-content: center;
     padding: 20px;
 }
 
@@ -196,7 +196,7 @@ button:hover {
 
 .search-container {
     margin: 20px;
-    text-align: left;
+    text-align: center;
 }
 
 .search-container input {
@@ -212,7 +212,7 @@ button:hover {
 
 h2 {
     color: #ffffff;
-    text-align: center;
+    text-align: left;
     font-size: 2rem;
     font-weight: 300;
     line-height: 1.4;
@@ -228,7 +228,7 @@ h2 {
     color: #ffffff !important;
     height: 40px !important;
     display: flex !important;
-    align-items: center !important;
+    align-items: left !important;
 }
 
 .select__menu {
