@@ -45,11 +45,7 @@ body {
     font-family: 'Dancing Script', cursive;
     color: #ff6347;
     font-weight: 700;
-    margin-right: 3px; /* Add spacing to separate 'my' */
-}
-
-.logo.large .my {
-    margin-right: 6px; /* Double spacing for larger logo */
+    margin-right: 2px; /* Add spacing to separate 'my' */
 }
 
 .logo .f,
@@ -61,8 +57,8 @@ body {
     color: #ffffff;
     position: relative;
     z-index: 2; /* Ensure letters are on top */
-    -webkit-text-stroke: 0.3px #0a2540; /* Add text stroke for webkit browsers */
-    /* text-shadow: -1px -1px 0 #0a2540, 1px -1px 0 #0a2540, -1px 1px 0 #0a2540, 1px 1px 0 #0a2540; /* Add text shadow for better support */
+    -webkit-text-stroke: .3px #0a2540; /* Add text stroke for webkit browsers */
+    /*text-shadow: -1px -1px 0 #0a2540, 1px -1px 0 #0a2540, -1px 1px 0 #0a2540, 1px 1px 0 #0a2540; /* Add text shadow for better support */
 }
 
 .logo .heart-v {
@@ -79,8 +75,8 @@ body {
 }
 
 .logo.large .heart-v {
-    width: 150px; /* Increase the size */
-    height: 150px; /* Increase the size */
+    width: 150px; /* Increase the size by 50% */
+    height: 150px; /* Increase the size by 50% */
     background-size: 150px 150px; /* Adjust the background size */
     margin: 0 -22px; /* Adjust the margin to overlap letters correctly */
 }
@@ -454,6 +450,18 @@ form p {
 
     .search-container input {
         width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .logo.large {
+        font-size: 4rem; /* Reduce font size */
+    }
+
+    .logo.large .heart-v {
+        width: 100px; /* Reduce image size */
+        height: 100px; /* Reduce image size */
+        background-size: 100px 100px; /* Adjust the background size */
     }
 }
 
