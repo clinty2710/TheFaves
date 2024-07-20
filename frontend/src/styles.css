@@ -394,6 +394,13 @@ form p {
     }
 }
 
+@media (max-width: 400px) {
+    form input {
+        width: 90%;
+        margin: 0 auto; /* Center the input fields */
+    }
+}
+
 /* Responsive styles */
 @media (max-width: 1200px) {
     .favorite-item {
