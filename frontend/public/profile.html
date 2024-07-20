@@ -6,8 +6,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
+    <link rel="stylesheet" href="/path/to/your/css/styles.css"> <!-- Make sure to link to your CSS file -->
 </head>
 <body>
     <div id="root"></div>
+    <script>
+        // Fix for iOS Safari zoom issue
+        if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+            document.addEventListener('gesturestart', function (event) {
+                event.preventDefault();
+            });
+        }
+
+        // Ensure the page loads correctly without zoom issues
+        window.onload = function() {
+            document.body.style.zoom = "100%";
+        }
+    </script>
 </body>
 </html>
