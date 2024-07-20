@@ -396,7 +396,7 @@ form p {
 
 @media (max-width: 400px) {
     form input {
-        width: 90%; /* Reduce width for smaller screens */
+        width: 100%; /* Reduce width for smaller screens */
         margin-left: auto;
         margin-right: auto;
     }
