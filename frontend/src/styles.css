@@ -11,6 +11,7 @@ body {
     box-sizing: border-box;
     line-height: 1.6;
     font-weight: 300;
+    width: 100%;
 }
 
 .App-header {
@@ -394,18 +395,6 @@ form p {
     }
 }
 
-@media (max-width: 400px) {
-    form input {
-        width: 93.5%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    form div {
-        display: block; /* Keep labels on top of input fields */
-    }
-}
-
 /* Responsive styles */
 @media (max-width: 1200px) {
     .favorite-item {
@@ -518,6 +507,18 @@ form p {
 
     .logo.large .s {
         margin-left: 0px; /* Adjust spacing to bring 'S' closer */
+    }
+}
+
+@media (max-width: 400px) {
+    form input {
+        width: 93.5%; /* Adjust width for smaller screens */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    form div {
+        display: block; /* Keep labels on top of input fields */
     }
 }
 
