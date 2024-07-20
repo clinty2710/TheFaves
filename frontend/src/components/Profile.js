@@ -1,5 +1,3 @@
-// src/components/Profile.js
-
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../AuthContext';
 import { useUser } from './UserContext';
@@ -19,11 +17,8 @@ const Profile = () => {
   const { user, setUser } = useUser();
 
   useEffect(() => {
-    // Force a reload when the component mounts
-    if (!window.location.hash) {
-      window.location = window.location + '#loaded';
-      window.location.reload();
-    }
+    // Force scroll to the top when the component mounts
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
