@@ -453,7 +453,7 @@ form p {
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 500px) {
     .logo.large {
         font-size: 4rem; /* Reduce font size */
     }
@@ -463,7 +463,26 @@ form p {
         height: 100px; /* Reduce image size */
         background-size: 100px 100px; /* Adjust the background size */
     }
+
+    .logo.large .f {
+        margin-right: -1px; /* Adjust spacing to bring 'F' closer */
+    }
+
+    .logo.large .a {
+        margin-left: -1px; /* Adjust spacing to bring 'A' closer */
+        margin-right: -6px; /* Adjust spacing to bring 'A' closer */
+    }
+
+    .logo.large .e {
+        margin-left: -2px; /* Adjust spacing to bring 'E' closer */
+        margin-right: 0px; /* Adjust spacing to bring 'E' closer */
+    }
+
+    .logo.large .s {
+        margin-left: 0px; /* Adjust spacing to bring 'S' closer */
+    }
 }
+
 
 /* Custom Toast Notification Styles */
 .Toastify__toast {
