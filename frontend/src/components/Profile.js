@@ -19,6 +19,14 @@ const Profile = () => {
   const { user, setUser } = useUser();
 
   useEffect(() => {
+    // Force a reload when the component mounts
+    if (!window.location.hash) {
+      window.location = window.location + '#loaded';
+      window.location.reload();
+    }
+  }, []);
+
+  useEffect(() => {
     const fetchUserProfile = async () => {
       console.log("Fetching user profile...");
       try {
