@@ -25,7 +25,7 @@ body {
     align-items: center;
     font-size: 3rem;
     justify-content: center;
-    position: relative; /* To use absolute positioning for overlapping */
+    position: relative; 
 }
 
 .logo.large {
@@ -45,7 +45,7 @@ body {
     font-family: 'Dancing Script', cursive;
     color: #ff6347;
     font-weight: 700;
-    margin-right: 2px; /* Add spacing to separate 'my' */
+    margin-right: 2px; 
 }
 
 .logo .f,
@@ -202,6 +202,7 @@ button:hover {
 .search-container input {
     padding: 10px;
     width: 40%;
+    min-width: 200px;
     border-radius: 5px;
     border: 2px solid #ffffff;
     background-color: #1a374d;
@@ -512,4 +513,33 @@ form p {
 
 .Toastify__progress-bar--error {
     background: #ff4500;
+}
+
+/* Search container Responsive styles */
+@media (max-width: 1200px) {
+    .search-container input {
+        width: 60%;
+        min-width: 200px; /* Ensure the minimum width is maintained */
+    }
+}
+
+@media (max-width: 992px) {
+    .search-container input {
+        width: 80%;
+        min-width: 200px; /* Ensure the minimum width is maintained */
+    }
+}
+
+@media (max-width: 768px) {
+    .search-container input {
+        width: 90%;
+        min-width: 200px; /* Ensure the minimum width is maintained */
+    }
+}
+
+@media (max-width: 576px) {
+    .search-container input {
+        width: 100%;
+        min-width: 200px; /* Ensure the minimum width is maintained */
+    }
 }
