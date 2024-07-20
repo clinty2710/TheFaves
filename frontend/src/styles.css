@@ -125,7 +125,7 @@ body {
 .favorites-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: left;
     padding: 20px;
 }
 
@@ -453,7 +453,7 @@ form p {
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 550px) {
     .logo.large {
         font-size: 4rem; /* Reduce font size */
     }
