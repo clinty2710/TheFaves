@@ -339,12 +339,28 @@ form p {
         width: 60%;
         min-width: 250px; /* Ensure the minimum width is maintained */
     }
+    .select__control {
+        width: 60% !important;
+        min-width: 250px !important; /* Ensure the minimum width is maintained */
+    }
+    .select__menu {
+        width: 60% !important;
+        min-width: 250px !important; /* Ensure the minimum width is maintained */
+    }
 }
 
 @media (max-width: 992px) {
     .search-container input {
         width: 80%;
         min-width: 250px; /* Ensure the minimum width is maintained */
+    }
+    .select__control {
+        width: 80% !important;
+        min-width: 250px !important; /* Ensure the minimum width is maintained */
+    }
+    .select__menu {
+        width: 80% !important;
+        min-width: 250px !important; /* Ensure the minimum width is maintained */
     }
 }
 
@@ -353,12 +369,28 @@ form p {
         width: 90%;
         min-width: 250px; /* Ensure the minimum width is maintained */
     }
+    .select__control {
+        width: 90% !important;
+        min-width: 250px !important; /* Ensure the minimum width is maintained */
+    }
+    .select__menu {
+        width: 90% !important;
+        min-width: 250px !important; /* Ensure the minimum width is maintained */
+    }
 }
 
 @media (max-width: 576px) {
     .search-container input {
         width: 100%;
         min-width: 250px; /* Ensure the minimum width is maintained */
+    }
+    .select__control {
+        width: 100% !important;
+        min-width: 250px !important; /* Ensure the minimum width is maintained */
+    }
+    .select__menu {
+        width: 100% !important;
+        min-width: 250px !important; /* Ensure the minimum width is maintained */
     }
 }
 
@@ -382,15 +414,6 @@ form p {
         width: 180px;
         font-size: 0.9rem;
     }
-
-    .select__control,
-    .select__menu {
-        width: 60%;
-    }
-
-    .search-container input {
-        width: 60%;
-    }
 }
 
 @media (max-width: 992px) {
@@ -411,15 +434,6 @@ form p {
     button {
         width: 160px;
         font-size: 0.8rem;
-    }
-
-    .select__control,
-    .select__menu {
-        width: 80%;
-    }
-
-    .search-container input {
-        width: 80%;
     }
 }
 
@@ -442,15 +456,6 @@ form p {
         width: 140px;
         font-size: 0.7rem;
     }
-
-    .select__control,
-    .select__menu {
-        width: 90%;
-    }
-
-    .search-container input {
-        width: 90%;
-    }
 }
 
 @media (max-width: 576px) {
@@ -471,15 +476,6 @@ form p {
     button {
         width: 120px;
         font-size: 0.6rem;
-    }
-
-    .select__control,
-    .select__menu {
-        width: 100%;
-    }
-
-    .search-container input {
-        width: 100%;
     }
 }
 
@@ -512,7 +508,6 @@ form p {
         margin-left: 0px; /* Adjust spacing to bring 'S' closer */
     }
 }
-
 
 /* Custom Toast Notification Styles */
 .Toastify__toast {
