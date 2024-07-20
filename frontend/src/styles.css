@@ -212,7 +212,7 @@ button:hover {
 
 h2 {
     color: #ffffff;
-    text-align: left;
+    text-align: center;
     font-size: 2rem;
     font-weight: 300;
     line-height: 1.4;
@@ -228,7 +228,7 @@ h2 {
     color: #ffffff !important;
     height: 40px !important;
     display: flex !important;
-    align-items: left !important;
+    align-items: center !important;
 }
 
 .select__menu {
