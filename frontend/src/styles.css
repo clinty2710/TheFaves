@@ -394,6 +394,12 @@ form p {
     }
 }
 
+@media (max-width: 400px) {
+    form input {
+        width: 90%; /* Reduce width for smaller screens */
+    }
+}
+
 /* Responsive styles */
 @media (max-width: 1200px) {
     .favorite-item {
