@@ -394,6 +394,18 @@ form p {
     }
 }
 
+@media (max-width: 400px) {
+    form input {
+        width: 90%; /* Reduce width for smaller screens */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    form div {
+        display: block; /* Keep labels on top of input fields */
+    }
+}
+
 /* Responsive styles */
 @media (max-width: 1200px) {
     .favorite-item {
@@ -506,18 +518,6 @@ form p {
 
     .logo.large .s {
         margin-left: 0px; /* Adjust spacing to bring 'S' closer */
-    }
-}
-
-@media (max-width: 400px) {
-    form input {
-        width: 90%; /* Reduce width for smaller screens */
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    form div {
-        display: block; /* Keep labels on top of input fields */
     }
 }
 
