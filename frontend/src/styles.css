@@ -522,6 +522,60 @@ form p {
     }
 }
 
+/* Large Screen Styles */
+@media (min-width: 768px) {
+    /* General container layout */
+    .profile-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .left-panel {
+        width: 25%;
+        padding: 20px;
+        border-right: 2px solid #ff6347;
+    }
+
+    .right-panel {
+        width: 70%;
+        padding: 20px;
+        overflow-y: auto;
+    }
+
+    .favorites-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+    }
+
+    /* Individual sections */
+    .section {
+        margin-bottom: 40px;
+    }
+
+    h2 {
+        text-align: left;
+    }
+
+    .search-container {
+        margin: 0;
+    }
+
+    .search-container input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .favorites-container {
+        padding: 0;
+    }
+
+    .favorite-item {
+        width: 100%;
+    }
+}
+
 /* Custom Toast Notification Styles */
 .Toastify__toast {
     border-radius: 10px;
