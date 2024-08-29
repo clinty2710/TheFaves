@@ -90,23 +90,17 @@ const Profile = () => {
         </div>
         <span className="welcome-message">Welcome, {user.nickname}!</span>
       </header>
-      <div className="content-layout">
+
+      {/* Favorite Movies Section */}
+      <div className="section-container">
         <div className="search-column">
-          <div className="search-container" id="movies-search-container">
+          <div className="search-container">
             <h2>Favorite Movies</h2>
             <SearchMovies favorites={favorites} setFavorites={setFavorites} />
           </div>
-          <div className="search-container" id="music-search-container">
-            <h2>Favorite Music</h2>
-            <SearchMusic favorites={favorites} setFavorites={setFavorites} />
-          </div>
-          <div className="search-container" id="books-search-container">
-            <h2>Favorite Books</h2>
-            <SearchBooks favorites={favorites} setFavorites={setFavorites} />
-          </div>
         </div>
         <div className="favorites-column">
-          <div className="favorites-section" id="movies-favorites-section">
+          <div className="favorites-section">
             {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'movie').map(fav => (
               <div key={fav._id} className="favorite-item">
                 {fav.movie && fav.movie.poster_path ? (
@@ -119,7 +113,19 @@ const Profile = () => {
               </div>
             ))}
           </div>
-          <div className="favorites-section" id="music-favorites-section">
+        </div>
+      </div>
+
+      {/* Favorite Music Section */}
+      <div className="section-container">
+        <div className="search-column">
+          <div className="search-container">
+            <h2>Favorite Music</h2>
+            <SearchMusic favorites={favorites} setFavorites={setFavorites} />
+          </div>
+        </div>
+        <div className="favorites-column">
+          <div className="favorites-section">
             {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'music').map(fav => (
               <div key={fav._id} className="favorite-item">
                 {fav.music && fav.music.cover_image ? (
@@ -132,7 +138,19 @@ const Profile = () => {
               </div>
             ))}
           </div>
-          <div className="favorites-section" id="books-favorites-section">
+        </div>
+      </div>
+
+      {/* Favorite Books Section */}
+      <div className="section-container">
+        <div className="search-column">
+          <div className="search-container">
+            <h2>Favorite Books</h2>
+            <SearchBooks favorites={favorites} setFavorites={setFavorites} />
+          </div>
+        </div>
+        <div className="favorites-column">
+          <div className="favorites-section">
             {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'book').map(fav => (
               <div key={fav._id} className="favorite-item">
                 {fav.book && fav.book.cover_image ? (
@@ -148,6 +166,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
+
       <LogoutButton />
     </div>
   );

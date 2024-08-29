@@ -127,23 +127,25 @@ body {
     font-size: 1rem; 
 }
 
-.content-layout {
+.section-container {
     display: flex;
-    padding: 20px;
+    margin-bottom: 40px;
 }
 
 .search-column {
     flex: 1;
     max-width: 300px;
+    margin-right: 20px;
 }
 
 .favorites-column {
     flex: 2;
-    margin-left: 20px;
 }
 
 .favorites-section {
-    margin-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 .favorite-item {
@@ -284,21 +286,8 @@ button:hover {
     align-items: center !important;
 }
 
-/* Ensure search containers align horizontally with their respective sections */
-#movies-search-container {
-    top: 0; /* Start at the top */
-}
-
-#music-search-container {
-    top: calc(100vh + 20px); /* Adjust this value based on the height of the movies section */
-}
-
-#books-search-container {
-    top: calc(200vh + 40px); /* Adjust this value based on the height of the movies + music sections */
-}
-
 @media (max-width: 768px) {
-    .content-layout {
+    .section-container {
         flex-direction: column;
     }
 
