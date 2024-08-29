@@ -19,17 +19,14 @@ const Profile = () => {
   const { user, setUser } = useUser();
 
   useEffect(() => {
-    // Force scroll to the top when the component mounts
     window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
-      console.log("Fetching user profile...");
       try {
         setLoading(true);
         const response = await getUserProfile();
-        console.log("Profile data received:", response);
         if (response) {
           setUser(response);
           setError(null);
@@ -37,7 +34,6 @@ const Profile = () => {
           throw new Error('Failed to fetch profile data');
         }
       } catch (error) {
-        console.error('Profile fetch error:', error);
         setError(error.message);
       } finally {
         setLoading(false);
@@ -56,7 +52,6 @@ const Profile = () => {
       if (user && user._id) {
         try {
           const response = await axios.get(`/api/favorites/user/${user._id}`, { withCredentials: true });
-          console.log("User favorites fetched:", response.data);
           setFavorites(response.data);
         } catch (error) {
           console.error('Failed to fetch favorites:', error);
@@ -78,26 +73,12 @@ const Profile = () => {
     }
   };
 
-  if (loading) {
-    console.log("Loading Profile...");
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    console.log("Error loading profile:", error);
-    return <div>Error: {error}</div>;
-  }
-
-  if (!user) {
-    console.log("No user data received");
-    return <div>No user data available</div>;
-  }
-
-  console.log("User data available:", user);
-  console.log("Favorites data:", favorites);
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!user) return <div>No user data available</div>;
 
   return (
-    <div>
+    <div className="profile-container">
       <header className="profile-header">
         <div className="logo">
           <span className="my">my</span>
@@ -109,51 +90,63 @@ const Profile = () => {
         </div>
         <span className="welcome-message">Welcome, {user.nickname}!</span>
       </header>
-      <h2>Favorite Movies</h2>
-      <SearchMovies favorites={favorites} setFavorites={setFavorites} />
-      <div className="favorites-container">
-        {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'movie').map(fav => (
-          <div key={fav._id} className="favorite-item">
-            {fav.movie && fav.movie.poster_path ? (
-              <img src={`https://image.tmdb.org/t/p/w500${fav.movie.poster_path}`} alt={fav.movie.title} />
-            ) : (
-              <div>No poster available</div>
-            )}
-            <p>{fav.movie ? fav.movie.title : 'No Title'}</p>
-            <i className="fas fa-trash-alt delete-icon" onClick={() => handleRemoveFavorite(fav._id)}></i>
+      <div className="content-layout">
+        <div className="search-column">
+          <div className="search-container">
+            <h2>Favorite Movies</h2>
+            <SearchMovies favorites={favorites} setFavorites={setFavorites} />
           </div>
-        ))}
-      </div>
-      <h2>Favorite Music</h2>
-      <SearchMusic favorites={favorites} setFavorites={setFavorites} />
-      <div className="favorites-container">
-        {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'music').map(fav => (
-          <div key={fav._id} className="favorite-item">
-            {fav.music && fav.music.cover_image ? (
-              <img src={fav.music.cover_image} alt={fav.music.title} />
-            ) : (
-              <div>No cover available</div>
-            )}
-            <p>{fav.music ? fav.music.title : 'No Title'}</p>
-            <i className="fas fa-trash-alt delete-icon" onClick={() => handleRemoveFavorite(fav._id)}></i>
+          <div className="search-container">
+            <h2>Favorite Music</h2>
+            <SearchMusic favorites={favorites} setFavorites={setFavorites} />
           </div>
-        ))}
-      </div>
-      <h2>Favorite Books</h2>
-      <SearchBooks favorites={favorites} setFavorites={setFavorites} />
-      <div className="favorites-container">
-        {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'book').map(fav => (
-          <div key={fav._id} className="favorite-item">
-            {fav.book && fav.book.cover_image ? (
-              <img src={fav.book.cover_image} alt={fav.book.title} />
-            ) : (
-              <div>No cover available</div>
-            )}
-            <p>{fav.book ? fav.book.title : 'No Title'}</p>
-            <p>{fav.book ? fav.book.author : 'Unknown Author'}</p>
-            <i className="fas fa-trash-alt delete-icon" onClick={() => handleRemoveFavorite(fav._id)}></i>
+          <div className="search-container">
+            <h2>Favorite Books</h2>
+            <SearchBooks favorites={favorites} setFavorites={setFavorites} />
           </div>
-        ))}
+        </div>
+        <div className="favorites-column">
+          <div className="favorites-section">
+            {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'movie').map(fav => (
+              <div key={fav._id} className="favorite-item">
+                {fav.movie && fav.movie.poster_path ? (
+                  <img src={`https://image.tmdb.org/t/p/w500${fav.movie.poster_path}`} alt={fav.movie.title} />
+                ) : (
+                  <div>No poster available</div>
+                )}
+                <p>{fav.movie ? fav.movie.title : 'No Title'}</p>
+                <i className="fas fa-trash-alt delete-icon" onClick={() => handleRemoveFavorite(fav._id)}></i>
+              </div>
+            ))}
+          </div>
+          <div className="favorites-section">
+            {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'music').map(fav => (
+              <div key={fav._id} className="favorite-item">
+                {fav.music && fav.music.cover_image ? (
+                  <img src={fav.music.cover_image} alt={fav.music.title} />
+                ) : (
+                  <div>No cover available</div>
+                )}
+                <p>{fav.music ? fav.music.title : 'No Title'}</p>
+                <i className="fas fa-trash-alt delete-icon" onClick={() => handleRemoveFavorite(fav._id)}></i>
+              </div>
+            ))}
+          </div>
+          <div className="favorites-section">
+            {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'book').map(fav => (
+              <div key={fav._id} className="favorite-item">
+                {fav.book && fav.book.cover_image ? (
+                  <img src={fav.book.cover_image} alt={fav.book.title} />
+                ) : (
+                  <div>No cover available</div>
+                )}
+                <p>{fav.book ? fav.book.title : 'No Title'}</p>
+                <p>{fav.book ? fav.book.author : 'Unknown Author'}</p>
+                <i className="fas fa-trash-alt delete-icon" onClick={() => handleRemoveFavorite(fav._id)}></i>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
       <LogoutButton />
     </div>
