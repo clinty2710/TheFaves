@@ -99,8 +99,8 @@ const Profile = () => {
           </div>
         </div>
         <div className="favorites-column">
+        <h2>Favorite Movies</h2>
           <div className="favorites-section">
-          <h2>Favorite Movies</h2>
             {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'movie').map(fav => (
               <div key={fav._id} className="favorite-item">
                 {fav.movie && fav.movie.poster_path ? (
