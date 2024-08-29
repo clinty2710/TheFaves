@@ -59,9 +59,6 @@ body {
     position: relative;
     z-index: 2;
     -webkit-text-stroke: .3px #0a2540; 
-    -webkit-text-stroke: .3px #0a2540; 
-    /*text-shadow: -1px -1px 0 #0a2540, 1px -1px 0 #0a2540, -1px 1px 0 #0a2540, 1px 1px 0 #0a2540; /* Add text shadow for better support */
-    -webkit-text-stroke: .3px #0a2540;
     /*text-shadow: -1px -1px 0 #0a2540, 1px -1px 0 #0a2540, -1px 1px 0 #0a2540, 1px 1px 0 #0a2540; /* Add text shadow for better support */
 }
 
@@ -126,40 +123,25 @@ body {
     font-size: 1rem; 
 }
 
-/* Updated layout for search and content columns */
 .favorites-container {
-    display: grid;
-    grid-template-columns: 1fr 3fr; /* Left column for search, right for content */
-    gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     padding: 20px;
 }
 
-.search-column {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.content-column {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 20px;
-}
-
-/* Styling for individual favorite items */
 .favorite-item {
     background-color: #1a374d;
     border-radius: 10px;
+    margin: 10px;
     padding: 10px;
     text-align: center;
-    width: calc(33.33% - 20px); /* 3 items per row */
+    width: 150px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: relative;
     transition: width 0.3s, padding 0.3s, font-size 0.3s;
 }
 
-/* Image styling for favorite items */
 .favorite-item img {
     border-radius: 10px;
     width: 100%;
@@ -167,7 +149,12 @@ body {
     transition: opacity 0.3s;
 }
 
-/* Delete icon styling */
+.favorite-item p {
+    color: #ffffff;
+    margin: 10px 0;
+    font-size: 1rem;
+}
+
 .favorite-item .delete-icon {
     position: absolute;
     top: 10px;
@@ -181,17 +168,14 @@ body {
     transition: opacity 0.3s;
 }
 
-/* Show delete icon on hover */
 .favorite-item:hover .delete-icon {
     opacity: 1;
 }
 
-/* Reduce image opacity on hover */
 .favorite-item:hover img {
     opacity: 0.5;
 }
 
-/* Button styling */
 button {
     background-color: #ff6347;
     border: none;
@@ -211,8 +195,26 @@ button:hover {
     background-color: #ff4500;
 }
 
+.search-container {
+    margin: 20px;
+    text-align: center;
+}
+
+.search-container input {
+    padding: 10px;
+    width: 40%;
+    min-width: 250px;
+    border-radius: 5px;
+    border: 2px solid #ffffff;
+    background-color: #1a374d;
+    color: #ffffff !important;
+    margin-bottom: 20px;
+    height: 40px;
+}
+
 h2 {
     color: #ffffff;
+    text-align: center;
     font-size: 2rem;
     font-weight: 300;
     line-height: 1.4;
@@ -220,7 +222,7 @@ h2 {
 
 /* Styling for react-select components */
 .select__control {
-    width: 100% !important; /* Ensure full width inside the column */
+    width: 40% !important;
     margin: 0 auto !important;
     border-radius: 5px !important;
     border: 2px solid #ffffff !important;
@@ -232,8 +234,11 @@ h2 {
 }
 
 .select__menu {
-    width: 100% !important;
     background-color: #1a374d !important;
+    width: 40% !important;
+    margin: 0 auto !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
     border-left: 2px solid #ff6347 !important;
     border-right: 2px solid #ff6347 !important;
     border-bottom: 2px solid #ff6347 !important;
@@ -253,6 +258,7 @@ h2 {
     color: #ffffff !important;
 }
 
+/* Ensure the input text is white */
 .select__input {
     color: #ffffff !important;
     padding: 0 !important;
@@ -261,27 +267,11 @@ h2 {
     align-items: center !important;
 }
 
+/* Ensure the placeholder text is visible */
 .select__placeholder {
     color: #ffffff !important;
     display: flex !important;
     align-items: center !important;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .favorites-container {
-        grid-template-columns: 1fr; /* Stack columns on smaller screens */
-    }
-
-    .favorite-item {
-        width: calc(50% - 20px); /* 2 items per row on smaller screens */
-    }
-}
-
-@media (max-width: 576px) {
-    .favorite-item {
-        width: calc(100% - 20px); /* 1 item per row on the smallest screens */
-    }
 }
 
 /* Center the form on the login and register pages */
@@ -334,6 +324,7 @@ form p {
     text-align: center;
 }
 
+/* Style the links to match the login button color */
 .center-links a {
     color: #ff6347;
     text-decoration: none;
@@ -341,6 +332,194 @@ form p {
 
 .center-links a:hover {
     color: #ff4500;
+}
+
+/* Search container Responsive styles */
+@media (max-width: 1200px) {
+    .search-container input {
+        width: 60%;
+        min-width: 250px; /* Ensure the minimum width is maintained */
+    }
+    .select__control {
+        width: 60% !important;
+        min-width: 250px !important; /* Ensure the minimum width is maintained */
+    }
+    .select__menu {
+        width: 60% !important;
+        min-width: 250px !important; /* Ensure the minimum width is maintained */
+    }
+}
+
+@media (max-width: 992px) {
+    .search-container input {
+        width: 80%;
+        min-width: 250px; /* Ensure the minimum width is maintained */
+    }
+    .select__control {
+        width: 80% !important;
+        min-width: 250px !important; /* Ensure the minimum width is maintained */
+    }
+    .select__menu {
+        width: 80% !important;
+        min-width: 250px !important; /* Ensure the minimum width is maintained */
+    }
+}
+
+@media (max-width: 768px) {
+    .search-container input {
+        width: 90%;
+        min-width: 250px; /* Ensure the minimum width is maintained */
+    }
+    .select__control {
+        width: 90% !important;
+        min-width: 250px !important; /* Ensure the minimum width is maintained */
+    }
+    .select__menu {
+        width: 90% !important;
+        min-width: 250px !important; /* Ensure the minimum width is maintained */
+    }
+}
+
+@media (max-width: 576px) {
+    .search-container input {
+        width: 100%;
+        min-width: 250px; /* Ensure the minimum width is maintained */
+    }
+    .select__control {
+        width: 100% !important;
+        min-width: 250px !important; /* Ensure the minimum width is maintained */
+    }
+    .select__menu {
+        width: 100% !important;
+        min-width: 250px !important; /* Ensure the minimum width is maintained */
+    }
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+    .favorite-item {
+        width: 130px;
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    .favorite-item p {
+        font-size: 0.9rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    button {
+        width: 180px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .favorite-item {
+        width: 110px;
+        padding: 6px;
+        font-size: 0.8rem;
+    }
+
+    .favorite-item p {
+        font-size: 0.8rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    button {
+        width: 160px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .favorite-item {
+        width: 90px;
+        padding: 4px;
+        font-size: 0.7rem;
+    }
+
+    .favorite-item p {
+        font-size: 0.7rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    button {
+        width: 140px;
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .favorite-item {
+        width: 70px;
+        padding: 2px;
+        font-size: 0.6rem;
+    }
+
+    .favorite-item p {
+        font-size: 0.6rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    button {
+        width: 120px;
+        font-size: 0.6rem;
+    }
+}
+
+@media (max-width: 550px) {
+    .logo.large {
+        font-size: 4rem; /* Reduce font size */
+    }
+
+    .logo.large .heart-v {
+        width: 100px; /* Reduce image size */
+        height: 100px; /* Reduce image size */
+        background-size: 100px 100px; /* Adjust the background size */
+    }
+
+    .logo.large .f {
+        margin-right: -1px; /* Adjust spacing to bring 'F' closer */
+    }
+
+    .logo.large .a {
+        margin-left: -1px; /* Adjust spacing to bring 'A' closer */
+        margin-right: -6px; /* Adjust spacing to bring 'A' closer */
+    }
+
+    .logo.large .e {
+        margin-left: -2px; /* Adjust spacing to bring 'E' closer */
+        margin-right: 0px; /* Adjust spacing to bring 'E' closer */
+    }
+
+    .logo.large .s {
+        margin-left: 0px; /* Adjust spacing to bring 'S' closer */
+    }
+}
+
+@media (max-width: 400px) {
+    form input {
+        width: 93.5%; /* Adjust width for smaller screens */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    form div {
+        display: block; /* Keep labels on top of input fields */
+    }
 }
 
 /* Custom Toast Notification Styles */
