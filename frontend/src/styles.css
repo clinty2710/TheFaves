@@ -135,9 +135,6 @@ body {
 .search-column {
     flex: 1;
     max-width: 300px;
-    position: sticky;
-    top: 0; /* Keeps the search fields fixed as you scroll */
-    align-self: flex-start;
 }
 
 .favorites-column {
@@ -218,6 +215,7 @@ button:hover {
 
 .search-container {
     margin-bottom: 20px;
+    position: relative;
 }
 
 .search-container h2 {
@@ -284,6 +282,19 @@ button:hover {
     color: #ffffff !important;
     display: flex !important;
     align-items: center !important;
+}
+
+/* Ensure search containers align horizontally with their respective sections */
+#movies-search-container {
+    top: 0; /* Start at the top */
+}
+
+#music-search-container {
+    top: calc(100vh + 20px); /* Adjust this value based on the height of the movies section */
+}
+
+#books-search-container {
+    top: calc(200vh + 40px); /* Adjust this value based on the height of the movies + music sections */
 }
 
 @media (max-width: 768px) {
