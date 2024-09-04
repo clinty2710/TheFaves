@@ -40,7 +40,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="form-container">
       <header className="App-header">
         <div className="logo large">
           <span className="my">my</span>
@@ -55,15 +55,33 @@ const Login = () => {
       <form onSubmit={handleLogin}>
         <div>
           <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            autoComplete="email"
+          />
         </div>
         <div>
           <label htmlFor="password">Password:</label>
-          <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="current-password" />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            autoComplete="current-password"
+          />
         </div>
         <button type="submit">Login</button>
       </form>
-      <p className="center-links">Don't have an account? <Link to="/register">Register here</Link></p>
+      <p className="center-links">
+        Don't have an account? <Link to="/register">Register here</Link>
+      </p>
     </div>
   );
 };

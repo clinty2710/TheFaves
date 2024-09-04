@@ -35,7 +35,6 @@ const Register = () => {
       });
       console.log('Registration successful:', response.data);
       toast.success('Registration successful');
-      // Redirect to login after successful registration
       navigate('/login');
     } catch (error) {
       console.error('Registration failed:', error.response?.data?.message || error.message);
@@ -45,7 +44,7 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <div className="form-container">
       <header className="App-header">
         <div className="logo large">
           <span className="my">my</span>
@@ -60,20 +59,40 @@ const Register = () => {
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name:</label>
-          <input type="text" name="nickname" value={formData.nickname} onChange={handleChange} required />
+          <input
+            type="text"
+            name="nickname"
+            value={formData.nickname}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div>
           <label>Email:</label>
-          <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div>
           <label>Password:</label>
-          <input type="password" name="password" value={formData.password} onChange={handleChange} required />
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
         </div>
         <button type="submit">Register</button>
         {error && <p>{error}</p>}
       </form>
-      <p className="center-links">Already have an account? <Link to="/login">Login here</Link></p>
+      <p className="center-links">
+        Already have an account? <Link to="/login">Login here</Link>
+      </p>
     </div>
   );
 };
