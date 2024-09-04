@@ -32,8 +32,10 @@ body {
     align-items: center;
     font-size: 3rem;
     justify-content: center;
-    position: relative; 
+    margin: 0 auto; /* Ensure it's centered */
+    position: relative;
 }
+
 
 .logo.large {
     font-size: 6rem;
