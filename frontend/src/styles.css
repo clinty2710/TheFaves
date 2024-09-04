@@ -240,6 +240,72 @@ h2 {
     margin-bottom: 10px;
 }
 
+/* Center the form on the login and register pages */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #1a374d; /* Added background for better appearance */
+    padding: 20px; /* Add padding inside the form */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+form div {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+form input {
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: 2px solid #ffffff;
+    background-color: #1a374d;
+    color: #ffffff;
+}
+
+form button {
+    width: 100%; /* Stretch the button to full width of the form */
+    font-size: 1rem;
+    display: block;
+    margin: 10px auto;
+    font-weight: 400;
+}
+
+form p {
+    color: #ff6347;
+    text-align: center;
+}
+
+/* Ensure the orange line spans across the entire page */
+.App-header {
+    border-bottom: 2px solid #ff6347;
+    width: 100%;
+}
+
+.center-links {
+    text-align: center;
+}
+
+.center-links a {
+    color: #ff6347;
+    text-decoration: none;
+}
+
+.center-links a:hover {
+    color: #ff4500;
+}
+
 .select__control {
     width: 100% !important;
     margin: 0 auto !important;
@@ -286,76 +352,6 @@ h2 {
     display: flex !important;
     align-items: center !important;
 }
-
-/* Begin Login and Register form adjustments */
-
-.form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-}
-
-form {
-    max-width: 400px;
-    width: 100%;
-    background-color: #1a374d;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-form div {
-    margin-bottom: 15px;
-    width: 100%;
-}
-
-form label {
-    color: #ffffff;
-    font-weight: 300;
-}
-
-form input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 2px solid #ffffff;
-    background-color: #1a374d;
-    color: #ffffff;
-}
-
-form button {
-    width: 100%;
-    padding: 10px;
-    background-color: #ff6347;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: 400;
-    color: #ffffff;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-form button:hover {
-    background-color: #ff4500;
-}
-
-.center-links {
-    text-align: center;
-    margin-top: 15px;
-}
-
-h2 {
-    color: #ffffff;
-    text-align: center;
-    font-size: 2rem;
-    font-weight: 300;
-    margin-bottom: 20px;
-}
-
-/* End Login and Register form adjustments */
 
 @media (max-width: 768px) {
     .section-container {
