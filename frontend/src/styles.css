@@ -248,7 +248,6 @@ form {
     justify-content: center;
     max-width: 400px;
     margin: 0 auto;
-    background-color: #1a374d; /* Added background for better appearance */
     padding: 20px; /* Add padding inside the form */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
@@ -275,7 +274,7 @@ form input {
 }
 
 form button {
-    width: 100%; /* Stretch the button to full width of the form */
+    width: 100%; 
     font-size: 1rem;
     display: block;
     margin: 10px auto;
