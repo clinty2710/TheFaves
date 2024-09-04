@@ -24,6 +24,7 @@ body {
     padding: 20px;
     background-color: #0a2540;
     border-bottom: 2px solid #ff6347;
+    width: 100%; /* Ensure the orange line spans across the entire page */
 }
 
 .logo {
@@ -248,9 +249,10 @@ form {
     justify-content: center;
     max-width: 400px;
     margin: 0 auto;
-    padding: 20px; /* Add padding inside the form */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    background-color: #1a374d;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 form div {
@@ -274,7 +276,7 @@ form input {
 }
 
 form button {
-    width: 100%; 
+    width: 150px;
     font-size: 1rem;
     display: block;
     margin: 10px auto;
@@ -284,12 +286,6 @@ form button {
 form p {
     color: #ff6347;
     text-align: center;
-}
-
-/* Ensure the orange line spans across the entire page */
-.App-header {
-    border-bottom: 2px solid #ff6347;
-    width: 100%;
 }
 
 .center-links {
