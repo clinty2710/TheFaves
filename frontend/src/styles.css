@@ -1,4 +1,4 @@
-/* styles.css/ */
+/* styles.css */
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&family=Dancing+Script:wght@700&display=swap');
 
@@ -139,26 +139,33 @@ body {
     flex: 1;
     max-width: 300px;
     margin-right: 20px;
-    border-right: 2px solid #ff6347; /* Vertical line separating columns */
-    padding-right: 20px; /* Add space between content and line */
+    border-right: 2px solid #ff6347; /* Vertical line to separate columns */
 }
 
 .favorites-column {
     flex: 2;
 }
 
+/* Horizontal lines between sections */
+.favorites-movies {
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ff6347;
+}
+
+.favorites-music {
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ff6347;
+}
+
+.favorites-books {
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ff6347;
+}
+
 .favorites-section {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    margin-bottom: 40px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid #ff6347; /* Horizontal line separating sections */
-}
-
-.favorites-section:last-child {
-    border-bottom: none; /* No bottom border for the last section */
-    padding-bottom: 0;
 }
 
 .favorite-item {
