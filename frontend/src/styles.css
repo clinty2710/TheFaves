@@ -140,7 +140,6 @@ body {
     flex: 1;
     max-width: 300px;
     margin-right: 20px;
-    border-right: 2px solid #ff6347; /* Vertical line to separate columns */
     padding-bottom: 20px; /* Align the bottom padding with the right column */
 }
 
