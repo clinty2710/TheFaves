@@ -146,26 +146,13 @@ body {
     flex: 2;
 }
 
-/* Horizontal lines between sections */
-.favorites-movies {
-    padding-bottom: 20px;
-    border-bottom: 2px solid #ff6347;
-}
-
-.favorites-music {
-    padding-bottom: 20px;
-    border-bottom: 2px solid #ff6347;
-}
-
-.favorites-books {
-    padding-bottom: 20px;
-    border-bottom: 2px solid #ff6347;
-}
-
+/* Orange horizontal line at the bottom of each container */
 .favorites-section {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ff6347; /* Orange horizontal line for each section */
 }
 
 .favorite-item {
