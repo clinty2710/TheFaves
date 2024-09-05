@@ -32,7 +32,7 @@ body {
     align-items: center;
     font-size: 3rem;
     justify-content: center;
-    margin: 0 auto; /* Ensure it's centered */
+    margin: 0; /* Ensure it's centered */
     position: relative;
 }
 
