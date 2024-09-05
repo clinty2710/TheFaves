@@ -142,6 +142,13 @@ body {
     border-right: 2px solid #ff6347; /* Vertical line to separate columns */
 }
 
+/* Orange horizontal lines in the left search column */
+.search-container {
+    margin-bottom: 20px;
+    position: relative;
+    border-bottom: 2px solid #ff6347; /* Add orange horizontal line */
+}
+
 .favorites-column {
     flex: 2;
 }
@@ -222,11 +229,6 @@ button:hover {
     background-color: #ff4500;
 }
 
-.search-container {
-    margin-bottom: 20px;
-    position: relative;
-}
-
 .search-container input {
     padding: 10px;
     width: 100%;
@@ -240,7 +242,7 @@ button:hover {
 
 h2 {
     color: #ffffff;
-    text-align: left;
+    text-align: center;
     font-size: 1.5rem;
     font-weight: 300;
     line-height: 1.4;
