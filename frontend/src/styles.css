@@ -141,12 +141,14 @@ body {
     max-width: 300px;
     margin-right: 20px;
     border-right: 2px solid #ff6347; /* Vertical line to separate columns */
+    padding-bottom: 20px; /* Align the bottom padding with the right column */
 }
 
 /* Orange horizontal lines in the left search column */
 .search-container {
     margin-bottom: 20px;
     position: relative;
+    padding-bottom: 20px; /* Ensure padding matches favorites-section */
     border-bottom: 2px solid #ff6347; /* Add orange horizontal line */
 }
 
@@ -243,7 +245,7 @@ button:hover {
 
 h2 {
     color: #ffffff;
-    text-align: center;
+    text-align: left;
     font-size: 1.5rem;
     font-weight: 300;
     line-height: 1.4;
