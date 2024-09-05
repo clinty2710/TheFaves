@@ -34,11 +34,11 @@ body {
     justify-content: center;
     margin: 0 auto; /* Ensure it's centered */
     position: relative;
+    margin-left: 0px;
 }
 
 .logo.large {
     font-size: 6rem;
-    margin-left: -30px;
 }
 
 .profile-header {
