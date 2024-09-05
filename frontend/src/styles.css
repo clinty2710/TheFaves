@@ -140,6 +140,7 @@ body {
     flex: 1;
     max-width: 300px;
     margin-right: 20px;
+    border-right: 2px solid #ff6347; /* Vertical line to separate columns */
     padding-bottom: 20px; /* Align the bottom padding with the right column */
 }
 
@@ -148,7 +149,6 @@ body {
     margin-bottom: 20px;
     position: relative;
     padding-bottom: 20px; /* Ensure padding matches favorites-section */
-    border-bottom: 2px solid #ff6347; /* Add orange horizontal line */
 }
 
 .favorites-column {
