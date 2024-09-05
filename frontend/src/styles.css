@@ -39,6 +39,7 @@ body {
 
 .logo.large {
     font-size: 6rem;
+    margin-left: -30px;
 }
 
 .profile-header {
