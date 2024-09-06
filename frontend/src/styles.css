@@ -432,6 +432,6 @@ form p {
         background-color: transparent; 
     }
     .search-column {
-        border-right: 2px solid transparent; 
+        border-right: none; 
     }
 }
