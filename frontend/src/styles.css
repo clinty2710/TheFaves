@@ -428,4 +428,7 @@ form p {
     .vertical-line-header {
         background-color: #0a2540;
     }
+    .search-column {
+        border-right: 2px solid #0a2540;
+    }
 }
