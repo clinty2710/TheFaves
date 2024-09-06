@@ -43,6 +43,7 @@ body {
     margin-left: -30px;
 }
 
+/* Adjust margin and padding below the header */
 .profile-header {
     display: flex;
     align-items: center;
@@ -51,23 +52,18 @@ body {
     background-color: #0a2540;
     border-bottom: 2px solid #ff6347;
     position: relative;
+    margin-bottom: 15px; /* Add some margin to create space below the header */
 }
 
+/* Adjust the vertical line */
 .vertical-line {
     position: absolute;
-    height: calc(100% + 20px); /* Extend the line to create space above and below */
+    height: calc(100% + 20px); /* Extend the line to create more space above and below */
     width: 2px;
     background-color: #ff6347;
-    top: -10px; /* Adjust this to create space above the header */
-    left: 320px; /* Position the line to align with the left column */
+    top: -10px; /* Adjust to match the top of the page */
+    left: 310px; /* Position it to align with the search column */
     z-index: 10; /* Ensure the line appears above other elements */
-}
-
-/* Vertical line below the header */
-.section-container .vertical-line {
-    margin-bottom: 20px; /* Add spacing at the bottom to match the left column */
-    border-left: 2px solid #ff6347;
-    height: 100%;
 }
 
 .logo .my {
@@ -150,16 +146,24 @@ body {
     font-size: 1rem;
 }
 
+/* Adjust the vertical line for section containers */
+.section-container .vertical-line {
+    margin-bottom: 20px; /* Match the padding and margins */
+    border-left: 2px solid #ff6347;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* Ensure margin and padding consistency between sections */
 .section-container {
     display: flex;
     margin-bottom: 0;
+    padding-top: 10px; /* Add padding for consistency */
 }
 
-.section-divider {
-    border-bottom: 2px solid #ff6347;
-    margin: 10px 0; /* Equalize the margin top and bottom */
-}
-
+/* Adjust spacing in the search column to align with the vertical line */
 .search-column {
     flex: 1;
     max-width: 300px;
@@ -168,6 +172,14 @@ body {
     border-right: 2px solid #ff6347; /* Vertical line */
     position: relative;
     padding: 5px;
+    padding-top: 15px; /* Adjust top padding to match other lines */
+}
+
+/* Adjust the margin and padding of the section-divider for consistency */
+.section-divider {
+    border-bottom: 2px solid #ff6347;
+    margin: 10px 0;
+    padding-top: 10px; /* Add padding to balance the spacing */
 }
 
 .favorites-column {
