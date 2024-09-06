@@ -60,7 +60,7 @@ body {
     width: 2px;
     background-color: #ff6347;
     top: -10px; /* Adjust the top to keep space above the logo */
-    left: 370px; /* Ensure it aligns with the vertical lines below */
+    left: 270px; /* Ensure it aligns with the vertical lines below */
     z-index: 10;
 }
 
