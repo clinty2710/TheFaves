@@ -53,13 +53,13 @@ body {
 }
 
 /* styles.css */
-.vertical-line-top {
-    width: 2px; /* Thickness of the line */
-    height: 60px; /* Adjust the height as needed */
-    background-color: #ff6347; /* Orange color */
+.vertical-line-right {
     position: absolute;
-    top: 0;
-    left: 20px; /* Adjust based on where you want it */
+    top: 0; /* Starting from the top of the profile-header */
+    bottom: 0; /* Spans the entire height of the header */
+    left: 100%; /* Places it immediately to the right of the logo */
+    width: 2px; /* Thickness of the line */
+    background-color: #ff6347; /* Orange color */
 }
 
 .logo .my {

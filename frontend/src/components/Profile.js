@@ -88,7 +88,7 @@ const Profile = () => {
           <span className="e">E</span>
           <span className="s">S</span>
         </div>
-        <div className="vertical-line-top"></div> {/* Moved inside profile-header */}
+        <div className="vertical-line-right"></div> {/* Vertical line to the right of logo */}
         <span className="welcome-message">Welcome, {user.nickname}!</span>
       </header>
 
