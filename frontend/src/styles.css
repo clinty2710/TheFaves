@@ -316,8 +316,8 @@ form p {
 }
 
 .select__control {
-    width: 95% !important;
-    margin: 0 auto !important;
+    width: 100% !important;
+    margin: 5 auto !important;
     border-radius: 5px !important;
     border: 2px solid #ffffff !important;
     background-color: #1a374d !important;
