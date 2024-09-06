@@ -393,28 +393,37 @@ form p {
     align-items: center !important;
 }
 
-/* Responsive behavior for favorite items */
-@media (max-width: 1200px) {
-    .favorite-item {
-        width: calc(25% - 20px); /* 4 items per row */
-    }
-}
-
-@media (max-width: 992px) {
-    .favorite-item {
-        width: calc(33.33% - 20px); /* 3 items per row */
-    }
-}
-
 @media (max-width: 768px) {
+    .section-container {
+        flex-direction: column;
+    }
+
+    .search-column, .favorites-column {
+        max-width: 100%;
+        margin-left: 0;
+    }
+
+    .favorites-section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
     .favorite-item {
-        width: calc(50% - 20px); /* 2 items per row */
+        width: calc(33.33% - 20px);
+        margin-bottom: 20px;
     }
 }
 
 @media (max-width: 576px) {
     .favorite-item {
-        width: calc(100% - 20px); /* 1 item per row */
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 400px) {
+    .favorite-item {
+        width: calc(100% - 20px);
     }
 }
 
