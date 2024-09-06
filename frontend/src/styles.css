@@ -52,13 +52,14 @@ body {
     position: relative; 
 }
 
+/* styles.css */
 .vertical-line-top {
+    width: 2px; /* Thickness of the line */
+    height: 60px; /* Adjust the height as needed */
+    background-color: #ff6347; /* Orange color */
     position: absolute;
     top: 0;
-    left: calc(300px + 20px); 
-    height: 100%; 
-    width: 2px;
-    background-color: #ff6347;
+    left: 20px; /* Adjust based on where you want it */
 }
 
 .logo .my {

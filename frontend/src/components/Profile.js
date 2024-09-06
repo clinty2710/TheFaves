@@ -1,4 +1,4 @@
-//Profile.js
+// Profile.js
 
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../AuthContext';
@@ -88,7 +88,7 @@ const Profile = () => {
           <span className="e">E</span>
           <span className="s">S</span>
         </div>
-        <div className="vertical-line-top"></div> {/* Vertical line added */}
+        <div className="vertical-line-top"></div> {/* Moved inside profile-header */}
         <span className="welcome-message">Welcome, {user.nickname}!</span>
       </header>
 
@@ -117,7 +117,6 @@ const Profile = () => {
         </div>
       </div>
 
-      {/* Divider line between sections */}
       <div className="section-divider"></div>
 
       {/* Favorite Music Section */}
@@ -145,7 +144,6 @@ const Profile = () => {
         </div>
       </div>
 
-      {/* Divider line between sections */}
       <div className="section-divider"></div>
 
       {/* Favorite Books Section */}
