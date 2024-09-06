@@ -91,6 +91,7 @@ const Profile = () => {
         {/* Add vertical line here */}
         <div className="vertical-line-header"></div>
         <span className="welcome-message">Welcome, {user.nickname}!</span>
+        <LogoutButton />
       </header>
 
       {/* Favorite Movies Section */}
@@ -172,7 +173,6 @@ const Profile = () => {
           </div>
         </div>
       </div>
-
       <LogoutButton />
     </div>
   );
