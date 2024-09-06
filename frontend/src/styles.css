@@ -266,7 +266,6 @@ button:hover {
     background-color: #1a374d;
     color: #ffffff !important;
     margin-bottom: 20px;
-    margin-right: 50px;
     height: 40px;
 }
 
@@ -346,7 +345,7 @@ form p {
 
 .select__control {
     width: 100% !important;
-    margin: 5 auto !important;
+    margin: 10 !important;
     border-radius: 5px !important;
     border: 2px solid #ffffff !important;
     background-color: #1a374d !important;
