@@ -49,14 +49,17 @@ body {
     padding: 20px;
     background-color: #0a2540;
     border-bottom: 2px solid #ff6347;
-    position: relative; /* To position vertical line */
+    position: relative;
 }
 
-.vertical-line-right {
-    height: 100%; /* Full height of the header */
+.vertical-line {
+    position: absolute;
+    height: 100%;
     width: 2px;
     background-color: #ff6347;
-    margin-left: 20px; /* Optional spacing */
+    top: 0;
+    left: 50%; /* Adjust this value based on where you want the line */
+    transform: translateX(-50%); /* Center the line if needed */
 }
 
 .logo .my {

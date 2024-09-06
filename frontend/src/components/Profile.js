@@ -89,7 +89,7 @@ const Profile = () => {
           <span className="s">S</span>
         </div>
         {/* Add vertical line here */}
-        <div className="vertical-line-right"></div>
+        <div className="vertical-line"></div>
         <span className="welcome-message">Welcome, {user.nickname}!</span>
       </header>
 
