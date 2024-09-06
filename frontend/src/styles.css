@@ -56,12 +56,12 @@ body {
 
 .vertical-line-header {
     position: absolute;
-    height: calc(100% + 20px); /* Extend height to ensure spacing */
+    height: calc(100% - 10px); /* Reduce height to stop before the horizontal line */
     width: 2px;
     background-color: #ff6347;
-    top: -10px; /* Add space above the header */
-    left: 320px; /* Ensure the line aligns with the vertical lines in the section containers */
-    z-index: 10; /* Ensure the line is visible */
+    top: -10px; /* Adjust the top to keep space above the logo */
+    left: 320px; /* Ensure it aligns with the vertical lines below */
+    z-index: 10;
 }
 
 .logo .my {
@@ -425,7 +425,7 @@ form p {
 }
 
 @media (max-width: 768px) {
-    .vertical-line {
+    .vertical-line-header {
         left: 240px; /* Adjust this value based on mobile layout */
     }
 }
