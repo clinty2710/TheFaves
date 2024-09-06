@@ -170,7 +170,6 @@ body {
     border-right: 2px solid #ff6347; /* Vertical line */
     position: relative;
     padding: 5px;
-    padding-right: 5px;
     padding-top: 15px; /* Adjust top padding to match other lines */
 }
 
