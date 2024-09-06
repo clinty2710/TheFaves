@@ -79,6 +79,8 @@ const Profile = () => {
 
   return (
     <div className="profile-container">
+      <div className="vertical-line-top"></div> {/* Vertical line added */}
+
       <header className="profile-header">
         <div className="logo">
           <span className="my">my</span>

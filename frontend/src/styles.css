@@ -49,6 +49,16 @@ body {
     padding: 20px;
     background-color: #0a2540;
     border-bottom: 2px solid #ff6347;
+    position: relative; 
+}
+
+.vertical-line-top {
+    position: absolute;
+    top: 0;
+    left: calc(300px + 20px); 
+    height: 100%; 
+    width: 2px;
+    background-color: #ff6347;
 }
 
 .logo .my {
