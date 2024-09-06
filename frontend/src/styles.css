@@ -164,7 +164,7 @@ body {
 /* Adjust spacing in the search column to align with the vertical line */
 .search-column {
     flex: 1;
-    max-width: 300px;
+    max-width: 250px;
     margin-right: 10px;
     margin-left: 10px;
     border-right: 2px solid #ff6347; /* Vertical line */
