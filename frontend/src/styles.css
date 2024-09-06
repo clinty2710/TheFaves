@@ -43,7 +43,6 @@ body {
     margin-left: -30px;
 }
 
-/* Adjust margin and padding below the header */
 .profile-header {
     display: flex;
     align-items: center;
@@ -52,18 +51,17 @@ body {
     background-color: #0a2540;
     border-bottom: 2px solid #ff6347;
     position: relative;
-    margin-bottom: 15px; /* Add some margin to create space below the header */
+    margin-bottom: 20px; /* Adjust space below the header */
 }
 
-/* Adjust the vertical line */
-.vertical-line {
+.vertical-line-header {
     position: absolute;
-    height: calc(100% + 20px); /* Extend the line to create more space above and below */
+    height: calc(100% + 20px); /* Extend height to ensure spacing */
     width: 2px;
     background-color: #ff6347;
-    top: -10px; /* Adjust to match the top of the page */
-    left: 310px; /* Position it to align with the search column */
-    z-index: 10; /* Ensure the line appears above other elements */
+    top: -10px; /* Add space above the header */
+    left: 320px; /* Ensure the line aligns with the vertical lines in the section containers */
+    z-index: 10; /* Ensure the line is visible */
 }
 
 .logo .my {
