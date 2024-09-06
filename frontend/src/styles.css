@@ -284,7 +284,8 @@ h1 {
     font-size: 1.5rem;
     font-weight: 300;
     line-height: 1.4;
-    margin-bottom: 10px;
+    margin-top: 15px;
+    margin-bottom: 5px;
 }
 
 form {
@@ -294,7 +295,7 @@ form {
     justify-content: center;
     max-width: 400px;
     margin: 0 auto;
-    padding: 30px;
+    padding: 20px;
 }
 
 form div {
