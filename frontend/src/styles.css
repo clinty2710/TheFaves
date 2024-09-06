@@ -345,7 +345,8 @@ form p {
 
 .select__control {
     width: 100% !important;
-    margin: 10 !important;
+    margin: 5 auto !important;
+    margin-right: 10;
     border-radius: 5px !important;
     border: 2px solid #ffffff !important;
     background-color: #1a374d !important;
