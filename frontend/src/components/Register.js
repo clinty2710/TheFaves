@@ -55,7 +55,7 @@ const Register = () => {
           <span className="s">S</span>
         </div>
       </header>
-      <h2>Register</h2>
+      <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name:</label>
