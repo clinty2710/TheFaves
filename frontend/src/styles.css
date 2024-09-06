@@ -55,11 +55,19 @@ body {
 
 .vertical-line {
     position: absolute;
-    height: calc(100% + 20px); /* Extends the height of the line to create space */
+    height: calc(100% + 20px); /* Extend the line to create space above and below */
     width: 2px;
     background-color: #ff6347;
-    top: -10px; /* Moves the line slightly above the header */
-    left: 320px; /* Matches the left column’s width */
+    top: -10px; /* Adjust this to create space above the header */
+    left: 320px; /* Position the line to align with the left column */
+    z-index: 10; /* Ensure the line appears above other elements */
+}
+
+/* Vertical line below the header */
+.section-container .vertical-line {
+    margin-bottom: 20px; /* Add spacing at the bottom to match the left column */
+    border-left: 2px solid #ff6347;
+    height: 100%;
 }
 
 .logo .my {
