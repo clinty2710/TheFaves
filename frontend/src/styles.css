@@ -17,6 +17,7 @@ body {
 .profile-container {
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
 }
 
 .App-header {
@@ -43,6 +44,7 @@ body {
     margin-left: -30px;
 }
 
+/* Profile Header */
 .profile-header {
     display: flex;
     align-items: center;
@@ -53,21 +55,15 @@ body {
     position: relative;
 }
 
+/* Vertical Line after the header */
 .vertical-line {
-    position: absolute;
-    height: calc(100% + 20px); /* Extend the line to create space above and below */
+    height: calc(100% + 20px); /* Extend the line further down */
     width: 2px;
     background-color: #ff6347;
-    top: -10px; /* Adjust this to create space above the header */
-    left: 320px; /* Position the line to align with the left column */
-    z-index: 10; /* Ensure the line appears above other elements */
-}
-
-/* Vertical line below the header */
-.section-container .vertical-line {
-    margin-bottom: 20px; /* Add spacing at the bottom to match the left column */
-    border-left: 2px solid #ff6347;
-    height: 100%;
+    position: absolute;
+    top: 20px; /* Adjust this value to move it further down */
+    left: 320px; /* Align this with the vertical line below */
+    z-index: 10;
 }
 
 .logo .my {
@@ -152,12 +148,21 @@ body {
 
 .section-container {
     display: flex;
-    margin-bottom: 0;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.section-container .vertical-line {
+    border-left: 2px solid #ff6347;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 
 .section-divider {
+    margin-top: 10px; /* Adjust this to create more space between the header and content */
     border-bottom: 2px solid #ff6347;
-    margin: 10px 0; /* Equalize the margin top and bottom */
 }
 
 .search-column {
