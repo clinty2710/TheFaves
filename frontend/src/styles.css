@@ -155,10 +155,10 @@ body {
     flex: 1;
     max-width: 300px;
     margin-right: 20px;
-    margin-left: 20px;
+    margin-left: 10px;
     border-right: 2px solid #ff6347; /* Vertical line */
     position: relative;
-    padding: 20px;
+    padding: 5px;
 }
 
 .favorites-column {
