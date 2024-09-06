@@ -165,11 +165,12 @@ body {
 .search-column {
     flex: 1;
     max-width: 250px;
-    margin-right: 50px;
+    margin-right: 20px;
     margin-left: 10px; /* Increase left margin for consistency */
     border-right: 2px solid #ff6347; /* Vertical line */
     position: relative;
     padding: 5px;
+    padding-right: 5px;
     padding-top: 15px; /* Adjust top padding to match other lines */
 }
 
