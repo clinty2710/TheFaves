@@ -429,9 +429,9 @@ form p {
 
 @media (max-width: 768px) {
     .vertical-line-header {
-        background-color: #0a2540;
+        background-color: transparent; 
     }
     .search-column {
-        border-right: 2px solid #0a2540;
+        border-right: 2px solid transparent; 
     }
 }
