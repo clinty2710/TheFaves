@@ -58,8 +58,7 @@ body {
     width: 2px;
     background-color: #ff6347;
     top: 0;
-    left: 50%; /* Adjust this value based on where you want the line */
-    transform: translateX(-50%); /* Center the line if needed */
+    left: 320px; /* Adjust the value to match the left column's width */
 }
 
 .logo .my {
@@ -392,5 +391,11 @@ form p {
 @media (max-width: 400px) {
     .favorite-item {
         width: calc(100% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .vertical-line {
+        left: 240px; /* Adjust the value for smaller screens */
     }
 }
