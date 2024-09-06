@@ -154,7 +154,7 @@ body {
 .search-column {
     flex: 1;
     max-width: 300px;
-    margin-right: 20px;
+    margin-right: 0px;
     border-right: 2px solid #ff6347; /* Vertical line */
     position: relative;
 }
