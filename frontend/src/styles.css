@@ -58,7 +58,7 @@ body {
     width: 2px;
     background-color: #ff6347;
     top: 0;
-    left: 320px; /* Adjust the value to match the left column's width */
+    left: 320px; /* Match this with the left column’s width */
 }
 
 .logo .my {
@@ -155,8 +155,8 @@ body {
     flex: 1;
     max-width: 300px;
     margin-right: 20px;
-    border-right: 2px solid #ff6347;
-
+    border-right: 2px solid #ff6347; /* Vertical line */
+    position: relative;
 }
 
 .favorites-column {
@@ -396,6 +396,6 @@ form p {
 
 @media (max-width: 768px) {
     .vertical-line {
-        left: 240px; /* Adjust the value for smaller screens */
+        left: 240px; /* Adjust this value based on mobile layout */
     }
 }
