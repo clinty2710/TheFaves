@@ -55,12 +55,11 @@ body {
 
 .vertical-line {
     position: absolute;
-    height: 100%;
+    height: calc(100% + 20px); /* Extends the height of the line to create space */
     width: 2px;
     background-color: #ff6347;
-    top: 0;
-    left: 320px; /* Match this with the left column’s width */
-    padding-bottom: 2px;
+    top: -10px; /* Moves the line slightly above the header */
+    left: 320px; /* Matches the left column’s width */
 }
 
 .logo .my {
