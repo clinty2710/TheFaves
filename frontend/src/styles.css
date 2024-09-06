@@ -49,17 +49,14 @@ body {
     padding: 20px;
     background-color: #0a2540;
     border-bottom: 2px solid #ff6347;
-    position: relative; 
+    position: relative; /* To position vertical line */
 }
 
-/* styles.css */
 .vertical-line-right {
-    position: absolute;
-    top: 0; /* Starting from the top of the profile-header */
-    bottom: 0; /* Spans the entire height of the header */
-    left: 100%; /* Places it immediately to the right of the logo */
-    width: 2px; /* Thickness of the line */
-    background-color: #ff6347; /* Orange color */
+    height: 100%; /* Full height of the header */
+    width: 2px;
+    background-color: #ff6347;
+    margin-left: 20px; /* Optional spacing */
 }
 
 .logo .my {
