@@ -51,7 +51,7 @@ body {
     background-color: #0a2540;
     border-bottom: 2px solid #ff6347;
     position: relative;
-    margin-bottom: 20px; /* Adjust space below the header */
+    margin-bottom: 10px; /* Adjust space below the header */
 }
 
 .vertical-line-header {
