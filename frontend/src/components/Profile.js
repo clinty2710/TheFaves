@@ -94,7 +94,7 @@ const Profile = () => {
       {/* Favorite Movies Section */}
       <div className="section-container">
         <div className="search-column">
-        <h2>Favorite Movies</h2>
+          <h2>Favorite Movies</h2>
           <div className="search-container">
             <SearchMovies favorites={favorites} setFavorites={setFavorites} />
           </div>
@@ -116,10 +116,13 @@ const Profile = () => {
         </div>
       </div>
 
+      {/* Divider line between sections */}
+      <div className="section-divider"></div>
+
       {/* Favorite Music Section */}
       <div className="section-container">
         <div className="search-column">
-        <h2>Favorite Music</h2>
+          <h2>Favorite Music</h2>
           <div className="search-container">
             <SearchMusic favorites={favorites} setFavorites={setFavorites} />
           </div>
@@ -141,10 +144,13 @@ const Profile = () => {
         </div>
       </div>
 
+      {/* Divider line between sections */}
+      <div className="section-divider"></div>
+
       {/* Favorite Books Section */}
       <div className="section-container">
         <div className="search-column">
-        <h2>Favorite Books</h2>
+          <h2>Favorite Books</h2>
           <div className="search-container">
             <SearchBooks favorites={favorites} setFavorites={setFavorites} />
           </div>

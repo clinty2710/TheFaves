@@ -24,7 +24,7 @@ body {
     padding: 20px;
     background-color: #0a2540;
     border-bottom: 2px solid #ff6347;
-    width: 100%; /* Ensure the orange line spans across the entire page */
+    width: 100%;
 }
 
 .logo {
@@ -32,7 +32,7 @@ body {
     align-items: center;
     font-size: 3rem;
     justify-content: center;
-    margin: 0 auto; /* Ensure it's centered */
+    margin: 0 auto;
     position: relative;
     margin-left: 0px;
 }
@@ -84,10 +84,10 @@ body {
 }
 
 .logo.large .heart-v {
-    width: 150px; 
-    height: 150px; 
-    background-size: 150px 150px; 
-    margin: 0 -22px; 
+    width: 150px;
+    height: 150px;
+    background-size: 150px 150px;
+    margin: 0 -22px;
 }
 
 .logo .f {
@@ -104,18 +104,18 @@ body {
 }
 
 .logo.large .a {
-    margin-left: -6px; 
+    margin-left: -6px;
     margin-right: -20px; 
 }
 
 .logo .e {
-    margin-left: -6px; 
-    margin-right: -.5px; 
+    margin-left: -6px;
+    margin-right: -.5px;
 }
 
 .logo.large .e {
-    margin-left: -12px; 
-    margin-right: -1px; 
+    margin-left: -12px;
+    margin-right: -1px;
 }
 
 .logo .s {
@@ -128,40 +128,36 @@ body {
 
 .welcome-message {
     margin-left: 10px;
-    font-size: 1rem; 
+    font-size: 1rem;
 }
 
 .section-container {
     display: flex;
-    margin-bottom: 40px;
+    margin-bottom: 0;
+}
+
+.section-divider {
+    border-bottom: 2px solid #ff6347;
+    margin-bottom: 20px;
 }
 
 .search-column {
     flex: 1;
     max-width: 300px;
     margin-right: 20px;
-    border-right: 2px solid #ff6347; /* Vertical line to separate columns */
-    padding-bottom: 20px; /* Align the bottom padding with the right column */
-}
-
-/* Orange horizontal lines in the left search column */
-.search-container {
-    margin-bottom: 20px;
-    position: relative;
-    padding-bottom: 20px; /* Ensure padding matches favorites-section */
+    border-right: 2px solid #ff6347;
+    padding-bottom: 20px;
 }
 
 .favorites-column {
     flex: 2;
 }
 
-/* Orange horizontal line at the bottom of each container */
 .favorites-section {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     padding-bottom: 20px;
-    border-bottom: 2px solid #ff6347; /* Orange horizontal line for each section */
 }
 
 .favorite-item {
@@ -251,7 +247,6 @@ h2 {
     margin-bottom: 10px;
 }
 
-/* Center the form on the login and register pages */
 form {
     display: flex;
     flex-direction: column;
