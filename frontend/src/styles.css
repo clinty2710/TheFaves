@@ -51,16 +51,16 @@ body {
     background-color: #0a2540;
     border-bottom: 2px solid #ff6347;
     position: relative;
-    margin-bottom: 10px; /* Adjust space below the header */
+    margin-bottom: 10px;
 }
 
 .vertical-line-header {
     position: absolute;
-    height: calc(100% - 10px); /* Reduce height to stop before the horizontal line */
+    height: calc(100% - 10px);
     width: 2px;
     background-color: #ff6347;
-    top: -10px; /* Adjust the top to keep space above the logo */
-    left: 280px; /* Adjust left to match the new margin in the search column */
+    top: -10px;
+    left: 280px;
     z-index: 10;
 }
 
@@ -85,14 +85,14 @@ body {
 
 .logo .heart-v {
     width: 75px; 
-    height: 75px; 
+    height: 75px;
     background-image: url('/frontend/public/images/klipartz.com.png');
-    background-size: 75px 75px; 
+    background-size: 75px 75px;
     background-repeat: no-repeat;
     background-position: center;
     display: inline-block;
-    margin: 0 -10px; 
-    z-index: 1; 
+    margin: 0 -10px;
+    z-index: 1;
     transform: translateY(5px); 
 }
 
@@ -103,50 +103,14 @@ body {
     margin: 0 -22px;
 }
 
-.logo .f {
-    margin-right: -3px; 
-}
-
-.logo.large .f {
-    margin-right: -6px;
-}
-
-.logo .a {
-    margin-left: -3px; 
-    margin-right: -10px; 
-}
-
-.logo.large .a {
-    margin-left: -6px;
-    margin-right: -20px; 
-}
-
-.logo .e {
-    margin-left: -6px;
-    margin-right: -.5px;
-}
-
-.logo.large .e {
-    margin-left: -12px;
-    margin-right: -1px;
-}
-
-.logo .s {
-    margin-left: -.5px; 
-}
-
-.logo.large .s {
-    margin-left: -1px; 
-}
-
 .welcome-message {
     margin-left: 10px;
     font-size: 1rem;
 }
 
-/* Adjust the vertical line for section containers */
+/* Section Layout Adjustments */
 .section-container .vertical-line {
-    margin-bottom: 20px; /* Match the padding and margins */
+    margin-bottom: 20px;
     border-left: 2px solid #ff6347;
     height: 100%;
     position: absolute;
@@ -154,29 +118,26 @@ body {
     top: 0;
 }
 
-/* Ensure margin and padding consistency between sections */
 .section-container {
     display: flex;
     margin-bottom: 0;
-    padding-top: 10px; /* Add padding for consistency */
+    padding-top: 10px;
 }
 
-/* Adjust spacing in the search column to align with the vertical line */
 .search-column {
     flex: 1;
     max-width: 250px;
     margin-right: -6px;
-    margin-left: 10px; /* Increase left margin for consistency */
-    border-right: 2px solid #ff6347; /* Vertical line */
+    margin-left: 10px;
+    border-right: 2px solid #ff6347;
     position: relative;
     padding: 15px 15px 5px 5px;
 }
 
-/* Adjust the margin and padding of the section-divider for consistency */
 .section-divider {
     border-bottom: 2px solid #ff6347;
     margin: 10px 0;
-    padding-top: 10px; /* Add padding to balance the spacing */
+    padding-top: 10px;
 }
 
 .favorites-column {
@@ -198,7 +159,6 @@ body {
     text-align: center;
     width: 150px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    position: relative;
     transition: width 0.3s, padding 0.3s, font-size 0.3s;
     display: inline-block;
     vertical-align: top;
@@ -238,6 +198,7 @@ body {
     opacity: 0.5;
 }
 
+/* Ensure Favorite Items Scale Down Properly on Small Screens */
 button {
     background-color: #ff6347;
     border: none;
@@ -268,131 +229,7 @@ button:hover {
     height: 40px;
 }
 
-h2 {
-    color: #ffffff;
-    text-align: left;
-    font-size: 1.5rem;
-    font-weight: 300;
-    line-height: 1.4;
-    margin-top: -5px;
-    margin-bottom: 10px;
-}
-
-h1 {
-    color: #ffffff;
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 300;
-    line-height: 1.4;
-    margin-top: 30px;
-    margin-bottom: 5px;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-form div {
-    margin-bottom: 15px;
-    width: 90%;
-}
-
-form label {
-    display: block;
-    margin-bottom: 5px;
-    color: #ffffff;
-}
-
-form input {
-    padding: 10px;
-    width: 95%;
-    border-radius: 5px;
-    border: 2px solid #ffffff;
-    background-color: #1a374d;
-    color: #ffffff;
-}
-
-form button {
-    width: 200px;
-    font-size: 1rem;
-    display: block;
-    margin: 10px auto;
-    font-weight: 400;
-}
-
-form p {
-    color: #ff6347;
-    text-align: center;
-}
-
-.center-links {
-    text-align: center;
-    margin-top: 0%;
-}
-
-.center-links a {
-    color: #ff6347;
-    text-decoration: none;
-}
-
-.center-links a:hover {
-    color: #ff4500;
-}
-
-.select__control {
-    width: 100% !important;
-    margin: 5 auto !important;
-    margin-right: 10;
-    border-radius: 5px !important;
-    border: 2px solid #ffffff !important;
-    background-color: #1a374d !important;
-    color: #ffffff !important;
-    height: 40px !important;
-    display: flex !important;
-    align-items: center !important;
-}
-
-.select__menu {
-    background-color: #1a374d !important;
-    border-left: 2px solid #ff6347 !important;
-    border-right: 2px solid #ff6347 !important;
-    border-bottom: 2px solid #ff6347 !important;
-}
-
-.select__option {
-    color: #ffffff !important;
-    text-align: left !important;
-}
-
-.select__option--is-focused {
-    background-color: #ff6347 !important;
-}
-
-.select__option--is-selected {
-    background-color: #ff4500 !important;
-    color: #ffffff !important;
-}
-
-.select__input {
-    color: #ffffff !important;
-    padding: 0 !important;
-    height: 100% !important;
-    display: flex !important;
-    align-items: center !important;
-}
-
-.select__placeholder {
-    color: #ffffff !important;
-    display: flex !important;
-    align-items: center !important;
-}
-
+/* Mobile Friendly Adjustments */
 @media (max-width: 768px) {
     .section-container {
         flex-direction: column;
@@ -410,20 +247,20 @@ form p {
     }
 
     .favorite-item {
-        width: calc(33.33% - 20px);
-        margin-bottom: 20px;
+        width: calc(33.33% - 10px); /* Reduce width on smaller screens */
+        margin-bottom: 10px;
     }
 }
 
 @media (max-width: 576px) {
     .favorite-item {
-        width: calc(50% - 20px);
+        width: calc(50% - 10px);
     }
 }
 
 @media (max-width: 400px) {
     .favorite-item {
-        width: calc(100% - 20px);
+        width: calc(100% - 10px);
     }
 }
 
