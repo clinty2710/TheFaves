@@ -60,7 +60,7 @@ body {
     width: 2px;
     background-color: #ff6347;
     top: -10px; /* Adjust the top to keep space above the logo */
-    left: 270px; /* Ensure it aligns with the vertical lines below */
+    left: 280px; /* Adjust left to match the new margin in the search column */
     z-index: 10;
 }
 
@@ -166,7 +166,7 @@ body {
     flex: 1;
     max-width: 250px;
     margin-right: 10px;
-    margin-left: 10px;
+    margin-left: 20px; /* Increase left margin for consistency */
     border-right: 2px solid #ff6347; /* Vertical line */
     position: relative;
     padding: 5px;
@@ -426,6 +426,6 @@ form p {
 
 @media (max-width: 768px) {
     .vertical-line-header {
-        left: 240px; /* Adjust this value based on mobile layout */
+        background-color: #0a2540;
     }
 }
