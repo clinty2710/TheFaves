@@ -383,6 +383,13 @@ form p {
     }
 }
 
+@media (max-width: 400px) {
+    .favorite-item {
+        width: calc(33.33% - 10px); /* Keep 3 across */
+        margin-bottom: 10px;
+    }
+}
+
 @media (max-width: 320px) {
     .favorite-item {
         width: calc(33.33% - 10px); /* Keep 3 across */
