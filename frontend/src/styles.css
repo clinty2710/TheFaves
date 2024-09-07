@@ -47,7 +47,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 100px 20px 100px;
+    padding: 20px 40px 20px 40px;
     background-color: #0a2540;
     border-bottom: 2px solid #ff6347;
     position: relative;
@@ -60,7 +60,7 @@ body {
     width: 2px;
     background-color: #ff6347;
     top: -10px;
-    left: 280px;
+    left: 285px;
     z-index: 10;
 }
 
