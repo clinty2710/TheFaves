@@ -154,22 +154,28 @@ body {
     background: linear-gradient(to bottom, #0a2540, #1a374d);
     color: rgba(255, 255, 255, 0.6); /* Lighter text color */
     text-align: center;
-    padding: 10px 20px 10px 20px;
+    padding: 10px 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 100%; /* Full width */
+    width: 100%;
     margin: 10px auto;
     font-size: 1rem;
     height: 200px; /* Same height as favorite items */
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 0.3s ease-in-out; /* Smooth fade-out transition */
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
 }
 
-.placeholder-item.hidden {
-    animation: fadeOut 0.3s ease-in-out forwards; /* Fade-out effect */
-    display: none; /* Ensure it disappears completely */
+.placeholder-item.fade-in {
+    animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.placeholder-item.fade-out {
+    animation: fadeOut 0.3s ease-in-out forwards;
+    opacity: 0;
+    display: none;
 }
 
 @keyframes fadeOut {

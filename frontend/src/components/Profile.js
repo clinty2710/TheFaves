@@ -104,7 +104,7 @@ const Profile = () => {
           <div className="favorites-section">
             {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'movie').length > 0 ? (
               favorites.filter(fav => fav.item_Type === 'movie').map(fav => (
-                <div key={fav._id} className="favorite-item">
+                <div key={fav._id} className="favorite-item fade-in">
                   {fav.movie && fav.movie.poster_path ? (
                     <img src={`https://image.tmdb.org/t/p/w500${fav.movie.poster_path}`} alt={fav.movie.title} />
                   ) : (
@@ -115,7 +115,7 @@ const Profile = () => {
                 </div>
               ))
             ) : (
-              <div className="placeholder-item">
+              <div className="placeholder-item fade-in-out">
                 No Favorites Saved
               </div>
             )}
@@ -137,7 +137,7 @@ const Profile = () => {
           <div className="favorites-section">
             {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'music').length > 0 ? (
               favorites.filter(fav => fav.item_Type === 'music').map(fav => (
-                <div key={fav._id} className="favorite-item">
+                <div key={fav._id} className="favorite-item fade-in">
                   {fav.music && fav.music.cover_image ? (
                     <img src={fav.music.cover_image} alt={fav.music.title} />
                   ) : (
@@ -148,7 +148,7 @@ const Profile = () => {
                 </div>
               ))
             ) : (
-              <div className="placeholder-item">
+              <div className="placeholder-item fade-in-out">
                 No Favorites Saved
               </div>
             )}
@@ -170,7 +170,7 @@ const Profile = () => {
           <div className="favorites-section">
             {Array.isArray(favorites) && favorites.filter(fav => fav.item_Type === 'book').length > 0 ? (
               favorites.filter(fav => fav.item_Type === 'book').map(fav => (
-                <div key={fav._id} className="favorite-item">
+                <div key={fav._id} className="favorite-item fade-in">
                   {fav.book && fav.book.cover_image ? (
                     <img src={fav.book.cover_image} alt={fav.book.title} />
                   ) : (
@@ -182,7 +182,7 @@ const Profile = () => {
                 </div>
               ))
             ) : (
-              <div className="placeholder-item">
+              <div className="placeholder-item fade-in-out">
                 No Favorites Saved
               </div>
             )}
