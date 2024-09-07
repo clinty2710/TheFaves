@@ -357,11 +357,19 @@ form p {
 @media (max-width: 768px) {
     .section-container {
         flex-direction: column;
+
+    }
+
+    h2  {
+        text-align: center;
+
     }
 
     .search-column, .favorites-column {
-        max-width: 110%;
+        max-width: 80%;
         margin-left: 0;
+        margin-right: 0;
+        justify-content: center;
     }
 
     .favorites-section {
