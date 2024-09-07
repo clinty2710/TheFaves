@@ -154,14 +154,14 @@ body {
     background-color: #1a374d; /* Slightly lighter color */
     color: rgba(255, 255, 255, 0.6); /* Lighter text color */
     text-align: center;
-    padding: 10px;
+    padding: 10px 20px 10px 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 100%; /* Full width */
     display: block; 
     margin: 10px auto;
     font-size: 1rem;
-    height: 150px; /* Same height as favorite items */
+    height: 200px; /* Same height as favorite items */
     display: flex;
     align-items: center;
     justify-content: center;
