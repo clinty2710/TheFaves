@@ -51,16 +51,16 @@ body {
     background-color: #0a2540;
     border-bottom: 2px solid #ff6347;
     position: relative;
-    margin-bottom: 10px; /* Adjust space below the header */
+    margin-bottom: 10px;
 }
 
 .vertical-line-header {
     position: absolute;
-    height: calc(100% - 10px); /* Reduce height to stop before the horizontal line */
+    height: calc(100% - 10px);
     width: 2px;
     background-color: #ff6347;
-    top: -10px; /* Adjust the top to keep space above the logo */
-    left: 280px; /* Adjust left to match the new margin in the search column */
+    top: -10px;
+    left: 280px;
     z-index: 10;
 }
 
@@ -68,7 +68,7 @@ body {
     font-family: 'Dancing Script', cursive;
     color: #ff6347;
     font-weight: 700;
-    margin-right: 2px; 
+    margin-right: 2px;
 }
 
 .logo .f,
@@ -80,20 +80,20 @@ body {
     color: #ffffff;
     position: relative;
     z-index: 2;
-    -webkit-text-stroke: .3px #0a2540; 
+    -webkit-text-stroke: .3px #0a2540;
 }
 
 .logo .heart-v {
-    width: 75px; 
-    height: 75px; 
+    width: 75px;
+    height: 75px;
     background-image: url('/frontend/public/images/klipartz.com.png');
-    background-size: 75px 75px; 
+    background-size: 75px 75px;
     background-repeat: no-repeat;
     background-position: center;
     display: inline-block;
-    margin: 0 -10px; 
-    z-index: 1; 
-    transform: translateY(5px); 
+    margin: 0 -10px;
+    z-index: 1;
+    transform: translateY(5px);
 }
 
 .logo.large .heart-v {
@@ -103,50 +103,13 @@ body {
     margin: 0 -22px;
 }
 
-.logo .f {
-    margin-right: -3px; 
-}
-
-.logo.large .f {
-    margin-right: -6px;
-}
-
-.logo .a {
-    margin-left: -3px; 
-    margin-right: -10px; 
-}
-
-.logo.large .a {
-    margin-left: -6px;
-    margin-right: -20px; 
-}
-
-.logo .e {
-    margin-left: -6px;
-    margin-right: -.5px;
-}
-
-.logo.large .e {
-    margin-left: -12px;
-    margin-right: -1px;
-}
-
-.logo .s {
-    margin-left: -.5px; 
-}
-
-.logo.large .s {
-    margin-left: -1px; 
-}
-
 .welcome-message {
     margin-left: 10px;
     font-size: 1rem;
 }
 
-/* Adjust the vertical line for section containers */
 .section-container .vertical-line {
-    margin-bottom: 20px; /* Match the padding and margins */
+    margin-bottom: 20px;
     border-left: 2px solid #ff6347;
     height: 100%;
     position: absolute;
@@ -154,29 +117,26 @@ body {
     top: 0;
 }
 
-/* Ensure margin and padding consistency between sections */
 .section-container {
     display: flex;
     margin-bottom: 0;
-    padding-top: 10px; /* Add padding for consistency */
+    padding-top: 10px;
 }
 
-/* Adjust spacing in the search column to align with the vertical line */
 .search-column {
     flex: 1;
     max-width: 250px;
-    margin-right: 0px;
-    margin-left: 10px; /* Increase left margin for consistency */
-    border-right: 2px solid #ff6347; /* Vertical line */
+    margin-right: -6px;
+    margin-left: 10px;
+    border-right: 2px solid #ff6347;
     position: relative;
     padding: 15px 15px 5px 5px;
 }
 
-/* Adjust the margin and padding of the section-divider for consistency */
 .section-divider {
     border-bottom: 2px solid #ff6347;
     margin: 10px 0;
-    padding-top: 10px; /* Add padding to balance the spacing */
+    padding-top: 10px;
 }
 
 .favorites-column {
@@ -196,7 +156,7 @@ body {
     margin: 10px;
     padding: 10px;
     text-align: center;
-    width: 150px; /* Default width for large screens */
+    width: 150px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: relative;
     transition: width 0.3s, padding 0.3s, font-size 0.3s;
@@ -411,30 +371,30 @@ form p {
     }
 
     .favorite-item {
-        width: calc(33.33% - 20px);
-        margin-bottom: 20px;
+        width: calc(25% - 20px); /* Fit 4 across */
+        margin-bottom: 10px;
     }
 }
 
 @media (max-width: 576px) {
     .favorite-item {
-        width: calc(50% - 15px);
-        margin-bottom: 15px;
+        width: calc(33.33% - 15px); /* Fit 3 across */
+        margin-bottom: 10px;
     }
 }
 
 @media (max-width: 400px) {
     .favorite-item {
-        width: calc(100% - 10px);
+        width: calc(50% - 10px); /* Fit 2 across */
         margin-bottom: 10px;
     }
 }
 
 @media (max-width: 768px) {
     .vertical-line-header {
-        background-color: transparent; 
+        background-color: transparent;
     }
     .search-column {
-        border-right: none; 
+        border-right: none;
     }
 }
