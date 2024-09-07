@@ -371,8 +371,7 @@ form p {
     }
 
     .search-container {
-        max-width: 80%;
-        justify-items: center;
+        max-width: 110%;
     }
 
     .favorites-section {
