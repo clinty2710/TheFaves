@@ -151,19 +151,20 @@ body {
 }
 
 .placeholder-item {
-    background-color: rgba(255, 255, 255, 0.1); /* Lighter color for contrast */
-    color: rgba(255, 255, 255, 0.7); /* Lighter text */
-    border-radius: 10px;
-    margin: 10px;
-    padding: 10px;
+    background-color: #1a374d; /* Slightly lighter color */
+    color: rgba(255, 255, 255, 0.6); /* Lighter text color */
     text-align: center;
-    width: 150px; /* Same width as favorite-item */
-    height: 225px; /* Height adjusted to match favorite-item */
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%; /* Full width */
+    display: block; 
+    margin: 10px auto;
+    font-size: 1rem;
+    height: 150px; /* Same height as favorite items */
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
-    font-style: italic;
 }
 
 .favorite-item {
