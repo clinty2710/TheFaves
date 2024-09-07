@@ -372,7 +372,7 @@ form p {
 
     .search-container {
         max-width: 80%;
-        justify-content: center;
+        justify-items: center;
     }
 
     .favorites-section {
