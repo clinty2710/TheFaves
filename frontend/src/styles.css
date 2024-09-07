@@ -47,7 +47,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 40px 20px 40px;
+    padding: 20px 25px 20px 25px;
     background-color: #0a2540;
     border-bottom: 2px solid #ff6347;
     position: relative;
