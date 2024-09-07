@@ -156,7 +156,7 @@ body {
     margin: 10px;
     padding: 10px;
     text-align: center;
-    width: 120px;
+    width: 150px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: relative;
     transition: width 0.3s, padding 0.3s, font-size 0.3s;
@@ -378,21 +378,21 @@ form p {
 
 @media (max-width: 576px) {
     .favorite-item {
-        width: calc(33.33% - 10px); /* Fit 3 across */
+        width: calc(25% - 10px); /* Fit 4 across */
         margin-bottom: 10px;
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 350px) {
     .favorite-item {
-        width: calc(33.33% - 10px); /* Keep 3 across */
+        width: calc(33.33% - 5px); /* Fit 3 across */
         margin-bottom: 10px;
     }
 }
 
 @media (max-width: 320px) {
     .favorite-item {
-        width: calc(33.33% - 10px); /* Keep 3 across */
+        width: calc(33.33% - 5px); /* Fit 3 across */
         margin-bottom: 10px;
     }
 }
