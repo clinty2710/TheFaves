@@ -366,9 +366,12 @@ form p {
     }
 
     .search-column, .favorites-column {
-        max-width: 80%;
+        max-width: 100%;
         margin-left: 0;
-        margin-right: 0;
+    }
+
+    .search-container {
+        max-width: 80%;
         justify-content: center;
     }
 
