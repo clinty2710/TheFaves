@@ -150,6 +150,22 @@ body {
     padding-bottom: 20px;
 }
 
+.placeholder-item {
+    background-color: rgba(255, 255, 255, 0.1); /* Lighter color for contrast */
+    color: rgba(255, 255, 255, 0.7); /* Lighter text */
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    width: 150px; /* Same width as favorite-item */
+    height: 225px; /* Height adjusted to match favorite-item */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-style: italic;
+}
+
 .favorite-item {
     background-color: #1a374d;
     border-radius: 10px;
