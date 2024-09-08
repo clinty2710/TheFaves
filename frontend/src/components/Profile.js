@@ -17,7 +17,7 @@ const Profile = () => {
   const [favorites, setFavorites] = useState([]);
   const { isAuthenticated } = useAuth();
   const { user, setUser } = useUser();
-  const [showPlaceholder, setShowPlaceholder] = useState(true); // State for handling fade-out
+  const [showPlaceholder, setShowPlaceholder] = useState(true); // State for managing placeholder visibility
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -54,7 +54,9 @@ const Profile = () => {
         try {
           const response = await axios.get(`/api/favorites/user/${user._id}`, { withCredentials: true });
           setFavorites(response.data);
-          setShowPlaceholder(response.data.length === 0); // Manage placeholder visibility
+          if (response.data.length === 0) {
+            setShowPlaceholder(true);  // Show placeholder if no favorites
+          }
         } catch (error) {
           console.error('Failed to fetch favorites:', error);
         }
@@ -66,12 +68,19 @@ const Profile = () => {
     }
   }, [user]);
 
+  const handleAddFavorite = (newFavorite) => {
+    setFavorites([...favorites, newFavorite]);
+    setShowPlaceholder(false); // Hide placeholder when a favorite is added
+  };
+
   const handleRemoveFavorite = async (id) => {
     try {
       await axios.delete(`/api/favorites/delete/${id}`, { withCredentials: true });
       const updatedFavorites = favorites.filter(fav => fav._id !== id);
       setFavorites(updatedFavorites);
-      setShowPlaceholder(updatedFavorites.length === 0); // Show placeholder if no favorites
+      if (updatedFavorites.length === 0) {
+        setTimeout(() => setShowPlaceholder(true), 500); // Delay showing the placeholder for a smooth transition
+      }
     } catch (error) {
       console.error('Error removing favorite:', error);
     }
@@ -119,7 +128,7 @@ const Profile = () => {
                 </div>
               ))
             ) : (
-              <div className={`placeholder-item ${showPlaceholder ? 'fade-in' : 'fade-out'}`}>
+              <div className={`placeholder-item ${showPlaceholder ? 'fade-in' : ''}`}>
                 No Favorites Saved
               </div>
             )}
@@ -152,7 +161,7 @@ const Profile = () => {
                 </div>
               ))
             ) : (
-              <div className={`placeholder-item ${showPlaceholder ? 'fade-in' : 'fade-out'}`}>
+              <div className={`placeholder-item ${showPlaceholder ? 'fade-in' : ''}`}>
                 No Favorites Saved
               </div>
             )}
@@ -186,7 +195,7 @@ const Profile = () => {
                 </div>
               ))
             ) : (
-              <div className={`placeholder-item ${showPlaceholder ? 'fade-in' : 'fade-out'}`}>
+              <div className={`placeholder-item ${showPlaceholder ? 'fade-in' : ''}`}>
                 No Favorites Saved
               </div>
             )}
