@@ -403,30 +403,30 @@ form p {
 
 /* Toast notification styles */
 .toast {
-    background-color: #0a2540; /* Match the body background */
-    color: #ffffff; /* Text color for the toast */
-    border-radius: 8px; /* Rounded corners for consistency with the design */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
-    padding: 15px 20px; /* Padding for better readability */
+    background-color: #0f335b; /* Slightly lighter than the body background */
+    color: #ffffff;
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 15px 20px;
     font-size: 1rem;
-    width: 300px; /* Adjust width if necessary */
+    width: 250px;
     max-width: 80%;
-    margin: 20px auto; /* Centered on the screen */
+    margin: 20px auto;
 }
 
 .toast.success {
-    background-color: #28a745; /* Green for success messages */
-    border: 2px solid #1a374d; /* Optional border for consistency */
+    background-color: #ff6347; /* Match your theme's orange */
+    border: 2px solid #1a374d; /* Consistent border */
 }
 
 .toast.error {
-    background-color: #dc3545; /* Red for error messages */
-    border: 2px solid #ff6347; /* Match the accent color */
+    background-color: #dc3545; /* Red for errors */
+    border: 2px solid #ff6347; /* Accent color */
 }
 
 .toast.info {
-    background-color: #17a2b8; /* Blue for info messages */
-    border: 2px solid #1a374d; /* Match secondary color */
+    background-color: #1a374d; /* Dark blue for info */
+    border: 2px solid #ff6347;
 }
 
 /* Transition effect for toast visibility */
@@ -439,17 +439,14 @@ form p {
     opacity: 1;
 }
 
-
 /* Media queries for responsive design */
 @media (max-width: 768px) {
     .section-container {
         flex-direction: column;
-
     }
 
-    h2  {
+    h2 {
         text-align: center;
-
     }
 
     .search-column, .favorites-column {
