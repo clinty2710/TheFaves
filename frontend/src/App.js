@@ -37,9 +37,9 @@ function App() {
             backgroundColor: '#1a374d',
             color: '#ffffff',
             borderRadius: '8px',         // Rounded corners
-            border: '2px solid #ff6347', // Orange
+            border: '1px solid #ff6347', // Orange
             boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
-            width: 200,
+            width: 250,
           }}
         />
       </div>
