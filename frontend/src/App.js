@@ -30,15 +30,16 @@ function App() {
           </Routes>
         </ErrorBoundary>
 
-        {/* Updated ToastContainer with custom styles */}
+        {/* ToastContainer with custom styles */}
         <ToastContainer 
           autoClose={3000} 
           toastStyle={{
-            backgroundColor: '#0a2540',  // Dark blue background
-            color: '#ffffff',            // White text color
+            backgroundColor: '#1a374d',
+            color: '#ffffff',
             borderRadius: '8px',         // Rounded corners
-            border: '2px solid #ff6347', // Orange border
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', // Box shadow for elevation
+            border: '2px solid #ff6347', // Orange
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+            width: 250,
           }}
         />
       </div>
