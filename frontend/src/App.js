@@ -36,8 +36,8 @@ function App() {
           toastStyle={{
             backgroundColor: '#1a374d',
             color: '#ffffff',
-            borderRadius: '8px',         // Rounded corners
-            border: '1px solid #ff6347', // Orange
+            borderRadius: '8px',
+            border: '1px solid #ff6347',
             boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
             width: 250,
           }}
