@@ -39,7 +39,7 @@ function App() {
             borderRadius: '8px',         // Rounded corners
             border: '2px solid #ff6347', // Orange
             boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
-            width: 250,
+            width: 200,
           }}
         />
       </div>
