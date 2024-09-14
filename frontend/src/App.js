@@ -29,7 +29,18 @@ function App() {
             <Route path="/favorite-items" element={isAuthenticated ? <FavoriteItems /> : <Navigate replace to="/login" />} />
           </Routes>
         </ErrorBoundary>
-        <ToastContainer autoClose={3000} />
+
+        {/* Updated ToastContainer with custom styles */}
+        <ToastContainer 
+          autoClose={3000} 
+          toastStyle={{
+            backgroundColor: '#0a2540',  // Dark blue background
+            color: '#ffffff',            // White text color
+            borderRadius: '8px',         // Rounded corners
+            border: '2px solid #ff6347', // Orange border
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', // Box shadow for elevation
+          }}
+        />
       </div>
     </UserProvider>
   );
