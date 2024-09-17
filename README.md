@@ -1,2 +1,2 @@
-# TheFaves
-Website to store favorite things called "The Faves"
+# myFaves
+Website to store favorite things called "myFAVES"
