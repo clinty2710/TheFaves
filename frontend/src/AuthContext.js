@@ -1,4 +1,5 @@
 // src/AuthContext.js
+// Clint Steadman
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';

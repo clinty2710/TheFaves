@@ -1,4 +1,5 @@
 // models/favorite.js
+// Clint Steadman
 
 const mongoose = require('mongoose');
 

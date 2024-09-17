@@ -1,4 +1,5 @@
 // src/components/Register.js
+// Clint Steadman
 
 import React, { useState } from 'react';
 import axios from 'axios';

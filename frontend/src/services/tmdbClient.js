@@ -1,4 +1,5 @@
 // frontend/src/services/tmdbClient.js
+// Clint Steadman
 
 const axios = require('axios');
 

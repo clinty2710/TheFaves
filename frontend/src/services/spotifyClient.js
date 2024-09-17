@@ -1,4 +1,5 @@
 // frontend/src/services/spotifyClient.js
+// Clint Steadman
 
 import axios from 'axios';
 

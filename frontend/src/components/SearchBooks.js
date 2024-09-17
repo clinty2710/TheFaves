@@ -1,4 +1,5 @@
 // src/components/SearchBooks.js
+// Clint Steadman
 
 import React, { useState, useEffect, useContext } from 'react';
 import Select from 'react-select';

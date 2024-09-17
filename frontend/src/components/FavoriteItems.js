@@ -1,4 +1,5 @@
 // src/components/FavoriteItems.js
+// Clint Steadman
 
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';

@@ -1,4 +1,5 @@
 // routes/Favorites.js
+// Clint Steadman
 
 const express = require('express');
 const router = express.Router();

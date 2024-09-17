@@ -1,4 +1,5 @@
 // Profile.js
+// Clint Steadman
 
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../AuthContext';

@@ -1,4 +1,5 @@
 // frontend/src/components/SearchMusic.js
+// Clint Steadman
 
 import React, { useState, useEffect, useContext } from 'react';
 import Select from 'react-select';

@@ -1,4 +1,5 @@
 // /Users/clinty2710/Desktop/TheFaves/models/user.js
+// Clint Steadman
 
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');

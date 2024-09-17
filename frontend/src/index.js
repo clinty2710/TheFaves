@@ -1,4 +1,5 @@
 // src/index.js
+// Clint Steadman
 
 if (navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome')) {
   document.cookie = "samesite_test=1; SameSite=None; Secure";

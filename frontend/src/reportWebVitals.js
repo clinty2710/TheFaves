@@ -1,4 +1,5 @@
 //reportWebVitals.js
+// Clint Steadman
 
 const reportWebVitals = onPerfEntry => {
   if (onPerfEntry && onPerfEntry instanceof Function) {

@@ -1,4 +1,5 @@
 // src/components/ErrorBoundary.js
+// Clint Steadman
 
 import React, { Component } from 'react';
 

@@ -1,4 +1,5 @@
 // LoginButton.js
+// Clint Steadman
 
 import React from 'react';
 import axios from 'axios';

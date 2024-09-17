@@ -1,4 +1,5 @@
 // Middlewares/auth.js
+// Clint Steadman
 
 const express = require('express');
 const passport = require('passport');

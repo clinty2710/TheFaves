@@ -1,7 +1,10 @@
-/* styles.css */
+/* styles.css 
+Clint Steadman */
 
+/* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&family=Dancing+Script:wght@700&display=swap');
 
+/* Global Styles */
 body {
     background-color: #0a2540;
     color: #ffffff;
@@ -14,11 +17,13 @@ body {
     width: 100%;
 }
 
+/* Profile Container */
 .profile-container {
     display: flex;
     flex-direction: column;
 }
 
+/* Header Styles */
 .App-header {
     text-align: center;
     padding: 20px;
@@ -28,6 +33,7 @@ body {
     margin-bottom: 2px;
 }
 
+/* Logo Styles */
 .logo {
     display: flex;
     align-items: center;
@@ -41,27 +47,6 @@ body {
 .logo.large {
     font-size: 6rem;
     margin-left: -30px;
-}
-
-.profile-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 25px 20px 25px;
-    background-color: #0a2540;
-    border-bottom: 2px solid #ff6347;
-    position: relative;
-    margin-bottom: 10px;
-}
-
-.vertical-line-header {
-    position: absolute;
-    height: calc(100% - 10px);
-    width: 2px;
-    background-color: #ff6347;
-    top: -10px;
-    left: 285px;
-    z-index: 10;
 }
 
 .logo .my {
@@ -103,9 +88,33 @@ body {
     margin: 0 -22px;
 }
 
+/* Welcome Message */
 .welcome-message {
     margin-left: 10px;
     font-size: 1rem;
+}
+
+/* Profile Header */
+.profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 25px 20px 25px;
+    background-color: #0a2540;
+    border-bottom: 2px solid #ff6347;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+/* Vertical Line */
+.vertical-line-header {
+    position: absolute;
+    height: calc(100% - 10px);
+    width: 2px;
+    background-color: #ff6347;
+    top: -10px;
+    left: 285px;
+    z-index: 10;
 }
 
 .section-container .vertical-line {
@@ -117,6 +126,7 @@ body {
     top: 0;
 }
 
+/* Section Containers */
 .section-container {
     display: flex;
     margin-bottom: 0;
@@ -133,16 +143,18 @@ body {
     padding: 15px 15px 5px 10px;
 }
 
+.favorites-column {
+    flex: 2;
+}
+
+/* Divider Between Sections */
 .section-divider {
     border-bottom: 2px solid #ff6347;
     margin: 10px 0;
     padding-top: 10px;
 }
 
-.favorites-column {
-    flex: 2;
-}
-
+/* Favorites Section */
 .favorites-section {
     display: flex;
     flex-wrap: wrap;
@@ -150,53 +162,7 @@ body {
     padding: 10px 10px 10px 10px;
 }
 
-/* Keyframes for fade-in */
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-/* Keyframes for fade-out */
-@keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-}
-
-/* Placeholder item styling */
-.placeholder-item {
-    background: linear-gradient(to bottom, #0a2540, #1a374d);
-    color: rgba(255, 255, 255, 0.6);
-    text-align: center;
-    padding: 10px 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    margin: 10px auto;
-    font-size: 1rem;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Fade-in effect using keyframes */
-.fade-in {
-    animation: fadeIn 0.5s forwards;
-}
-
-/* Fade-out effect using keyframes */
-.fade-out {
-    animation: fadeOut 0.5s forwards;
-}
-
+/* Favorite Item */
 .favorite-item {
     background-color: #1a374d;
     border-radius: 10px;
@@ -209,7 +175,7 @@ body {
     transition: width 0.3s, padding 0.3s, font-size 0.3s;
     display: inline-block;
     vertical-align: top;
-    animation: fadeIn 0.5s ease-in-out; /* Apply the fade-in animation */
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 .favorite-item img {
@@ -246,6 +212,7 @@ body {
     opacity: 0.5;
 }
 
+/* Buttons */
 button {
     background-color: #ff6347;
     border: none;
@@ -265,6 +232,7 @@ button:hover {
     background-color: #ff4500;
 }
 
+/* Search Input */
 .search-container input {
     padding: 10px;
     width: 100%;
@@ -276,6 +244,7 @@ button:hover {
     height: 40px;
 }
 
+/* Headings */
 h2 {
     color: #ffffff;
     text-align: left;
@@ -296,6 +265,7 @@ h1 {
     margin-bottom: 5px;
 }
 
+/* Forms */
 form {
     display: flex;
     flex-direction: column;
@@ -339,6 +309,7 @@ form p {
     text-align: center;
 }
 
+/* Links */
 .center-links {
     text-align: center;
     margin-top: 0%;
@@ -353,6 +324,7 @@ form p {
     color: #ff4500;
 }
 
+/* Select Dropdowns */
 .select__control {
     width: 100% !important;
     margin: 5 auto !important;
@@ -401,7 +373,53 @@ form p {
     align-items: center !important;
 }
 
-/* Media queries for responsive design */
+/* Placeholder Styling */
+.placeholder-item {
+    background: linear-gradient(to bottom, #0a2540, #1a374d);
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    margin: 10px auto;
+    font-size: 1rem;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Fade-in effect */
+.fade-in {
+    animation: fadeIn 0.5s forwards;
+}
+
+/* Fade-out effect */
+.fade-out {
+    animation: fadeOut 0.5s forwards;
+}
+
+/* Media Queries */
 @media (max-width: 768px) {
     .section-container {
         flex-direction: column;

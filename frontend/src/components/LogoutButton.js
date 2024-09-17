@@ -1,4 +1,5 @@
 // src/components/LogoutButton.js
+// Clint Steadman
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';

@@ -1,4 +1,5 @@
 // middlewares/ensureAuthenticated.js
+// Clint Steadman
 
 const ensureAuthenticated = (req, res, next) => {
     if (req.isAuthenticated()) {

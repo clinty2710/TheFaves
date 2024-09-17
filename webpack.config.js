@@ -1,4 +1,5 @@
 //webpack.config.js
+// Clint Steadman
 
 const path = require('path');
 const webpack = require('webpack');
